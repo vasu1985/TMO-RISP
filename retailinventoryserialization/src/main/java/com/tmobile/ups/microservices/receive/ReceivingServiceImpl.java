@@ -35,8 +35,6 @@ public class ReceivingServiceImpl implements ReceivingService {
 			log.info(stock);
 		}
 		return stock;
-		// return new Stock("123", "Redmond T Mobile Retail Store", "TPR", true,
-		// true);
 	}
 
 	@Override
