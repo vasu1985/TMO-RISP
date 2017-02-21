@@ -3,13 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.tmobile.ups</groupId>
-	<artifactId>ups-data</artifactId>
+	<groupId>com.tmobile.ris</groupId>
+	<artifactId>ris-data</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>RetailInventorySerialization</name>
-	<description>ups data</description>
+	<description>ris data</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
