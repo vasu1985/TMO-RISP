@@ -1,4 +1,4 @@
-package com.tmobile.ups;
+package com.tmobile.ris;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
