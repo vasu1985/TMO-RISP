@@ -1,4 +1,4 @@
-package com.tmobile.ups.microservices.receive;
+package com.tmobile.ris.microservices.receive;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -7,7 +7,7 @@ import javax.persistence.Id;
 public class Stock {
 
 	@Id
-	private String stockinLocId;
+	private Long stockingLocationId;
 	private String stockingLocNam;
 	private String storeType;
 	private boolean isAbleToRecieve;
@@ -17,22 +17,22 @@ public class Stock {
 
 	}
 
-	public Stock(String stockinLocId, String stockingLocNam, String storeType, boolean isAbleToRecieve,
+	public Stock(Long stockinLocId, String stockingLocNam, String storeType, boolean isAbleToRecieve,
 			boolean isDarkStore) {
 		super();
-		this.stockinLocId = stockinLocId;
+		this.stockingLocationId = stockinLocId;
 		this.stockingLocNam = stockingLocNam;
 		this.storeType = storeType;
 		this.isAbleToRecieve = isAbleToRecieve;
 		this.isDarkStore = isDarkStore;
 	}
 
-	public String getStockinLocId() {
-		return stockinLocId;
+	public Long getStockinLocId() {
+		return stockingLocationId;
 	}
 
-	public void setStockinLocId(String stockinLocId) {
-		this.stockinLocId = stockinLocId;
+	public void setStockinLocId(Long stockinLocId) {
+		this.stockingLocationId = stockinLocId;
 	}
 
 	public String getStockingLocNam() {
@@ -66,6 +66,5 @@ public class Stock {
 	public void setDarkStore(boolean isDarkStore) {
 		this.isDarkStore = isDarkStore;
 	}
-
 
 }

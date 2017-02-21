@@ -1,15 +1,13 @@
-package com.tmobile.ups.microservices.receive;
+package com.tmobile.ris.microservices.receive;
 
-public class Device {
+public class Device extends Product {
 
 	private String serialNumber;
 	private String serialType;
-	private String productName;
 	private boolean isInTransit;
 	private boolean isHUAlreadyDelivered;
 	private boolean isLostStolen;
 	private boolean isValidSerialNumber;
-	private String currentStockingLocation;
 
 	public Device() {
 
@@ -21,12 +19,10 @@ public class Device {
 		super();
 		this.serialNumber = serialNumber;
 		this.serialType = serialType;
-		this.productName = productName;
 		this.isInTransit = isInTransit;
 		this.isHUAlreadyDelivered = isHUAlreadyDelivered;
 		this.isLostStolen = isLostStolen;
 		this.isValidSerialNumber = isValidSerialNumber;
-		this.currentStockingLocation = currentStockingLocation;
 	}
 
 	public String getSerialNumber() {
@@ -43,14 +39,6 @@ public class Device {
 
 	public void setSerialType(String serialType) {
 		this.serialType = serialType;
-	}
-
-	public String getProductName() {
-		return productName;
-	}
-
-	public void setProductName(String productName) {
-		this.productName = productName;
 	}
 
 	public boolean isInTransit() {
@@ -84,15 +72,5 @@ public class Device {
 	public void setValidSerialNumber(boolean isValidSerialNumber) {
 		this.isValidSerialNumber = isValidSerialNumber;
 	}
-
-	public String getCurrentStockingLocation() {
-		return currentStockingLocation;
-	}
-
-	public void setCurrentStockingLocation(String currentStockingLocation) {
-		this.currentStockingLocation = currentStockingLocation;
-	}
-
-	
 
 }

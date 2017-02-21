@@ -1,20 +1,25 @@
-package com.tmobile.ups.microservices.receive;
+package com.tmobile.ris.microservices.receive;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ReceivingServiceImpl implements ReceivingService {
 
+	@Autowired
+	private StockRepository stockRepository;
+
 	private static Log log = LogFactory.getLog(ReceivingServiceImpl.class);
 
-	private List<Stock> stores = Arrays.asList(new Stock("xyz", "Factoria T Mobile Retail Store", "TPR", true, true),
-			new Stock("abc", "Bothell T Mobile Retail Store", "TPR", true, true),
-			new Stock("123", "Redmond T Mobile Retail Store", "TPR", true, true));
+	private List<Stock> stores = Arrays.asList(new Stock(123l, "Factoria T Mobile Retail Store", "TPR", true, true),
+			new Stock(456l, "Bothell T Mobile Retail Store", "TPR", true, true),
+			new Stock(789l, "Redmond T Mobile Retail Store", "TPR", true, true));
 
 	private List<Device> devices = Arrays.asList(
 			new Device("98794242412313432", "IMEI", null, false, false, false, true, null),
@@ -23,9 +28,13 @@ public class ReceivingServiceImpl implements ReceivingService {
 
 	@Override
 	public List<Stock> getStores() {
-		return Arrays.asList(new Stock("xyz", "Factoria T Mobile Retail Store", "TPR", true, true),
-				new Stock("abc", "Bothell T Mobile Retail Store", "TPR", true, true),
-				new Stock("123", "Redmond T Mobile Retail Store", "TPR", true, true));
+		List<Stock> stores = new ArrayList<>();
+		stockRepository.findAll().forEach(stores::add);
+		return stores;
+//		 return Arrays.asList(new Stock(123l, "Factoria T Mobile Retail	 Store", "TPR", true, true),
+//		 new Stock(456l, "Bothell T Mobile Retail Store", "TPR", true, true),
+//		 new Stock(789l, "Redmond T Mobile Retail Store", "TPR", true,
+//		 true));
 	}
 
 	@Override
@@ -44,6 +53,13 @@ public class ReceivingServiceImpl implements ReceivingService {
 			log.info(device);
 		}
 		return device;
+	}
+
+	@Override
+	public Stock addStock(Stock stock) {
+		stockRepository.save(stock);
+		return stock;
+
 	}
 
 }

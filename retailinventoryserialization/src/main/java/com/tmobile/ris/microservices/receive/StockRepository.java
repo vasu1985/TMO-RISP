@@ -1,4 +1,4 @@
-package com.tmobile.ups.microservices.receive;
+package com.tmobile.ris.microservices.receive;
 
 import org.springframework.data.repository.CrudRepository;
 

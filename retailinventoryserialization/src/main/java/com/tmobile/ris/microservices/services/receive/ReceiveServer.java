@@ -1,9 +1,9 @@
-package com.tmobile.ups.microservices.services.receive;
+package com.tmobile.ris.microservices.services.receive;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
-@SpringBootApplication
+@EnableAutoConfiguration
 public class ReceiveServer {
 
 	public static void main(String[] args) {

@@ -1,9 +1,10 @@
-package com.tmobile.ups.microservices.receive;
+package com.tmobile.ris.microservices.receive;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +22,8 @@ public class ReceivingController {
 
 	@RequestMapping(value = "/resources/stores", method = RequestMethod.GET)
 	public List<Stock> getStores() {
-		System.out.println("###############################################################################################");
+		System.out.println(
+				"##########################################  GET STORES  #####################################################");
 		return receivingService.getStores();
 	}
 
@@ -30,4 +32,8 @@ public class ReceivingController {
 		return receivingService.validateSerialNumber(serialNumber);
 	}
 
+	@RequestMapping(value = "/resources/stores", method = RequestMethod.POST)
+	public void addStock(@RequestBody Stock stock) {
+		receivingService.addStock(stock);
+	}
 }

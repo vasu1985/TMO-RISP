@@ -1,4 +1,4 @@
-package com.tmobile.ups.microservices.receive;
+package com.tmobile.ris.microservices.receive;
 
 import java.util.List;
 
@@ -10,4 +10,5 @@ public interface ReceivingService {
 
 	Device validateSerialNumber(String serialNumber);
 
+	Stock addStock(Stock stock);
 }
