@@ -1,17 +1,20 @@
 package com.tmobile.ris.microservices.receive;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Stock {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private Long stockingLocationId;
 	private String stockingLocNam;
 	private String storeType;
-	private boolean isAbleToRecieve;
-	private boolean isDarkStore;
+	private boolean ableToRecieve;
+	private boolean darkStore;
 
 	public Stock() {
 
@@ -23,8 +26,8 @@ public class Stock {
 		this.stockingLocationId = stockinLocId;
 		this.stockingLocNam = stockingLocNam;
 		this.storeType = storeType;
-		this.isAbleToRecieve = isAbleToRecieve;
-		this.isDarkStore = isDarkStore;
+		this.ableToRecieve = isAbleToRecieve;
+		this.darkStore = isDarkStore;
 	}
 
 	public Long getStockinLocId() {
@@ -52,19 +55,19 @@ public class Stock {
 	}
 
 	public boolean isAbleToRecieve() {
-		return isAbleToRecieve;
+		return ableToRecieve;
 	}
 
 	public void setAbleToRecieve(boolean isAbleToRecieve) {
-		this.isAbleToRecieve = isAbleToRecieve;
+		this.ableToRecieve = isAbleToRecieve;
 	}
 
 	public boolean isDarkStore() {
-		return isDarkStore;
+		return darkStore;
 	}
 
 	public void setDarkStore(boolean isDarkStore) {
-		this.isDarkStore = isDarkStore;
+		this.darkStore = isDarkStore;
 	}
 
 }
