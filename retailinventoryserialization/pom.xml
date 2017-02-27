@@ -25,20 +25,78 @@
 	</properties>
 
 	<dependencies>
+	<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter</artifactId>
+  <exclusions>
+    <exclusion>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-logging</artifactId>
+    </exclusion>
+  </exclusions>
+</dependency>
+
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-web</artifactId>
+  <exclusions>
+    <exclusion>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-logging</artifactId>
+    </exclusion>
+  </exclusions>
+</dependency>
+	<dependency>
+    <groupId>org.apache.geode</groupId>
+    <artifactId>geode-core</artifactId>
+    <version>1.1.0</version>
+</dependency>
+	<dependency>
+    <groupId>org.apache.geode</groupId>
+    <artifactId>gemfire-core</artifactId>
+    <version>1.0.0-incubating.M1</version>
+</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-rest-core</artifactId>
+			</dependency>		
+		<dependency>
+			<groupId>org.springframework.shell</groupId>
+			<artifactId>spring-shell</artifactId>
+			<version>1.0.0.RELEASE</version>
+			<scope>runtime</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-context-support</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- <dependency> <groupId>org.springframework.shell</groupId> <artifactId>spring-shell</artifactId> 
+			<scope>runtime</scope> </dependency> -->
+		<!-- <dependency> <groupId>org.springframework.data</groupId> <artifactId>spring-data-gemfire</artifactId> 
+			</dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<artifactId>spring-boot-starter-data-gemfire</artifactId>
 		</dependency>
-		<dependency>
+		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-data-jpa</artifactId> 
+			</dependency> -->
+		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
+		</dependency> -->
 		<dependency>
-			<groupId>org.apache.derby</groupId>
-			<artifactId>derby</artifactId>
-			<scope>runtime</scope>
+			<groupId>com.gemstone.gemfire</groupId>
+			<artifactId>gemfire</artifactId>
+			
 		</dependency>
+		<!-- <dependency> <groupId>org.apache.derby</groupId> <artifactId>derby</artifactId> 
+			<scope>runtime</scope> </dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -54,6 +112,23 @@
 			</plugin>
 		</plugins>
 	</build>
-
+	<repositories>
+		<repository>
+			<id>gemfire-repository</id>
+			<name>Gemfire Repository</name>
+			<url>http://dist.gemstone.com/maven/release</url>
+		</repository>
+		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>central</id>
+			<name>libs-release</name>
+			<url>http://repo.springsource.org/libs-release</url>
+		</repository>
+	</repositories>
 
 </project>
+
+
+

@@ -1,23 +1,29 @@
 package com.tmobile.ris.microservices.receive;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.util.concurrent.atomic.AtomicLong;
+import org.apache.geode.pdx.PdxReader;
+import org.apache.geode.pdx.PdxSerializable;
+import org.apache.geode.pdx.PdxWriter;
 
-@Entity
-public class Stock {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
-	private Long stockingLocationId;
-	private String stockingLocNam;
-	private String storeType;
-	private boolean ableToRecieve;
-	private boolean darkStore;
+public class Stock implements PdxSerializable{
 
-	public Stock() {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private static AtomicLong COUNTER = new AtomicLong(0L);
+	//private static final long serialVersionUID = 1L;
+	
+	transient private Long stockingLocationId;
+	transient private String stockingLocNam;
+	transient private String storeType;
+	transient private boolean isAbleToRecieve;
+	transient private boolean isDarkStore;
 
+	public Stock(){
+		 stockingLocationId = COUNTER.incrementAndGet();
+		
 	}
 
 	public Stock(Long stockinLocId, String stockingLocNam, String storeType, boolean isAbleToRecieve,
@@ -26,8 +32,8 @@ public class Stock {
 		this.stockingLocationId = stockinLocId;
 		this.stockingLocNam = stockingLocNam;
 		this.storeType = storeType;
-		this.ableToRecieve = isAbleToRecieve;
-		this.darkStore = isDarkStore;
+		this.isAbleToRecieve = isAbleToRecieve;
+		this.isDarkStore = isDarkStore;
 	}
 
 	public Long getStockinLocId() {
@@ -55,19 +61,43 @@ public class Stock {
 	}
 
 	public boolean isAbleToRecieve() {
-		return ableToRecieve;
+		return isAbleToRecieve;
 	}
 
 	public void setAbleToRecieve(boolean isAbleToRecieve) {
-		this.ableToRecieve = isAbleToRecieve;
+		this.isAbleToRecieve = isAbleToRecieve;
 	}
 
 	public boolean isDarkStore() {
-		return darkStore;
+		return isDarkStore;
 	}
 
 	public void setDarkStore(boolean isDarkStore) {
-		this.darkStore = isDarkStore;
+		this.isDarkStore = isDarkStore;
+	}
+	@Override
+	public String toString() {
+		return "Stock [stockingLocationId=" + stockingLocationId + ", stockingLocNam=" + stockingLocNam + ", storeType="
+				+ storeType + ", isAbleToRecieve=" + isAbleToRecieve + ", isDarkStore=" + isDarkStore + "]";
+	}
+	//private Object unreadFields;
+	public void fromData(PdxReader reader) {
+		//this.unreadFields = reader.readUnreadFields();
+		this.stockingLocationId = reader.readLong("stockingLocationId");
+		this.stockingLocNam = reader.readString("stockingLocNam");
+		this.storeType = reader.readString("storeType");
+		this.isAbleToRecieve = reader.readBoolean("isAbleToRecieve");
+		this.isDarkStore = reader.readBoolean("isDarkStore");		
+	}
+
+	public void toData(PdxWriter writer) {
+		//writer.writeUnreadFields(this.unreadFields);
+		writer.writeLong("stockingLocationId", stockingLocationId)
+		.writeString("stockingLocNam", stockingLocNam)
+		.writeString("storeType", storeType)
+		.writeBoolean("isAbleToRecieve", isAbleToRecieve)
+		.writeBoolean("isDarkStore", isDarkStore);
+		
 	}
 
 }
