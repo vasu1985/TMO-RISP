@@ -22,37 +22,38 @@ import org.apache.geode.cache.query.SelectResults;
 import org.apache.geode.cache.query.TypeMismatchException;
 import org.apache.geode.pdx.PdxInstance;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
 import org.springframework.data.gemfire.repository.config.EnableGemfireRepositories;
 import org.springframework.stereotype.Service;
-import java.net.URI;
-import java.text.SimpleDateFormat;
-import org.springframework.http.converter.ByteArrayHttpMessageConverter;
-import org.springframework.http.converter.HttpMessageConverter;
-//import  org.springframework.http.converter.ResourceHttpMessageConverter;
-import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
+
+import com.tmobile.ris.microservices.Retailinventoryserialization;
 
 @EnableGemfireRepositories
 @Service
 public class ReceivingServiceImpl implements ReceivingService {
 	
-	 ClientCacheFactory cf =  new ClientCacheFactory().addPoolServer( "localhost", 40405);
-	   ClientCache cache = cf.setPdxReadSerialized( true).create();
-	   ClientRegionFactory rf = cache.createClientRegionFactory(ClientRegionShortcut.PROXY);
-	   
-	   Region region = rf.create( "stock");
+	Region<String, String>  region; 
+	ClientCache cache;
+	   public ReceivingServiceImpl() {
+		super();
+		cache = new ClientCacheFactory()
+				.setPdxPersistent(true)
+		      .addPoolLocator("locator", 10334)
+		      .create();
+		
+		region = cache
+			      .<String, String>createClientRegionFactory(ClientRegionShortcut.CACHING_PROXY)
+			      .create("stock");
+	}
 
 	@Autowired
 	private StockRepository stockRepository;
 
 	private static Log log = LogFactory.getLog(ReceivingServiceImpl.class);
 
-	private List<Stock> stores = Arrays.asList(new Stock(123l, "Factoria T Mobile Retail Store", "TPR", true, true),
-			new Stock(456l, "Bothell T Mobile Retail Store", "TPR", true, true),
-			new Stock(789l, "Redmond T Mobile Retail Store", "TPR", true, true));
+//	private List<Stock> stores = Arrays.asList(new Stock(123l, "Factoria T Mobile Retail Store", "TPR", true, true),
+//			new Stock(456l, "Bothell T Mobile Retail Store", "TPR", true, true),
+//			new Stock(789l, "Redmond T Mobile Retail Store", "TPR", true, true));
 
 	private List<Device> devices = Arrays.asList(
 			new Device("98794242412313432", "IMEI", null, false, false, false, true, null),
@@ -92,16 +93,29 @@ public class ReceivingServiceImpl implements ReceivingService {
 
 	@Override
 	public Stock getStoreDetails(String stockinLocId) {
-		 QueryService queryService;
-		Stock stockObj =  null;
-	    Object obj = null;
+//		/https://geode.apache.org/docs/guide/developing/query_additional/using_query_bind_parameters.html
+		String queryString = "select * from /stock s WHERE s.stockingLocationId = $1";
+
+		QueryService queryService = cache.getQueryService();
+		Query query = queryService.newQuery(queryString);
+
+		// set query bind parameters
+		Object[] params = new Object[1];
+		params[0] = stockinLocId;
+
+		// Execute the query locally. It returns the results set.
+		SelectResults results = null;
 		try {
-			obj = region.query("select * from /stock where stockingLocationId = "+stockinLocId);
+			results = (SelectResults) query.execute(params);
 		} catch (FunctionDomainException | TypeMismatchException | NameResolutionException
 				| QueryInvocationTargetException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		 
+		Stock stockObj =  null;
+	    Object obj  = results.iterator().next().toString();
+		
 	    if(obj  instanceof PdxInstance){
 	     // System.out.println( "Obj is PdxInstance");
 	     PdxInstance pi = (PdxInstance)obj;
@@ -129,13 +143,24 @@ public class ReceivingServiceImpl implements ReceivingService {
 	int i=1;
 	@Override
 	public Stock addStock(Stock stock) {
-		 Map< String,  Object> stkMap =  new HashMap< String,  Object>();
-		 stkMap.put(i+++"", stock);
-		region.putAll(stkMap);
-		
+		 
+		 region.put(i+++"",stock+"") ;
+		System.out.println(region.toString());
 		//stockRepository.save(stock);
 		return stock;
 
+	}
+	
+	public static void main(String[] args) {
+		ReceivingServiceImpl impl = new ReceivingServiceImpl();
+		impl.addStock(new Stock("123", "Factoria T Mobile Retail Store", "TPR", true, true));
+		impl.addStock(new Stock("456", "Bothell T Mobile Retail Store", "TPR", true, true));
+		
+		System.out.println(impl.getStoreDetails("123"));
+		
+		System.out.println(impl.getStores());
+		
+		
 	}
 
 }
