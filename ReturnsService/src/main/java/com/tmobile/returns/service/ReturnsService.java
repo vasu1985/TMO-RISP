@@ -2,74 +2,61 @@ package com.tmobile.returns.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.tmobile.returns.repository.UserRepository;
 import com.tmobile.returns.utils.Constants;
-import com.tmobile.returns.utils.UserDetails;
 
 /**
  * The Class ReturnService.
  */
 @Service
 public class ReturnsService {
+	@Autowired
+	private UserRepository userRepository;
 
-	/** The log. */
 	private static Logger log = LoggerFactory.getLogger(ReturnsService.class);
 
-	/** The Constant GET_SCAN_IMEI_DETAILS. */
 	public static final String GET_SCAN_IMEI_DETAILS = "getScanIMEIDetails";
 
-	/** The Constant GET_LABEL_DETAILS. */
 	public static final String GET_LABEL_DETAILS = "getLabelDetails";
 
-	/** The Constant GET_USER_AUTHENTICATION. */
 	public static final String GET_USER_AUTHENTICATION = "authenticateUser";
 
+	public static final String GET_CONFIRM_STATUS = "confirmStatus";
+
 	@Value("${returnService.scanIMEI.sampleJson}")
-	private String sampleJson_imei;
+	private String SampleJson_1;
 
 	@Value("${returnService.labelDetails.sampleJson}")
-	private String sampleJson_label;
+	private String SampleJson_2;
 
-	@Value("${returnService.authenticateUser.sampleJsonAuthSuccess}")
-	private String sampleJson_authSuccess;
+	@Value("${returnService.authenticateUser.sampleJson}")
+	private String SampleJson_3;
 
-	@Value("${returnService.authenticateUser.sampleJsonAuthFailure}")
-	private String sampleJson_authFailure;
+	@Value("${returnService.confirm.sampleJson}")
+	private String SampleJson_4;
 
-	/**
-	 * Gets the scan IMEI details.
-	 *
-	 * @return the scan IMEI details.
-	 */
+	@Value("${returnService.authenticateUser1.sampleJson}")
+	private String SampleJson_5;
+
+	@Value("${returnService.authenticateUser2.sampleJson}")
+	private String SampleJson_6;
+
 	public String getScanIMEIDetails() {
 		log.info(GET_LABEL_DETAILS + Constants.LOG_INFO_VALUE);
-		return sampleJson_imei;
+		return SampleJson_1;
 	}
 
-	/**
-	 * Gets the label details.
-	 *
-	 * @return the label details.
-	 */
 	public String getLabelDetails() {
 		log.info(GET_SCAN_IMEI_DETAILS + Constants.LOG_INFO_VALUE);
-		return sampleJson_label;
+		return SampleJson_2;
 	}
 
-	/**
-	 * Gets the auth details.
-	 * 
-	 * @param user
-	 *
-	 * @return the auth response.
-	 */
-	public String authenticateUser(UserDetails user) {
-		log.info(GET_USER_AUTHENTICATION + Constants.LOG_INFO_VALUE);
-		if (user.getName().equalsIgnoreCase("techm"))
-			return sampleJson_authSuccess;
-		else
-			return sampleJson_authFailure;
+	public String getConfirmation() {
+		log.info(GET_CONFIRM_STATUS + Constants.LOG_INFO_VALUE);
+		return SampleJson_4;
 	}
 }
