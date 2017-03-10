@@ -69,6 +69,7 @@ public class DeviceCommandController {
 	 */
 	@RequestMapping(value = "/tmo/resources/services/devices", method = RequestMethod.POST)
 	public String addDevice(@RequestBody Device device) {
+		System.out.println("Controller ----------------"+device.toString());
 		return deviceCommandService.addDevice(device);
 	}
 

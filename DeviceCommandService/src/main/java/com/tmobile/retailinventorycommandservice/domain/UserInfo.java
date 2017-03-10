@@ -1,8 +1,7 @@
 
 package com.tmobile.retailinventorycommandservice.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+
 
 /**
  * <p>
@@ -14,11 +13,11 @@ import javax.persistence.Id;
  * @project RetailInventoryService
  * @updated DateTime: Mar 9, 2017 2:28:49 PM Author: SS00443175
  */
-@Entity
+
 public class UserInfo {
 
     /** The rep id. */
-    @Id
+   
     private String mRepId;
 
     /** The password. */

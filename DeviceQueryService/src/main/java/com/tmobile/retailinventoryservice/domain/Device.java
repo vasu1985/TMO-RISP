@@ -1,8 +1,13 @@
 
 package com.tmobile.retailinventoryservice.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import java.io.Serializable;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.gemfire.mapping.Region;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * <p>
@@ -14,32 +19,48 @@ import javax.persistence.Id;
  * @project RetailInventoryService
  * @updated DateTime: Mar 9, 2017 2:28:41 PM Author: SS00443175
  */
-@Entity
-public class Device {
+@Region("devices")
+public class Device implements Serializable{
 
-    /** The imei. */
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@JsonProperty("mKeyImei")
+	private Long mKeyImei;
+
+	/** The imei. */
+	@JsonProperty("mImei")
     private String mImei;
 
     /** The sku. */
+	@JsonProperty("mSku")
     private String mSku;
 
     /** The rep id. */
+	@JsonProperty("mRepId")
     private String mRepId;
 
     /** The description. */
+    @JsonProperty("mDescription")
     private String mDescription;
 
     /** The program. */
+    @JsonProperty("mProgram")
     private String mProgram;
 
     /** The current state. */
+    @JsonProperty("mCurrentState")
     private String mCurrentState;
 
     /** The change state. */
+    @JsonProperty("mChangeState")
     private String mChangeState;
 
     /** The reason. */
+    @JsonProperty("mReason")
     private String mReason;
 
     /**
@@ -193,4 +214,13 @@ public class Device {
     public void setImei( String imei) {
         this.mImei = imei;
     }
+
+	@Override
+	public String toString() {
+		return "Device [mKeyImei=" + mKeyImei + ", mImei=" + mImei + ", mSku=" + mSku + ", mRepId=" + mRepId
+				+ ", mDescription=" + mDescription + ", mProgram=" + mProgram + ", mCurrentState=" + mCurrentState
+				+ ", mChangeState=" + mChangeState + ", mReason=" + mReason + "]";
+	}
+    
+    
 }

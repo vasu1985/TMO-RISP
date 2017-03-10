@@ -1,6 +1,7 @@
 
 package com.tmobile.retailinventoryservice.repository;
 
+import org.springframework.data.gemfire.mapping.Region;
 import org.springframework.data.repository.CrudRepository;
 
 import com.tmobile.retailinventoryservice.domain.UserInfo;
@@ -15,6 +16,7 @@ import com.tmobile.retailinventoryservice.domain.UserInfo;
  * @project RetailInventoryService
  * @updated DateTime: Mar 9, 2017 2:29:00 PM Author: SS00443175
  */
+@Region("devices")
 public interface UserQueryRepository extends CrudRepository<UserInfo, String> {
     /*TODO*/
 }
