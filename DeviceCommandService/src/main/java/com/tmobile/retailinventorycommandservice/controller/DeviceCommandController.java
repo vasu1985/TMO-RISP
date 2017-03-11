@@ -1,20 +1,18 @@
 
 package com.tmobile.retailinventorycommandservice.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
-import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.Bean;
+import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tmobile.retailinventorycommandservice.CommandApp;
 import com.tmobile.retailinventorycommandservice.domain.Device;
 import com.tmobile.retailinventorycommandservice.service.DeviceCommandService;
@@ -34,31 +32,17 @@ import com.tmobile.retailinventorycommandservice.service.DeviceCommandService;
 @RequestMapping("/device")
 public class DeviceCommandController {
 
-	private  RabbitTemplate mRabbitTemplate = new RabbitTemplate(connectionFactory());
-
-	private  ConfigurableApplicationContext mContext;
-
-	public DeviceCommandController() {
-	}
-	@Bean
-    public ConnectionFactory connectionFactory() {
-        CachingConnectionFactory connectionFactory = new CachingConnectionFactory("localhost");
-        connectionFactory.setUsername("guest");
-        connectionFactory.setPassword("guest");
-        return connectionFactory;
-    }
-	public DeviceCommandController(RabbitTemplate rabbitTemplate, ConfigurableApplicationContext context) {
-
-		this.mRabbitTemplate = rabbitTemplate;
-		this.mContext = context;
-	}
-
-	/** The log. */
-	private static Logger log = LoggerFactory.getLogger(DeviceCommandController.class);
-
 	/** The device service. */
 	@Autowired
 	private DeviceCommandService deviceCommandService;
+	ApplicationContext context;
+	
+	ObjectMapper mapper = new ObjectMapper();
+
+	@Autowired
+	public void context(ApplicationContext context) {
+		this.context = context;
+	}
 
 	/**
 	 * Adds the device.
@@ -85,7 +69,15 @@ public class DeviceCommandController {
 	@RequestMapping(value = "/tmo/resources/services/devices/{imei}", method = RequestMethod.PUT)
 	public String updateDevice(@RequestBody Device device) {
 		System.out.println("Updating Device...");
-		mRabbitTemplate.convertAndSend(CommandApp.queueName, "Hello from RabbitMQ!");
+		RabbitTemplate rabbitTemplate = context.getBean(RabbitTemplate.class);
+		rabbitTemplate.setQueue(CommandApp.queueName);
+		try {
+			rabbitTemplate.convertAndSend(CommandApp.queueName,mapper.writeValueAsString(device));
+		} catch (AmqpException e) {
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
 		return deviceCommandService.updateDevice(device);
 	}
 }
