@@ -20,17 +20,17 @@ import org.springframework.context.annotation.Bean;
  */
 @SpringBootApplication
 public class CommandApp {
-
-	public final static String queueName = "state-updated";
+	public final static String queueName = "device-updated";
 
 	@Bean
 	Queue queue() {
 		return new Queue(queueName, false);
 	}
+	
 
 	@Bean
 	TopicExchange exchange() {
-		return new TopicExchange("spring-boot-exchange");
+		return new TopicExchange("device-exchange");
 	}
 
 	@Bean
