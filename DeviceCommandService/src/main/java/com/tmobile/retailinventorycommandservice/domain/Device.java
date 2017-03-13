@@ -38,6 +38,10 @@ public class Device implements Serializable{
     /** The reason. */
     @JsonProperty("reason")
     private String mReason;
+    
+    /** The reason. */
+    @JsonProperty("repId")
+    private String mRepId;
 	
 	public Device(){
 		
@@ -79,19 +83,29 @@ public class Device implements Serializable{
 		return serialVersionUID;
 	}
 
-	public Device(String mImei, String mProgram, String mCurrentState, String mReason) {
-		super();
-		this.mImei = mImei;
-		this.mProgram = mProgram;
-		this.mCurrentState = mCurrentState;
-		this.mReason = mReason;
+	public String getmRepId() {
+		return mRepId;
+	}
+
+	public void setmRepId(String mRepId) {
+		this.mRepId = mRepId;
 	}
 
 	@Override
 	public String toString() {
 		return "Device [mImei=" + mImei + ", mProgram=" + mProgram + ", mCurrentState=" + mCurrentState + ", mReason="
-				+ mReason + "]";
+				+ mReason + ", mRepId=" + mRepId + "]";
 	}
+
+	public Device(String mImei, String mProgram, String mCurrentState, String mReason, String mRepId) {
+		super();
+		this.mImei = mImei;
+		this.mProgram = mProgram;
+		this.mCurrentState = mCurrentState;
+		this.mReason = mReason;
+		this.mRepId = mRepId;
+	}
+
 
      
 }
