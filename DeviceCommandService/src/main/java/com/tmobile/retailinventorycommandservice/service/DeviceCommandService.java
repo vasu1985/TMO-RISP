@@ -33,7 +33,7 @@ public class DeviceCommandService {
 	 */
 	public String addDevice(Device device) {
 		deviceCommandRepository.save(device);
-		return "IMEI->" + device.getImei() + " added sucessfully";
+		return "IMEI->" + device.getmImei() + " added sucessfully";
 	}
 
 	// TODO addDevices()
@@ -49,7 +49,7 @@ public class DeviceCommandService {
 	 */
 	public String updateDevice(Device updatedDevice) {
 		deviceCommandRepository.save(updatedDevice);
-		return updatedDevice.getImei() + " updated sucessfully";
+		return updatedDevice.getmImei() + " updated sucessfully";
 
 	}
 

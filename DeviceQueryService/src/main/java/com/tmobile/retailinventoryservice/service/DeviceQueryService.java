@@ -38,6 +38,12 @@ public class DeviceQueryService {
 		deviceQueryRepository.findAll().forEach(devices::add);
 		return devices;
 	}
+	
+	public String updateDevice(Device updatedDevice) {
+		deviceQueryRepository.save(updatedDevice);
+		return updatedDevice.getmImei() + " updated sucessfully";
+
+	}
 
 	/**
 	 * Gets the device details.
@@ -49,6 +55,11 @@ public class DeviceQueryService {
 	public Device getDeviceDetails(String imei) {
 		return deviceQueryRepository.findOne(imei);
 
+	}
+
+	public String addDevice(Device device) {
+		deviceQueryRepository.save(device);
+        return "IMEI-> added sucessfully";
 	}
 
 }

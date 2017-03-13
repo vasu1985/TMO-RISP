@@ -33,7 +33,7 @@ public class GeodeConfig {
 	ClientRegionFactoryBean<String, Device> region(ClientCache cache)  throws Exception{
 		ClientRegionFactoryBean<String, Device> clientRegionFactory = new ClientRegionFactoryBean<>();
 		clientRegionFactory.setCache (cache);
-        clientRegionFactory.setRegionName("devices");
+        clientRegionFactory.setRegionName("queryDevice");
         clientRegionFactory.afterPropertiesSet();
 		return clientRegionFactory;
 	}

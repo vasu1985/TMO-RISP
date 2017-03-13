@@ -16,7 +16,8 @@ import com.tmobile.retailinventoryservice.domain.Device;
  * @project RetailInventoryService
  * @updated DateTime: Mar 9, 2017 2:28:54 PM Author: SS00443175
  */
-@Region("devices")
+@Region("queryDevice")
 public interface DeviceQueryRepository extends CrudRepository<Device, String> {
 /*TODO*/
+	
 }

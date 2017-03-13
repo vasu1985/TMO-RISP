@@ -1,6 +1,7 @@
 
 package com.tmobile.retailinventoryservice.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,7 @@ public class UserQueryController {
 	 */
 	@RequestMapping(value = "/tmo/resources/services/users", method = RequestMethod.GET)
 	public List<UserInfo> getUsers() {
-		return userQueryService.getUsers();
+//		return userQueryService.getUsers();
+		return Arrays.asList(new UserInfo("test1", "pwd", "Store Manager", "This is Manager"));
 	}
 }

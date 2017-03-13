@@ -1,6 +1,9 @@
 
 package com.tmobile.retailinventoryservice.domain;
 
+import java.io.Serializable;
+
+import org.springframework.data.gemfire.mapping.Region;
 
 /**
  * <p>
@@ -12,8 +15,9 @@ package com.tmobile.retailinventoryservice.domain;
  * @project RetailInventoryService
  * @updated DateTime: Mar 9, 2017 2:28:49 PM Author: SS00443175
  */
-
-public class UserInfo {
+@Region("queryDevice")
+public class UserInfo implements Serializable{
+	private static final long serialVersionUID = 1L;
 
     /** The rep id. */
     
@@ -38,6 +42,8 @@ public class UserInfo {
      * public User(String repId, String role, String description, String autherization, String authentication) { super(); this.repId = repId; this.role = role;
      * this.description = description; }
      */
+    
+    
 
     /**
      * Gets the password.
@@ -48,7 +54,14 @@ public class UserInfo {
         return mPassword;
     }
 
-    /**
+    public UserInfo(String mRepId, String mPassword, String mRole, String mDescription) {
+		super();
+		this.mRepId = mRepId;
+		this.mPassword = mPassword;
+		this.mRole = mRole;
+		this.mDescription = mDescription;
+	}
+	/**
      * Sets the password.
      *
      * @param password

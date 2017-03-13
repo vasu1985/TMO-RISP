@@ -1,7 +1,9 @@
 
 package com.tmobile.retailinventorycommandservice.domain;
 
+import java.io.Serializable;
 
+import org.springframework.data.gemfire.mapping.Region;
 
 /**
  * <p>
@@ -13,8 +15,8 @@ package com.tmobile.retailinventorycommandservice.domain;
  * @project RetailInventoryService
  * @updated DateTime: Mar 9, 2017 2:28:49 PM Author: SS00443175
  */
-
-public class UserInfo {
+@Region("devices")
+public class UserInfo implements Serializable{
 
     /** The rep id. */
    

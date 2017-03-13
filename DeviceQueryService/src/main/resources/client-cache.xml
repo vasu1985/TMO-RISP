@@ -18,7 +18,7 @@
 		</pdx-serializer>
 	</pdx>
 
-	<region name="devices" refid="PROXY">
+	<region name="queryDevice" refid="PROXY">
 		<region-attributes pool-name="client-pool" />
 	</region>
 </client-cache>
