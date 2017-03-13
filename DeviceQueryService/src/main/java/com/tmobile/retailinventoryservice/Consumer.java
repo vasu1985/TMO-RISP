@@ -30,6 +30,7 @@ public class Consumer {
 			Device deviceToPersist = deviceQueryService.getDeviceDetails(updatedDevice.getmImei());
 			deviceToPersist.setmReason(updatedDevice.getmReason());
 			deviceToPersist.setmCurrentState(updatedDevice.getmCurrentState());
+			deviceToPersist.setmRepId(updatedDevice.getmRepId());
 			deviceQueryService.updateDevice(deviceToPersist);
 		} catch (JsonParseException e) {
 			e.printStackTrace();

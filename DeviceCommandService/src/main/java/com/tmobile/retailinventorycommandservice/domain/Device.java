@@ -24,19 +24,19 @@ public class Device implements Serializable{
 	
     /** The imei. */
 	@Id
-	@JsonProperty("mImei")
+	@JsonProperty("imei")
     private String mImei;
 
     /** The program. */
-    @JsonProperty("mProgram")
+    @JsonProperty("program")
     private String mProgram;
 
     /** The current state. */
-    @JsonProperty("mCurrentState")
+    @JsonProperty("currentState")
     private String mCurrentState;
 
     /** The reason. */
-    @JsonProperty("mReason")
+    @JsonProperty("reason")
     private String mReason;
 	
 	public Device(){
