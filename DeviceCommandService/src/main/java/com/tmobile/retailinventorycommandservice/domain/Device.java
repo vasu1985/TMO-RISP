@@ -27,18 +27,6 @@ public class Device implements Serializable{
 	@JsonProperty("mImei")
     private String mImei;
 
-    /** The sku. */
-	@JsonProperty("mSku")
-    private String mSku;
-
-    /** The rep id. */
-	@JsonProperty("mRepId")
-    private String mRepId;
-
-    /** The description. */
-    @JsonProperty("mDescription")
-    private String mDescription;
-
     /** The program. */
     @JsonProperty("mProgram")
     private String mProgram;
@@ -47,27 +35,9 @@ public class Device implements Serializable{
     @JsonProperty("mCurrentState")
     private String mCurrentState;
 
-    /** The change state. */
-    @JsonProperty("mChangeState")
-    private String mChangeState;
-
     /** The reason. */
     @JsonProperty("mReason")
     private String mReason;
-
-    
-	public Device(String mImei, String mSku, String mRepId, String mDescription, String mProgram, String mCurrentState,
-			String mChangeState, String mReason) {
-		
-		this.mImei = mImei;
-		this.mSku = mSku;
-		this.mRepId = mRepId;
-		this.mDescription = mDescription;
-		this.mProgram = mProgram;
-		this.mCurrentState = mCurrentState;
-		this.mChangeState = mChangeState;
-		this.mReason = mReason;
-	}
 	
 	public Device(){
 		
@@ -79,30 +49,6 @@ public class Device implements Serializable{
 
 	public void setmImei(String mImei) {
 		this.mImei = mImei;
-	}
-
-	public String getmSku() {
-		return mSku;
-	}
-
-	public void setmSku(String mSku) {
-		this.mSku = mSku;
-	}
-
-	public String getmRepId() {
-		return mRepId;
-	}
-
-	public void setmRepId(String mRepId) {
-		this.mRepId = mRepId;
-	}
-
-	public String getmDescription() {
-		return mDescription;
-	}
-
-	public void setmDescription(String mDescription) {
-		this.mDescription = mDescription;
 	}
 
 	public String getmProgram() {
@@ -121,14 +67,6 @@ public class Device implements Serializable{
 		this.mCurrentState = mCurrentState;
 	}
 
-	public String getmChangeState() {
-		return mChangeState;
-	}
-
-	public void setmChangeState(String mChangeState) {
-		this.mChangeState = mChangeState;
-	}
-
 	public String getmReason() {
 		return mReason;
 	}
@@ -141,11 +79,18 @@ public class Device implements Serializable{
 		return serialVersionUID;
 	}
 
+	public Device(String mImei, String mProgram, String mCurrentState, String mReason) {
+		super();
+		this.mImei = mImei;
+		this.mProgram = mProgram;
+		this.mCurrentState = mCurrentState;
+		this.mReason = mReason;
+	}
+
 	@Override
 	public String toString() {
-		return "Device [mImei=" + mImei + ", mSku=" + mSku + ", mRepId=" + mRepId + ", mDescription=" + mDescription
-				+ ", mProgram=" + mProgram + ", mCurrentState=" + mCurrentState + ", mChangeState=" + mChangeState
-				+ ", mReason=" + mReason + "]";
+		return "Device [mImei=" + mImei + ", mProgram=" + mProgram + ", mCurrentState=" + mCurrentState + ", mReason="
+				+ mReason + "]";
 	}
 
      

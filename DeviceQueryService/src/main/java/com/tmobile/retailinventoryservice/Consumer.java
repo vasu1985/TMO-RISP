@@ -24,9 +24,13 @@ public class Consumer {
 	public void consumeMessage(String message) {
 		System.out.println("Consumed <" + message + ">");
 		try {
-			Device device = mapper.readValue(message, Device.class);
-			System.out.println("imei-> " + device.getmImei() + "\nnew state-> " + device.getmCurrentState());
-			deviceQueryService.updateDevice(device);
+			Device updatedDevice = mapper.readValue(message, Device.class);
+			System.out.println(
+					"imei-> " + updatedDevice.getmImei() + "\nnew state-> " + updatedDevice.getmCurrentState());
+			Device deviceToPersist = deviceQueryService.getDeviceDetails(updatedDevice.getmImei());
+			deviceToPersist.setmReason(updatedDevice.getmReason());
+			deviceToPersist.setmCurrentState(updatedDevice.getmCurrentState());
+			deviceQueryService.updateDevice(deviceToPersist);
 		} catch (JsonParseException e) {
 			e.printStackTrace();
 		} catch (JsonMappingException e) {
