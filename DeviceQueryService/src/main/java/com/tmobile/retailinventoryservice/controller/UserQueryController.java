@@ -4,6 +4,8 @@ package com.tmobile.retailinventoryservice.controller;
 import java.util.Arrays;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,6 +32,9 @@ import com.tmobile.retailinventoryservice.service.UserQueryService;
 @RequestMapping("/user")
 public class UserQueryController {
 
+	/** The log. */
+    private static Logger      log                   = LoggerFactory.getLogger(UserQueryController.class);
+
 	/** The user service. */
 	@Autowired
 	private UserQueryService userQueryService;
@@ -43,7 +48,7 @@ public class UserQueryController {
 	 */
 	@RequestMapping(value = "${retailInventoryService.authenticateUser.url.mapping}", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	public AuthDetails authenticateUser(@RequestBody UserInfo user) {
-		System.out.println("JSON authenticate user:" + user.getRepId());
+		log.info("JSON authenticate user:" + user.getRepId());
 		return userQueryService.authenticateUser(user);
 	}
 

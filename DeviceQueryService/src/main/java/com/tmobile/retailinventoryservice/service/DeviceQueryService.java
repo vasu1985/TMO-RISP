@@ -4,6 +4,8 @@ package com.tmobile.retailinventoryservice.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,10 @@ import com.tmobile.retailinventoryservice.repository.DeviceQueryRepository;
  */
 @Service
 public class DeviceQueryService {
+	
+	/** The log. */
+    private static Logger log = LoggerFactory.getLogger(DeviceQueryService.class);
+
 
 	/** The device repository. */
 	@Autowired
@@ -59,6 +65,7 @@ public class DeviceQueryService {
 
 	public String addDevice(Device device) {
 		deviceQueryRepository.save(device);
+		log.info("IMEI-> added sucessfully");	
 		return "IMEI->" + device.getmImei() + " added sucessfully";
 	}
 

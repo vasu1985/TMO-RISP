@@ -69,7 +69,7 @@ public class DeviceQueryController {
 
 	@RequestMapping(value = "retailInventoryQueryService.imeiDetails.mapping", method = RequestMethod.PUT)
 	public String updateDevice(@RequestBody Device device) {
-		System.out.println("Updating Device...");
+		log.info("Updating Device...");
 
 		return deviceQueryService.updateDevice(device);
 	}

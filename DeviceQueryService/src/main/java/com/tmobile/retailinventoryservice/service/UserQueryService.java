@@ -46,7 +46,7 @@ public class UserQueryService {
 	 */
 	public AuthDetails authenticateUser(UserInfo loggedInUser) {
 		log.info(GET_USER_AUTHENTICATION + Constants.LOG_INFO_VALUE);
-		System.out.println("status is:" + loggedInUser);
+		log.info("status is:" + loggedInUser);
 		String role = null;
 		for (UserInfo user : getUsers()) {
 			if (null != user) {

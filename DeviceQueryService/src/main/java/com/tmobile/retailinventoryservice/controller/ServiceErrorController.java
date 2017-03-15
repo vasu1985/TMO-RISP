@@ -6,6 +6,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ErrorAttributes;
 import org.springframework.boot.autoconfigure.web.ErrorController;
@@ -25,7 +27,10 @@ import com.tmobile.retailinventoryservice.exception.HTTPErrorResponse;
 @RestController( "${error.mapping}")
 public class ServiceErrorController implements ErrorController {
 
-    /** The error attributes. */
+	/** The log. */
+    private static Logger      log                   = LoggerFactory.getLogger(ServiceErrorController.class);
+
+	/** The error attributes. */
     @Autowired
     private ErrorAttributes    errorAttributes;
 
