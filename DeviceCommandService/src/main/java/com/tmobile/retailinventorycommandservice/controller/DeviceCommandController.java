@@ -35,14 +35,14 @@ import com.tmobile.retailinventorycommandservice.service.DeviceCommandService;
 @RequestMapping("/device")
 public class DeviceCommandController {
 
-	 /** The log. */
-    private static Logger      log                   = LoggerFactory.getLogger(DeviceCommandController.class);
-    
+	/** The log. */
+	private static Logger log = LoggerFactory.getLogger(DeviceCommandController.class);
+
 	/** The device service. */
 	@Autowired
 	private DeviceCommandService deviceCommandService;
 	ApplicationContext context;
-	
+
 	ObjectMapper mapper = new ObjectMapper();
 
 	@Autowired
@@ -59,7 +59,7 @@ public class DeviceCommandController {
 	 */
 	@RequestMapping(value = "/tmo/resources/services/devices", method = RequestMethod.POST)
 	public String addDevice(@RequestBody Device device) {
-		log.info("Controller ----------------"+device.toString());
+		log.info("Controller ----------------" + device.getmImei());
 		return deviceCommandService.addDevice(device);
 	}
 
@@ -75,20 +75,26 @@ public class DeviceCommandController {
 	@RequestMapping(value = "/tmo/resources/services/devices/{imei}", method = RequestMethod.PUT)
 	public String updateDevice(@RequestBody Device device) {
 		log.info("Updating Device...");
-		RabbitTemplate rabbitTemplate = context.getBean(RabbitTemplate.class);
-		rabbitTemplate.setQueue(CommandApp.queueName);
+		String updateMesg = null;
 		try {
-			rabbitTemplate.convertAndSend(CommandApp.queueName,mapper.writeValueAsString(device));
+			RabbitTemplate rabbitTemplate = context.getBean(RabbitTemplate.class);
+			rabbitTemplate.setQueue(CommandApp.queueName);
+			updateMesg = deviceCommandService.updateDevice(device);
+			rabbitTemplate.convertAndSend(CommandApp.queueName, mapper.writeValueAsString(device));
 		} catch (AmqpException e) {
-			e.printStackTrace();
 			log.error(e.toString());
 		} catch (JsonProcessingException e) {
 			log.error(e.toString());
 			e.printStackTrace();
+		} catch (Exception e) {
+			log.error(e.toString());
+			throw e;
+		} finally {
+			// TODO write code for inserting the entry into retry table
 		}
-		return deviceCommandService.updateDevice(device);
+		return updateMesg;
 	}
-	
+
 	@RequestMapping(value = "/tmo/resources/services/devices/{imei}", method = RequestMethod.GET)
 	public Device getDeviceDetails(@PathVariable String imei) {
 		return deviceCommandService.getDeviceDetails(imei);
