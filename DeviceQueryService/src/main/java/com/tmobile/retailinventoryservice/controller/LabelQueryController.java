@@ -25,7 +25,7 @@ import com.tmobile.retailinventoryservice.service.DeviceQueryService;
  */
 @CrossOrigin( "*")
 @RestController
-@RequestMapping( "/label")
+@RequestMapping( "${label.service.mapping}")
 public class LabelQueryController {
 
     /** The log. */
@@ -42,7 +42,7 @@ public class LabelQueryController {
      *            the imei
      * @return the device details
      */
-    @RequestMapping( value = "/tmo/resources/services/devices/{imei}", method = RequestMethod.GET)
+    @RequestMapping( value = "${retailInventoryQueryService.labelDetails.mapping}", method = RequestMethod.GET)
     public Device getLabelDetails( @PathVariable String imei) {
         return deviceQueryService.getDeviceDetails(imei);
     }

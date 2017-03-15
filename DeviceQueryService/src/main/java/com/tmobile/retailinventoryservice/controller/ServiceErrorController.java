@@ -22,7 +22,7 @@ import com.tmobile.retailinventoryservice.exception.HTTPErrorResponse;
 /**
  * The Class EcommerceErrorController. This class handles single point exception handler for EccommerceService Module. .
  */
-@RestController( "/error")
+@RestController( "${error.mapping}")
 public class ServiceErrorController implements ErrorController {
 
     /** The error attributes. */
@@ -47,7 +47,7 @@ public class ServiceErrorController implements ErrorController {
      * @return the error json
      */
     @ExceptionHandler
-    @RequestMapping( value = "/error")
+    @RequestMapping( value = "${error.mapping}")
     public CustomHTTPResponse error( HttpServletRequest request, HttpServletResponse response, Exception ex) {
         RequestAttributes requestAttributes = new ServletRequestAttributes(request, response);
         Map<String, Object> error = errorAttributes.getErrorAttributes(requestAttributes, true);

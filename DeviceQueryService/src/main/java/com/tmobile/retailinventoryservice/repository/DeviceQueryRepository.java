@@ -19,5 +19,5 @@ import com.tmobile.retailinventoryservice.domain.Device;
 @Region("queryDevice")
 public interface DeviceQueryRepository extends CrudRepository<Device, String> {
 /*TODO*/
-	
+	Device findBymImei(String mImei);
 }

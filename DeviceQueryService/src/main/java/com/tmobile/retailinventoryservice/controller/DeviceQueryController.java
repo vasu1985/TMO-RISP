@@ -28,7 +28,7 @@ import com.tmobile.retailinventoryservice.service.DeviceQueryService;
  */
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/device")
+@RequestMapping("${device.service.mapping}")
 public class DeviceQueryController {
 
 	/** The log. */
@@ -43,7 +43,7 @@ public class DeviceQueryController {
 	 *
 	 * @return the devices
 	 */
-	@RequestMapping(value = "/tmo/resources/services/devices", method = RequestMethod.GET)
+	@RequestMapping(value = "${retailInventoryQueryService.allImeiDetails.mapping}", method = RequestMethod.GET)
 	public List<Device> getDevices() {
 		log.info("Showing devices");
 		return deviceQueryService.getDevices();
@@ -56,7 +56,7 @@ public class DeviceQueryController {
 	 *            the imei
 	 * @return the device details
 	 */
-	@RequestMapping(value = "/tmo/resources/services/devices/{imei}", method = RequestMethod.GET)
+	@RequestMapping(value = "${retailInventoryQueryService.imeiDetails.mapping}", method = RequestMethod.GET)
 	public Device getDeviceDetails(@PathVariable String imei) {
 		return deviceQueryService.getDeviceDetails(imei);
 	}
@@ -67,7 +67,7 @@ public class DeviceQueryController {
 		return deviceQueryService.addDevice(device);
 	}
 
-	@RequestMapping(value = "/tmo/resources/services/devices/{imei}", method = RequestMethod.PUT)
+	@RequestMapping(value = "retailInventoryQueryService.imeiDetails.mapping", method = RequestMethod.PUT)
 	public String updateDevice(@RequestBody Device device) {
 		System.out.println("Updating Device...");
 

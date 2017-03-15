@@ -6,6 +6,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -79,5 +80,10 @@ public class DeviceCommandController {
 			e.printStackTrace();
 		}
 		return deviceCommandService.updateDevice(device);
+	}
+	
+	@RequestMapping(value = "/tmo/resources/services/devices/{imei}", method = RequestMethod.GET)
+	public Device getDeviceDetails(@PathVariable String imei) {
+		return deviceCommandService.getDeviceDetails(imei);
 	}
 }

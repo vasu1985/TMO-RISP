@@ -65,4 +65,8 @@ public class DeviceCommandService {
 		return "device with imei-> " + imei + "deleted successfully";
 	}
 
+	public Device getDeviceDetails(String imei) {
+		return deviceCommandRepository.findOne(imei);
+	}
+
 }

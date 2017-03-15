@@ -38,7 +38,7 @@ public class DeviceQueryService {
 		deviceQueryRepository.findAll().forEach(devices::add);
 		return devices;
 	}
-	
+
 	public String updateDevice(Device updatedDevice) {
 		deviceQueryRepository.save(updatedDevice);
 		return updatedDevice.getmImei() + " updated sucessfully";
@@ -59,7 +59,7 @@ public class DeviceQueryService {
 
 	public String addDevice(Device device) {
 		deviceQueryRepository.save(device);
-        return "IMEI-> added sucessfully";
+		return "IMEI->" + device.getmImei() + " added sucessfully";
 	}
 
 }
