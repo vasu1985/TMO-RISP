@@ -1,6 +1,8 @@
 
 package com.tmobile.retailinventorycommandservice.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,9 @@ import com.tmobile.retailinventorycommandservice.service.DeviceCommandService;
 @RequestMapping("/device")
 public class DeviceCommandController {
 
+	 /** The log. */
+    private static Logger      log                   = LoggerFactory.getLogger(DeviceCommandController.class);
+    
 	/** The device service. */
 	@Autowired
 	private DeviceCommandService deviceCommandService;
@@ -54,7 +59,7 @@ public class DeviceCommandController {
 	 */
 	@RequestMapping(value = "/tmo/resources/services/devices", method = RequestMethod.POST)
 	public String addDevice(@RequestBody Device device) {
-		System.out.println("Controller ----------------"+device.toString());
+		log.info("Controller ----------------"+device.toString());
 		return deviceCommandService.addDevice(device);
 	}
 
@@ -69,14 +74,16 @@ public class DeviceCommandController {
 	 */
 	@RequestMapping(value = "/tmo/resources/services/devices/{imei}", method = RequestMethod.PUT)
 	public String updateDevice(@RequestBody Device device) {
-		System.out.println("Updating Device...");
+		log.info("Updating Device...");
 		RabbitTemplate rabbitTemplate = context.getBean(RabbitTemplate.class);
 		rabbitTemplate.setQueue(CommandApp.queueName);
 		try {
 			rabbitTemplate.convertAndSend(CommandApp.queueName,mapper.writeValueAsString(device));
 		} catch (AmqpException e) {
 			e.printStackTrace();
+			log.error(e.toString());
 		} catch (JsonProcessingException e) {
+			log.error(e.toString());
 			e.printStackTrace();
 		}
 		return deviceCommandService.updateDevice(device);

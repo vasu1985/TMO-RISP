@@ -1,6 +1,8 @@
 
 package com.tmobile.retailinventorycommandservice.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +21,10 @@ import com.tmobile.retailinventorycommandservice.repository.DeviceCommandReposit
  */
 @Service
 public class DeviceCommandService {
+	/** The log. */
+    private static Logger      log                   = LoggerFactory.getLogger(DeviceCommandService.class);
 
+	
 	/** The device repository. */
 	@Autowired
 	private DeviceCommandRepository deviceCommandRepository;
@@ -33,6 +38,7 @@ public class DeviceCommandService {
 	 */
 	public String addDevice(Device device) {
 		deviceCommandRepository.save(device);
+		log.info("addDevice IMEI->" + device.getmImei());
 		return "IMEI->" + device.getmImei() + " added sucessfully";
 	}
 
@@ -49,6 +55,7 @@ public class DeviceCommandService {
 	 */
 	public String updateDevice(Device updatedDevice) {
 		deviceCommandRepository.save(updatedDevice);
+		log.info("updatedDevice IMEI->" + updatedDevice.getmImei());
 		return updatedDevice.getmImei() + " updated sucessfully";
 
 	}
@@ -62,6 +69,7 @@ public class DeviceCommandService {
 	 */
 	public String deleteDevice(String imei) {
 		deviceCommandRepository.delete(imei);
+		log.info("deleteDevice IMEI->" + imei);
 		return "device with imei-> " + imei + "deleted successfully";
 	}
 

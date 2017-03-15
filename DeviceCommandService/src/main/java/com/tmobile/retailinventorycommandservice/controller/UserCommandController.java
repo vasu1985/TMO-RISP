@@ -1,5 +1,7 @@
 package com.tmobile.retailinventorycommandservice.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +27,10 @@ import com.tmobile.retailinventorycommandservice.service.UserCommandService;
 @RequestMapping("/user")
 public class UserCommandController {
 
+	/** The log. */
+    private static Logger      log                   = LoggerFactory.getLogger(UserCommandController.class);
+
+	
 	/** The user service. */
 	@Autowired
 	private UserCommandService userCommandService;
@@ -38,7 +44,7 @@ public class UserCommandController {
 	 */
 	@RequestMapping(value = "/tmo/resources/services/users", method = RequestMethod.POST)
 	public String addUser(@RequestBody UserInfo user) {
-
+		log.info("In AddUser");
 		return userCommandService.addUser(user);
 	}
 
