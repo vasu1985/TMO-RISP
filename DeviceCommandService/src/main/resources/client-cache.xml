@@ -20,5 +20,8 @@
 
 	<region name="devices" refid="PROXY">
 		<region-attributes pool-name="client-pool" />
+	</region> 
+	<region name="transactions" refid="PROXY">
+		<region-attributes pool-name="client-pool" />
 	</region>
 </client-cache>

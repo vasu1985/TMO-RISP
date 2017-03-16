@@ -21,12 +21,18 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class CommandApp {
 	public final static String queueName = "imei-state-updated";
+	public final static String transQueueName = "transaction-state-updated";
+	
 
 	@Bean
 	Queue queue() {
 		return new Queue(queueName, false);
 	}
 	
+	@Bean
+	Queue queue_trans(){
+		return new Queue(transQueueName, false);
+	} 
 
 	@Bean
 	TopicExchange exchange() {
@@ -37,7 +43,11 @@ public class CommandApp {
 	Binding binding(Queue queue, TopicExchange exchange) {
 		return BindingBuilder.bind(queue).to(exchange).with(queueName);
 	}
-
+	
+	@Bean
+	Binding binding_transaction(Queue queue, TopicExchange exchange) {
+		return BindingBuilder.bind(queue).to(exchange).with(transQueueName);
+	}
 	/**
 	 * The main method.
 	 *

@@ -12,6 +12,7 @@ import org.springframework.data.gemfire.repository.config.EnableGemfireRepositor
 import com.gemstone.gemfire.cache.GemFireCache;
 import com.gemstone.gemfire.cache.client.ClientCache;
 import com.tmobile.retailinventorycommandservice.domain.Device;
+import com.tmobile.retailinventorycommandservice.domain.Transaction;
 
 
 @Configuration
@@ -34,6 +35,15 @@ public class GeodeConfig {
 		ClientRegionFactoryBean<String, Device> clientRegionFactory = new ClientRegionFactoryBean<>();
 		clientRegionFactory.setCache (cache);
         clientRegionFactory.setRegionName("devices");
+        clientRegionFactory.afterPropertiesSet();
+		return clientRegionFactory;
+	}
+	
+	@Bean
+	ClientRegionFactoryBean<String, Transaction> region_1(ClientCache cache)  throws Exception{
+		ClientRegionFactoryBean<String, Transaction> clientRegionFactory = new ClientRegionFactoryBean<>();
+		clientRegionFactory.setCache (cache);
+        clientRegionFactory.setRegionName("transactions");
         clientRegionFactory.afterPropertiesSet();
 		return clientRegionFactory;
 	}
