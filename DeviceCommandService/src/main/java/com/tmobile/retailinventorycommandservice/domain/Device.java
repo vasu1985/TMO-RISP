@@ -18,33 +18,33 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @updated DateTime: Mar 9, 2017 2:28:41 PM Author: SS00443175
  */
 @Region("devices")
-public class Device implements Serializable{
+public class Device implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
-    /** The imei. */
+
+	/** The imei. */
 	@Id
 	@JsonProperty("imei")
-    private String mImei;
+	private String mImei;
 
-    /** The program. */
-    @JsonProperty("program")
-    private String mProgram;
+	/** The program. */
+	@JsonProperty("programId")
+	private String mProgramId;
 
-    /** The current state. */
-    @JsonProperty("currentState")
-    private String mCurrentState;
+	/** The current state. */
+	@JsonProperty("state")
+	private String mState;
 
-    /** The reason. */
-    @JsonProperty("reason")
-    private String mReason;
-    
-    /** The reason. */
-    @JsonProperty("repId")
-    private String mRepId;
-	
-	public Device(){
-		
+	/** The reason. */
+	@JsonProperty("reason")
+	private String mReason;
+
+	/** The reason. */
+	@JsonProperty("repId")
+	private String mRepId;
+
+	public Device() {
+
 	}
 
 	public String getmImei() {
@@ -55,20 +55,12 @@ public class Device implements Serializable{
 		this.mImei = mImei;
 	}
 
-	public String getmProgram() {
-		return mProgram;
+	public String getmProgramId() {
+		return mProgramId;
 	}
 
-	public void setmProgram(String mProgram) {
-		this.mProgram = mProgram;
-	}
-
-	public String getmCurrentState() {
-		return mCurrentState;
-	}
-
-	public void setmCurrentState(String mCurrentState) {
-		this.mCurrentState = mCurrentState;
+	public void setmProgramId(String mProgram) {
+		this.mProgramId = mProgram;
 	}
 
 	public String getmReason() {
@@ -91,21 +83,19 @@ public class Device implements Serializable{
 		this.mRepId = mRepId;
 	}
 
-	@Override
-	public String toString() {
-		return "Device [mImei=" + mImei + ", mProgram=" + mProgram + ", mCurrentState=" + mCurrentState + ", mReason="
-				+ mReason + ", mRepId=" + mRepId + "]";
-	}
-
-	public Device(String mImei, String mProgram, String mCurrentState, String mReason, String mRepId) {
+	public Device(String mImei, String mProgramId, String mState, String mReason, String mRepId) {
 		super();
 		this.mImei = mImei;
-		this.mProgram = mProgram;
-		this.mCurrentState = mCurrentState;
+		this.mProgramId = mProgramId;
+		this.mState = mState;
 		this.mReason = mReason;
 		this.mRepId = mRepId;
 	}
 
+	@Override
+	public String toString() {
+		return "Device [mImei=" + mImei + ", mProgramId=" + mProgramId + ", mState=" + mState + ", mReason=" + mReason
+				+ ", mRepId=" + mRepId + "]";
+	}
 
-     
 }

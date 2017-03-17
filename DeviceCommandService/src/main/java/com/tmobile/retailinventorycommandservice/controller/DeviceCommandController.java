@@ -43,10 +43,10 @@ public class DeviceCommandController {
 	/** The device service. */
 	@Autowired
 	private DeviceCommandService deviceCommandService;
-	
+
 	@Autowired
 	private TransactionsCommandService transactionsCommandService;
-	
+
 	ApplicationContext context;
 
 	ObjectMapper mapper = new ObjectMapper();
@@ -91,36 +91,36 @@ public class DeviceCommandController {
 		} catch (AmqpException e) {
 			log.error(e.toString());
 			status = "fail";
-			
+
 		} catch (JsonProcessingException e) {
 			log.error(e.toString());
 			status = "fail";
 			e.printStackTrace();
-			
+
 		} catch (Exception e) {
 			log.error(e.toString());
 			status = "fail";
 			throw e;
 		} finally {
-			try{
-			Transaction trans = new Transaction();
-			trans.setmImei(device.getmImei());
-			trans.setmCurrentState(device.getmCurrentState());
-			trans.setmReason(device.getmReason());
-			trans.setmRepId(device.getmRepId());
-			trans.setmStatus(status);
-			trans.setQueueName(CommandApp.queueName);
+			try {
+				Transaction trans = new Transaction();
+				trans.setmImei(device.getmImei());
+				trans.setmCurrentState(device.getmState());
+				trans.setmReason(device.getmReason());
+				trans.setmRepId(device.getmRepId());
+				trans.setmStatus(status);
+				trans.setQueueName(CommandApp.queueName);
 
-			updateMesg = transactionsCommandService.addTransaction(trans);
-				log.debug("Transaction imei:"+transactionsCommandService.getTransactionDetails(device.getmImei()));
-			
-			if(status.equalsIgnoreCase("success")){
+				updateMesg = transactionsCommandService.addTransaction(trans);
+				log.debug("Transaction imei:" + transactionsCommandService.getTransactionDetails(device.getmImei()));
+
+				if (status.equalsIgnoreCase("success")) {
 					RabbitTemplate rabbitTemplate = context.getBean(RabbitTemplate.class);
 					rabbitTemplate.setQueue(CommandApp.transQueueName);
-					log.debug("Queue name is:"+CommandApp.transQueueName);
+					log.debug("Queue name is:" + CommandApp.transQueueName);
 					rabbitTemplate.convertAndSend(CommandApp.transQueueName, mapper.writeValueAsString(trans));
 				}
-			}catch (Exception e){
+			} catch (Exception e) {
 				log.error(e.getMessage());
 			}
 		}

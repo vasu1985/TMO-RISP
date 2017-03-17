@@ -30,10 +30,10 @@ public class Consumer {
 		try {
 			Device updatedDevice = mapper.readValue(message, Device.class);
 			log.info(
-					"imei-> " + updatedDevice.getmImei() + "\nnew state-> " + updatedDevice.getmCurrentState());
+					"imei-> " + updatedDevice.getmImei() + "\nnew state-> " + updatedDevice.getmState());
 			Device deviceToPersist = deviceQueryService.getDeviceDetails(updatedDevice.getmImei());
 			deviceToPersist.setmReason(updatedDevice.getmReason());
-			deviceToPersist.setmCurrentState(updatedDevice.getmCurrentState());
+			deviceToPersist.setmState(updatedDevice.getmState());
 			deviceToPersist.setmRepId(updatedDevice.getmRepId());
 			deviceQueryService.updateDevice(deviceToPersist);
 		} catch (JsonParseException e) {
