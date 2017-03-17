@@ -23,43 +23,57 @@ import com.tmobile.retailinventoryservice.repository.DeviceQueryRepository;
 @Service
 public class DeviceQueryService {
 
-	/** The device repository. */
-	@Autowired
-	private DeviceQueryRepository deviceQueryRepository;
-	// TODO addDevices()
+    /** The device repository. */
+    @Autowired
+    private DeviceQueryRepository deviceQueryRepository;
+    // TODO addDevices()
 
-	/**
-	 * Gets the devices.
-	 *
-	 * @return the devices
-	 */
-	public List<Device> getDevices() {
-		List<Device> devices = new ArrayList<>();
-		deviceQueryRepository.findAll().forEach(devices::add);
-		return devices;
-	}
-	
-	public String updateDevice(Device updatedDevice) {
-		deviceQueryRepository.save(updatedDevice);
-		return updatedDevice.getmImei() + " updated sucessfully";
+    /**
+     * Gets the devices.
+     *
+     * @return the devices
+     */
+    public List<Device> getDevices() {
+        List<Device> devices = new ArrayList<>();
+        deviceQueryRepository.findAll().forEach(devices::add);
+        return devices;
+    }
 
-	}
+    /**
+     * Update device.
+     *
+     * @param updatedDevice
+     *            the updated device
+     * @return the string
+     */
+    public String updateDevice( Device updatedDevice) {
+        deviceQueryRepository.save(updatedDevice);
+        return updatedDevice.getmImei() + " updated sucessfully";
 
-	/**
-	 * Gets the device details.
-	 *
-	 * @param imei
-	 *            the imei
-	 * @return the device details
-	 */
-	public Device getDeviceDetails(String imei) {
-		return deviceQueryRepository.findOne(imei);
+    }
 
-	}
+    /**
+     * Gets the device details.
+     *
+     * @param imei
+     *            the imei
+     * @return the device details
+     */
+    public Device getDeviceDetails( String imei) {
+        return deviceQueryRepository.findOne(imei);
 
-	public String addDevice(Device device) {
-		deviceQueryRepository.save(device);
+    }
+
+    /**
+     * Adds the device.
+     *
+     * @param device
+     *            the device
+     * @return the string
+     */
+    public String addDevice( Device device) {
+        deviceQueryRepository.save(device);
         return "IMEI-> added sucessfully";
-	}
+    }
 
 }

@@ -26,51 +26,64 @@ import com.tmobile.retailinventoryservice.service.DeviceQueryService;
  * @project RetailInventoryService
  * @updated DateTime: Mar 9, 2017 2:30:01 PM Author: SS00443175
  */
-@CrossOrigin("*")
+@CrossOrigin( "*")
 @RestController
-@RequestMapping("/device")
+@RequestMapping( "/device")
 public class DeviceQueryController {
 
-	/** The log. */
-	private static Logger log = LoggerFactory.getLogger(DeviceQueryController.class);
+    /** The log. */
+    private static Logger      log = LoggerFactory.getLogger(DeviceQueryController.class);
 
-	/** The device service. */
-	@Autowired
-	private DeviceQueryService deviceQueryService;
+    /** The device service. */
+    @Autowired
+    private DeviceQueryService deviceQueryService;
 
-	/**
-	 * Gets the devices.
-	 *
-	 * @return the devices
-	 */
-	@RequestMapping(value = "/tmo/resources/services/devices", method = RequestMethod.GET)
-	public List<Device> getDevices() {
-		log.info("Showing devices");
-		return deviceQueryService.getDevices();
-	}
+    /**
+     * Gets the devices.
+     *
+     * @return the devices
+     */
+    @RequestMapping( value = "/tmo/resources/services/devices", method = RequestMethod.GET)
+    public List<Device> getDevices() {
+        log.info("Showing devices");
+        return deviceQueryService.getDevices();
+    }
 
-	/**
-	 * Gets the device details.
-	 *
-	 * @param imei
-	 *            the imei
-	 * @return the device details
-	 */
-	@RequestMapping(value = "/tmo/resources/services/devices/{imei}", method = RequestMethod.GET)
-	public Device getDeviceDetails(@PathVariable String imei) {
-		return deviceQueryService.getDeviceDetails(imei);
-	}
+    /**
+     * Gets the device details.
+     *
+     * @param imei
+     *            the imei
+     * @return the device details
+     */
+    @RequestMapping( value = "/tmo/resources/services/devices/{imei}", method = RequestMethod.GET)
+    public Device getDeviceDetails( @PathVariable String imei) {
+        return deviceQueryService.getDeviceDetails(imei);
+    }
 
-	@RequestMapping(value = "/tmo/resources/services/devices", method = RequestMethod.POST)
-	public String addDevice(@RequestBody Device device) {
+    /**
+     * Adds the device.
+     *
+     * @param device
+     *            the device
+     * @return the string
+     */
+    @RequestMapping( value = "/tmo/resources/services/devices", method = RequestMethod.POST)
+    public String addDevice( @RequestBody Device device) {
 
-		return deviceQueryService.addDevice(device);
-	}
+        return deviceQueryService.addDevice(device);
+    }
 
-	@RequestMapping(value = "/tmo/resources/services/devices/{imei}", method = RequestMethod.PUT)
-	public String updateDevice(@RequestBody Device device) {
-		System.out.println("Updating Device...");
-
-		return deviceQueryService.updateDevice(device);
-	}
+    /**
+     * Update device.
+     *
+     * @param device
+     *            the device
+     * @return the string
+     */
+    @RequestMapping( value = "/tmo/resources/services/devices/{imei}", method = RequestMethod.PUT)
+    public String updateDevice( @RequestBody Device device) {
+        log.info("Updating Device...");
+        return deviceQueryService.updateDevice(device);
+    }
 }
