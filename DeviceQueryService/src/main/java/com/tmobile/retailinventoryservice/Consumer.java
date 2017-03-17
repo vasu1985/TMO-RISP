@@ -4,6 +4,8 @@ package com.tmobile.retailinventoryservice;
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +17,8 @@ import com.tmobile.retailinventoryservice.service.DeviceQueryService;
 
 @Component
 public class Consumer {
+	/** The log. */
+	private static Logger log = LoggerFactory.getLogger(Consumer.class);
 
 	private CountDownLatch latch = new CountDownLatch(1);
 	ObjectMapper mapper = new ObjectMapper();
@@ -22,22 +26,30 @@ public class Consumer {
 	private DeviceQueryService deviceQueryService;
 
 	public void consumeMessage(String message) {
-		System.out.println("Consumed <" + message + ">");
+		log.info("Consumed <" + message + ">");
 		try {
 			Device updatedDevice = mapper.readValue(message, Device.class);
-			System.out.println(
-					"imei-> " + updatedDevice.getmImei() + "\nnew state-> " + updatedDevice.getmCurrentState());
+			if (null != updatedDevice) {
+				log.info("imei-> " + updatedDevice.getmImei() + "\nnew state-> " + updatedDevice.getmState());
+			}
 			Device deviceToPersist = deviceQueryService.getDeviceDetails(updatedDevice.getmImei());
-			deviceToPersist.setmReason(updatedDevice.getmReason());
-			deviceToPersist.setmCurrentState(updatedDevice.getmCurrentState());
-			deviceToPersist.setmRepId(updatedDevice.getmRepId());
-			deviceQueryService.updateDevice(deviceToPersist);
+			if (null != deviceToPersist) {
+				deviceToPersist.setmReason(updatedDevice.getmReason());
+				deviceToPersist.setmState(updatedDevice.getmState());
+				deviceToPersist.setmRepId(updatedDevice.getmRepId());
+				deviceQueryService.updateDevice(deviceToPersist);
+			} else {
+				deviceQueryService.updateDevice(updatedDevice);
+			}
 		} catch (JsonParseException e) {
 			e.printStackTrace();
+			log.error(e.getMessage());
 		} catch (JsonMappingException e) {
 			e.printStackTrace();
+			log.error(e.getMessage());
 		} catch (IOException e) {
 			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 		latch.countDown();
 	}

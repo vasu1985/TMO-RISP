@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class QueryApp {
 
-    final static String queueName = "device-updated";
+    final static String queueName = "imei-state-updated";
 
     @Bean
     SimpleMessageListenerContainer container( ConnectionFactory connectionFactory, MessageListenerAdapter listenerAdapter) {

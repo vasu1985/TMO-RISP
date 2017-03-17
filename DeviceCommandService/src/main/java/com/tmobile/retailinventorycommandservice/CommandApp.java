@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Bean;
  */
 @SpringBootApplication
 public class CommandApp {
-	public final static String queueName = "device-updated";
+	public final static String queueName = "imei-state-updated";
 
 	@Bean
 	Queue queue() {

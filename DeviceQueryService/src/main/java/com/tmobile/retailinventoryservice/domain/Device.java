@@ -18,59 +18,54 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @updated DateTime: Mar 9, 2017 2:28:41 PM Author: SS00443175
  */
 @Region("queryDevice")
-public class Device implements Serializable{
+public class Device implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
-    /** The imei. */
+
+	/** The imei. */
 	@Id
 	@JsonProperty("imei")
-    private String mImei;
-
-    /** The sku. */
+	private String mImei;
+	/** The sku. */
 	@JsonProperty("sku")
-    private String mSku;
+	private String mSku;
 
-    /** The rep id. */
+	@JsonProperty("stockTransferOrderId")
+	private String mStockTransferOrderId;
+
+	@JsonProperty("accountId")
+	private String mAccountId;
+
+	@JsonProperty("programId")
+	private String mProgramId;
+
+	@JsonProperty("owningStoreId")
+	private String mOwningStoreId;
+
+	/** The rep id. */
 	@JsonProperty("repId")
-    private String mRepId;
+	private String mRepId;
 
-    /** The description. */
-    @JsonProperty("description")
-    private String mDescription;
+	/** The description. */
+	@JsonProperty("description")
+	private String mDescription;
 
-    /** The program. */
-    @JsonProperty("program")
-    private String mProgram;
+	/** The current state. */
+	@JsonProperty("state")
+	private String mState;
 
-    /** The current state. */
-    @JsonProperty("currentState")
-    private String mCurrentState;
+	/** The reason. */
+	@JsonProperty("reason")
+	private String mReason;
 
-    /** The change state. */
-    @JsonProperty("changeState")
-    private String mChangeState;
+	@JsonProperty("make")
+	private String mMake;
 
-    /** The reason. */
-    @JsonProperty("reason")
-    private String mReason;
+	@JsonProperty("model")
+	private String mModel;
 
-    
-	public Device(String mImei, String mSku, String mRepId, String mDescription, String mProgram, String mCurrentState,
-			String mChangeState, String mReason) {
-		
-		this.mImei = mImei;
-		this.mSku = mSku;
-		this.mRepId = mRepId;
-		this.mDescription = mDescription;
-		this.mProgram = mProgram;
-		this.mCurrentState = mCurrentState;
-		this.mChangeState = mChangeState;
-		this.mReason = mReason;
-	}
-	
-	public Device(){
-		
+	public Device() {
+
 	}
 
 	public String getmImei() {
@@ -105,30 +100,6 @@ public class Device implements Serializable{
 		this.mDescription = mDescription;
 	}
 
-	public String getmProgram() {
-		return mProgram;
-	}
-
-	public void setmProgram(String mProgram) {
-		this.mProgram = mProgram;
-	}
-
-	public String getmCurrentState() {
-		return mCurrentState;
-	}
-
-	public void setmCurrentState(String mCurrentState) {
-		this.mCurrentState = mCurrentState;
-	}
-
-	public String getmChangeState() {
-		return mChangeState;
-	}
-
-	public void setmChangeState(String mChangeState) {
-		this.mChangeState = mChangeState;
-	}
-
 	public String getmReason() {
 		return mReason;
 	}
@@ -141,12 +112,86 @@ public class Device implements Serializable{
 		return serialVersionUID;
 	}
 
-	@Override
-	public String toString() {
-		return "Device [mImei=" + mImei + ", mSku=" + mSku + ", mRepId=" + mRepId + ", mDescription=" + mDescription
-				+ ", mProgram=" + mProgram + ", mCurrentState=" + mCurrentState + ", mChangeState=" + mChangeState
-				+ ", mReason=" + mReason + "]";
+	public String getmStockTransferOrderId() {
+		return mStockTransferOrderId;
 	}
 
-     
+	public void setmStockTransferOrderId(String mStockTransferOrderId) {
+		this.mStockTransferOrderId = mStockTransferOrderId;
+	}
+
+	public String getmAccountId() {
+		return mAccountId;
+	}
+
+	public void setmAccountId(String mAccountId) {
+		this.mAccountId = mAccountId;
+	}
+
+	public String getmProgramId() {
+		return mProgramId;
+	}
+
+	public void setmProgramId(String mProgramId) {
+		this.mProgramId = mProgramId;
+	}
+
+	public String getmOwningStoreId() {
+		return mOwningStoreId;
+	}
+
+	public void setmOwningStoreId(String mOwningStoreId) {
+		this.mOwningStoreId = mOwningStoreId;
+	}
+
+	public String getmState() {
+		return mState;
+	}
+
+	public void setmState(String mState) {
+		this.mState = mState;
+	}
+
+	public String getmMake() {
+		return mMake;
+	}
+
+	public void setmMake(String mMake) {
+		this.mMake = mMake;
+	}
+
+	public String getmModel() {
+		return mModel;
+	}
+
+	public void setmModel(String mModel) {
+		this.mModel = mModel;
+	}
+
+	@Override
+	public String toString() {
+		return "Device [mImei=" + mImei + ", mSku=" + mSku + ", mStockTransferOrderId=" + mStockTransferOrderId
+				+ ", mAccountId=" + mAccountId + ", mProgramId=" + mProgramId + ", mOwningStoreId=" + mOwningStoreId
+				+ ", mRepId=" + mRepId + ", mDescription=" + mDescription + ", mState=" + mState + ", mReason="
+				+ mReason + ", mMake=" + mMake + ", mModel=" + mModel + "]";
+	}
+
+	public Device(String mImei, String mSku, String mStockTransferOrderId, String mAccountId, String mProgramId,
+			String mOwningStoreId, String mRepId, String mDescription, String mState, String mReason, String mMake,
+			String mModel) {
+		super();
+		this.mImei = mImei;
+		this.mSku = mSku;
+		this.mStockTransferOrderId = mStockTransferOrderId;
+		this.mAccountId = mAccountId;
+		this.mProgramId = mProgramId;
+		this.mOwningStoreId = mOwningStoreId;
+		this.mRepId = mRepId;
+		this.mDescription = mDescription;
+		this.mState = mState;
+		this.mReason = mReason;
+		this.mMake = mMake;
+		this.mModel = mModel;
+	}
+
 }

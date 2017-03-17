@@ -28,12 +28,12 @@ public class Device implements Serializable{
     private String mImei;
 
     /** The program. */
-    @JsonProperty("program")
-    private String mProgram;
+    @JsonProperty("programId")
+    private String mProgramId;
 
     /** The current state. */
-    @JsonProperty("currentState")
-    private String mCurrentState;
+    @JsonProperty("state")
+    private String mState;
 
     /** The reason. */
     @JsonProperty("reason")
@@ -55,21 +55,14 @@ public class Device implements Serializable{
 		this.mImei = mImei;
 	}
 
-	public String getmProgram() {
-		return mProgram;
+	public String getmProgramId() {
+		return mProgramId;
 	}
 
-	public void setmProgram(String mProgram) {
-		this.mProgram = mProgram;
+	public void setmProgramId(String mProgram) {
+		this.mProgramId = mProgram;
 	}
 
-	public String getmCurrentState() {
-		return mCurrentState;
-	}
-
-	public void setmCurrentState(String mCurrentState) {
-		this.mCurrentState = mCurrentState;
-	}
 
 	public String getmReason() {
 		return mReason;
@@ -91,20 +84,21 @@ public class Device implements Serializable{
 		this.mRepId = mRepId;
 	}
 
-	@Override
-	public String toString() {
-		return "Device [mImei=" + mImei + ", mProgram=" + mProgram + ", mCurrentState=" + mCurrentState + ", mReason="
-				+ mReason + ", mRepId=" + mRepId + "]";
-	}
-
-	public Device(String mImei, String mProgram, String mCurrentState, String mReason, String mRepId) {
+	public Device(String mImei, String mProgramId, String mState, String mReason, String mRepId) {
 		super();
 		this.mImei = mImei;
-		this.mProgram = mProgram;
-		this.mCurrentState = mCurrentState;
+		this.mProgramId = mProgramId;
+		this.mState = mState;
 		this.mReason = mReason;
 		this.mRepId = mRepId;
 	}
+
+	@Override
+	public String toString() {
+		return "Device [mImei=" + mImei + ", mProgramId=" + mProgramId + ", mState=" + mState + ", mReason=" + mReason
+				+ ", mRepId=" + mRepId + "]";
+	}
+
 
 
      
