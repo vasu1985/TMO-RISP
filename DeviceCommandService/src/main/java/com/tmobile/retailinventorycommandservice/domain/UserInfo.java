@@ -15,21 +15,24 @@ import org.springframework.data.gemfire.mapping.Region;
  * @project RetailInventoryService
  * @updated DateTime: Mar 9, 2017 2:28:49 PM Author: SS00443175
  */
-@Region("devices")
-public class UserInfo implements Serializable{
+@Region( "devices")
+public class UserInfo implements Serializable {
+
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = 1L;
 
     /** The rep id. */
-   
-    private String mRepId;
+
+    private String            mRepId;
 
     /** The password. */
-    private String mPassword;
+    private String            mPassword;
 
     /** The role. */
-    private String mRole;
+    private String            mRole;
 
     /** The description. */
-    private String mDescription;
+    private String            mDescription;
 
     /**
      * The Constructor.

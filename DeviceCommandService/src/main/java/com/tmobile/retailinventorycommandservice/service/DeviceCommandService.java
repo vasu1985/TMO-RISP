@@ -20,49 +20,47 @@ import com.tmobile.retailinventorycommandservice.repository.DeviceCommandReposit
 @Service
 public class DeviceCommandService {
 
-	/** The device repository. */
-	@Autowired
-	private DeviceCommandRepository deviceCommandRepository;
+    /** The device repository. */
+    @Autowired
+    private DeviceCommandRepository deviceCommandRepository;
 
-	/**
-	 * Adds the device.
-	 *
-	 * @param device
-	 *            the device
-	 * @return the string
-	 */
-	public String addDevice(Device device) {
-		deviceCommandRepository.save(device);
-		return "IMEI->" + device.getmImei() + " added sucessfully";
-	}
+    /**
+     * Adds the device.
+     *
+     * @param device
+     *            the device
+     * @return the string
+     */
+    public String addDevice( Device device) {
+        deviceCommandRepository.save(device);
+        return "IMEI->" + device.getmImei() + " added sucessfully";
+    }
 
-	// TODO addDevices()
+    // TODO addDevices()
 
-	/**
-	 * Update device.
-	 *
-	 * @param imei
-	 *            the imei
-	 * @param updatedDevice
-	 *            the updated device
-	 * @return the string
-	 */
-	public String updateDevice(Device updatedDevice) {
-		deviceCommandRepository.save(updatedDevice);
-		return updatedDevice.getmImei() + " updated sucessfully";
+    /**
+     * Update device.
+     *
+     * @param updatedDevice
+     *            the updated device
+     * @return the string
+     */
+    public String updateDevice( Device updatedDevice) {
+        deviceCommandRepository.save(updatedDevice);
+        return updatedDevice.getmImei() + " updated sucessfully";
 
-	}
+    }
 
-	/**
-	 * Delete device.
-	 *
-	 * @param imei
-	 *            the imei
-	 * @return the string
-	 */
-	public String deleteDevice(String imei) {
-		deviceCommandRepository.delete(imei);
-		return "device with imei-> " + imei + "deleted successfully";
-	}
+    /**
+     * Delete device.
+     *
+     * @param imei
+     *            the imei
+     * @return the string
+     */
+    public String deleteDevice( String imei) {
+        deviceCommandRepository.delete(imei);
+        return "device with imei-> " + imei + "deleted successfully";
+    }
 
 }

@@ -1,3 +1,4 @@
+
 package com.tmobile.retailinventorycommandservice.domain;
 
 import java.io.Serializable;
@@ -17,89 +18,156 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @project RetailInventoryService
  * @updated DateTime: Mar 9, 2017 2:28:41 PM Author: SS00443175
  */
-@Region("devices")
-public class Device implements Serializable{
+@Region( "devices")
+public class Device implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = 1L;
+
     /** The imei. */
-	@Id
-	@JsonProperty("imei")
-    private String mImei;
+    @Id
+    @JsonProperty( "imei")
+    private String            mImei;
 
     /** The program. */
-    @JsonProperty("programId")
-    private String mProgramId;
+    @JsonProperty( "programId")
+    private String            mProgramId;
 
     /** The current state. */
-    @JsonProperty("state")
-    private String mState;
+    @JsonProperty( "state")
+    private String            mState;
 
     /** The reason. */
-    @JsonProperty("reason")
-    private String mReason;
-    
+    @JsonProperty( "reason")
+    private String            mReason;
+
     /** The reason. */
-    @JsonProperty("repId")
-    private String mRepId;
-	
-	public Device(){
-		
-	}
+    @JsonProperty( "repId")
+    private String            mRepId;
 
-	public String getmImei() {
-		return mImei;
-	}
+    /**
+     * The Constructor.
+     */
+    public Device() {
 
-	public void setmImei(String mImei) {
-		this.mImei = mImei;
-	}
+    }
 
-	public String getmProgramId() {
-		return mProgramId;
-	}
+    /**
+     * The Constructor.
+     *
+     * @param mImei
+     *            the m imei
+     * @param mProgramId
+     *            the m program id
+     * @param mState
+     *            the m state
+     * @param mReason
+     *            the m reason
+     * @param mRepId
+     *            the m rep id
+     */
+    public Device( String mImei, String mProgramId, String mState, String mReason, String mRepId) {
+        super();
+        this.mImei = mImei;
+        this.mProgramId = mProgramId;
+        this.mState = mState;
+        this.mReason = mReason;
+        this.mRepId = mRepId;
+    }
 
-	public void setmProgramId(String mProgram) {
-		this.mProgramId = mProgram;
-	}
+    /**
+     * Getm imei.
+     *
+     * @return the m imei
+     */
+    public String getmImei() {
+        return mImei;
+    }
 
+    /**
+     * Setm imei.
+     *
+     * @param mImei
+     *            the m imei
+     */
+    public void setmImei( String mImei) {
+        this.mImei = mImei;
+    }
 
-	public String getmReason() {
-		return mReason;
-	}
+    /**
+     * Getm program id.
+     *
+     * @return the m program id
+     */
+    public String getmProgramId() {
+        return mProgramId;
+    }
 
-	public void setmReason(String mReason) {
-		this.mReason = mReason;
-	}
+    /**
+     * Setm program id.
+     *
+     * @param mProgram
+     *            the m program id
+     */
+    public void setmProgramId( String mProgram) {
+        this.mProgramId = mProgram;
+    }
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+    /**
+     * Getm reason.
+     *
+     * @return the m reason
+     */
+    public String getmReason() {
+        return mReason;
+    }
 
-	public String getmRepId() {
-		return mRepId;
-	}
+    /**
+     * Setm reason.
+     *
+     * @param mReason
+     *            the m reason
+     */
+    public void setmReason( String mReason) {
+        this.mReason = mReason;
+    }
 
-	public void setmRepId(String mRepId) {
-		this.mRepId = mRepId;
-	}
+    /**
+     * Gets the serialversionuid.
+     *
+     * @return the serialversionuid
+     */
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
 
-	public Device(String mImei, String mProgramId, String mState, String mReason, String mRepId) {
-		super();
-		this.mImei = mImei;
-		this.mProgramId = mProgramId;
-		this.mState = mState;
-		this.mReason = mReason;
-		this.mRepId = mRepId;
-	}
+    /**
+     * Getm rep id.
+     *
+     * @return the m rep id
+     */
+    public String getmRepId() {
+        return mRepId;
+    }
 
-	@Override
-	public String toString() {
-		return "Device [mImei=" + mImei + ", mProgramId=" + mProgramId + ", mState=" + mState + ", mReason=" + mReason
-				+ ", mRepId=" + mRepId + "]";
-	}
+    /**
+     * Setm rep id.
+     *
+     * @param mRepId
+     *            the m rep id
+     */
+    public void setmRepId( String mRepId) {
+        this.mRepId = mRepId;
+    }
 
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
 
+    @Override
+    public String toString() {
+        return "Device [mImei=" + mImei + ", mProgramId=" + mProgramId + ", mState=" + mState + ", mReason=" + mReason + ", mRepId=" + mRepId + "]";
+    }
 
-     
 }
