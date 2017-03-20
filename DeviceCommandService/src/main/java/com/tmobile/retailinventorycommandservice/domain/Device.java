@@ -31,7 +31,7 @@ public class Device implements Serializable {
 	@JsonProperty("programId")
 	private String mProgramId;
 
-	/** The current state. */
+	/** The current state. */ 
 	@JsonProperty("state")
 	private String mState;
 
@@ -96,6 +96,14 @@ public class Device implements Serializable {
 	public String toString() {
 		return "Device [mImei=" + mImei + ", mProgramId=" + mProgramId + ", mState=" + mState + ", mReason=" + mReason
 				+ ", mRepId=" + mRepId + "]";
+	}
+
+	public String getmState() {
+		return mState;
+	}
+
+	public void setmState(String mState) {
+		this.mState = mState;
 	}
 
 }
