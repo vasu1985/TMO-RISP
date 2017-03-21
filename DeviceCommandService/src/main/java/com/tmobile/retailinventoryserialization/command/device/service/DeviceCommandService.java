@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import com.tmobile.retailinventoryserialization.base.service.BaseService;
 import com.tmobile.retailinventoryserialization.command.device.domain.shared.Device;
 import com.tmobile.retailinventoryserialization.command.device.repository.DeviceCommandRepository;
 
@@ -24,7 +25,7 @@ import com.tmobile.retailinventoryserialization.command.device.repository.Device
  */
 @Validated
 @Service
-public class DeviceCommandService {
+public class DeviceCommandService extends BaseService{
 
     /** The log. */
     private static Logger           log = LoggerFactory.getLogger(DeviceCommandService.class);

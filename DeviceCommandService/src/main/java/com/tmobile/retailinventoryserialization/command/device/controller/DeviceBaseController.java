@@ -1,5 +1,7 @@
 package com.tmobile.retailinventoryserialization.command.device.controller;
 
-public class DeviceBaseController{
+import com.tmobile.retailinventoryserialization.base.controller.BaseController;
+
+public class DeviceBaseController extends BaseController{
 
 }
