@@ -1,4 +1,4 @@
-package com.tmobile.retailinventoryserialization.query.device.domain;
+package com.tmobile.retailinventoryserialization.query.device.domain.shared;
 
 import java.io.Serializable;
 

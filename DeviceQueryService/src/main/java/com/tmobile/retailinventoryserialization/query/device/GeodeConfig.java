@@ -11,7 +11,7 @@ import org.springframework.data.gemfire.repository.config.EnableGemfireRepositor
 
 import com.gemstone.gemfire.cache.GemFireCache;
 import com.gemstone.gemfire.cache.client.ClientCache;
-import com.tmobile.retailinventoryserialization.query.device.domain.Device;
+import com.tmobile.retailinventoryserialization.query.device.domain.shared.Device;
 
 
 @Configuration

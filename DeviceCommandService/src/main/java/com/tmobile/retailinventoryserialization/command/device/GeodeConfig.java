@@ -12,8 +12,8 @@ import org.springframework.data.gemfire.repository.config.EnableGemfireRepositor
 
 import com.gemstone.gemfire.cache.GemFireCache;
 import com.gemstone.gemfire.cache.client.ClientCache;
-import com.tmobile.retailinventoryserialization.command.device.domain.Device;
-import com.tmobile.retailinventoryserialization.command.device.domain.Transaction;
+import com.tmobile.retailinventoryserialization.command.device.domain.shared.Device;
+import com.tmobile.retailinventoryserialization.command.device.domain.shared.Transaction;
 
 @Configuration
 @EnableGemfireRepositories

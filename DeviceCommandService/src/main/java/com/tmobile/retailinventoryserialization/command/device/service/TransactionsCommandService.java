@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tmobile.retailinventoryserialization.command.device.domain.Transaction;
+import com.tmobile.retailinventoryserialization.command.device.domain.shared.Transaction;
 import com.tmobile.retailinventoryserialization.command.device.repository.TransactionsCommandRepository;
 
 /**

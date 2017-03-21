@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tmobile.retailinventoryserialization.command.device.domain.UserInfo;
+import com.tmobile.retailinventoryserialization.command.device.domain.shared.UserInfo;
 import com.tmobile.retailinventoryserialization.command.device.service.UserCommandService;
 
 /**

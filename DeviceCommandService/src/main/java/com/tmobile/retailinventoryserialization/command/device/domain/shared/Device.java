@@ -1,5 +1,5 @@
 
-package com.tmobile.retailinventoryserialization.command.device.domain;
+package com.tmobile.retailinventoryserialization.command.device.domain.shared;
 
 import java.io.Serializable;
 

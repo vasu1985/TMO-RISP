@@ -9,8 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tmobile.retailinventoryserialization.query.device.domain.AuthDetails;
-import com.tmobile.retailinventoryserialization.query.device.domain.UserInfo;
+import com.tmobile.retailinventoryserialization.query.device.domain.shared.AuthDetails;
+import com.tmobile.retailinventoryserialization.query.device.domain.shared.UserInfo;
 import com.tmobile.retailinventoryserialization.query.device.repository.UserQueryRepository;
 import com.tmobile.retailinventoryserialization.query.device.utils.Constants;
 

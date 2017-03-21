@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tmobile.retailinventoryserialization.command.device.CommandApp;
-import com.tmobile.retailinventoryserialization.command.device.domain.Device;
-import com.tmobile.retailinventoryserialization.command.device.domain.Transaction;
+import com.tmobile.retailinventoryserialization.command.device.domain.shared.Device;
+import com.tmobile.retailinventoryserialization.command.device.domain.shared.Transaction;
 import com.tmobile.retailinventoryserialization.command.device.service.DeviceCommandService;
 import com.tmobile.retailinventoryserialization.command.device.service.TransactionsCommandService;
 

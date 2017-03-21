@@ -1,5 +1,5 @@
 
-package com.tmobile.retailinventoryserialization.query.device.domain;
+package com.tmobile.retailinventoryserialization.query.device.domain.shared;
 
 /**
  * <p>

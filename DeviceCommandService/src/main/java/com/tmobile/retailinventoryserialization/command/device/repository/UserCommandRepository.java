@@ -4,7 +4,7 @@ package com.tmobile.retailinventoryserialization.command.device.repository;
 import org.springframework.data.gemfire.mapping.Region;
 import org.springframework.data.repository.CrudRepository;
 
-import com.tmobile.retailinventoryserialization.command.device.domain.UserInfo;
+import com.tmobile.retailinventoryserialization.command.device.domain.shared.UserInfo;
 
 /**
  * <p>
