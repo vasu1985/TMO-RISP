@@ -21,60 +21,60 @@ import com.tmobile.retailinventorycommandservice.repository.TransactionsCommandR
  */
 @Service
 public class TransactionsCommandService {
-	/** The log. */
-    private static Logger      log                   = LoggerFactory.getLogger(TransactionsCommandService.class);
 
-	
-	/** The device repository. */
-	@Autowired
-	private TransactionsCommandRepository transactionCommandRepository;
+    /** The log. */
+    private static Logger                 log = LoggerFactory.getLogger(TransactionsCommandService.class);
 
-	/**
-	 * Adds the device.
-	 *
-	 * @param Transaction
-	 *            the Transaction
-	 * @return the string
-	 */
-	public String addTransaction(Transaction transaction) {
-		transactionCommandRepository.save(transaction);
-		log.info("addDevice IMEI->" + transaction.getmImei());
-		return "IMEI->" + transaction.getmImei() + " added sucessfully";
-	}
+    /** The device repository. */
+    @Autowired
+    private TransactionsCommandRepository transactionCommandRepository;
 
-	// TODO addDevices()
+    /**
+     * Adds the device.
+     *
+     * @param Transaction
+     *            the Transaction
+     * @return the string
+     */
+    public String addTransaction( Transaction transaction) {
+        transactionCommandRepository.save(transaction);
+        log.info("addDevice IMEI->" + transaction.getmImei());
+        return "IMEI->" + transaction.getmImei() + " added sucessfully";
+    }
 
-	/**
-	 * Update Transaction.
-	 *
-	 * @param imei
-	 *            the imei
-	 * @param updatedTransaction
-	 *            the updated Transaction
-	 * @return the string
-	 */
-	public String updateTransaction(Transaction transaction) {
-		transactionCommandRepository.save(transaction);
-		log.info("updatedDevice IMEI->" + transaction.getmImei());
-		return transaction.getmImei() + " updated sucessfully";
+    // TODO addDevices()
 
-	}
+    /**
+     * Delete Transaction
+     *
+     * @param imei
+     *            the imei
+     * @return the string
+     */
+    public String deleteTransaction( String imei) {
+        transactionCommandRepository.delete(imei);
+        log.info("deleteDevice IMEI->" + imei);
+        return "device with imei-> " + imei + "deleted successfully";
+    }
 
-	/**
-	 * Delete Transaction
-	 *
-	 * @param imei
-	 *            the imei
-	 * @return the string
-	 */
-	public String deleteTransaction(String imei) {
-		transactionCommandRepository.delete(imei);
-		log.info("deleteDevice IMEI->" + imei);
-		return "device with imei-> " + imei + "deleted successfully";
-	}
+    public Transaction getTransactionDetails( String imei) {
+        return transactionCommandRepository.findOne(imei);
+    }
 
-	public Transaction getTransactionDetails(String imei) {
-		return transactionCommandRepository.findOne(imei);
-	}
+    /**
+     * Update Transaction.
+     *
+     * @param imei
+     *            the imei
+     * @param updatedTransaction
+     *            the updated Transaction
+     * @return the string
+     */
+    public String updateTransaction( Transaction transaction) {
+        transactionCommandRepository.save(transaction);
+        log.info("updatedDevice IMEI->" + transaction.getmImei());
+        return transaction.getmImei() + " updated sucessfully";
+
+    }
 
 }

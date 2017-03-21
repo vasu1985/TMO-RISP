@@ -1,3 +1,4 @@
+
 package com.tmobile.retailinventorycommandservice.domain;
 
 import java.io.Serializable;
@@ -20,97 +21,96 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @project RetailInventoryService
  * @updated DateTime: Mar 9, 2017 2:28:41 PM Author: SS00443175
  */
-@Region("devices")
+@Region( "devices")
 public class Device implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/** The imei. */
-	@Id
-	@JsonProperty("imei")
-	@NotNull
-	@Size(min = 15, max = 15)
-	private String mImei;
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
 
-	/** The program. */
-	@JsonProperty("programId")
-	private String mProgramId;
+    /** The imei. */
+    @Id
+    @JsonProperty( "imei")
+    @NotNull
+    @Size( min = 15, max = 15)
+    private String            mImei;
 
-	/** The current state. */
-	@JsonProperty("state")
-	@NotNull
-	private String mState;
+    /** The programId */
+    @JsonProperty( "programId")
+    private String            mProgramId;
 
-	/** The reason. */
-	@JsonProperty("reason")
-	@NotNull
-	private String mReason;
+    /** The state. */
+    @JsonProperty( "state")
+    @NotNull
+    private String            mState;
 
-	/** The reason. */
-	@JsonProperty("repId")
-	private String mRepId;
+    /** The reason. */
+    @JsonProperty( "reason")
+    @NotNull
+    private String            mReason;
 
-	public Device() {
+    /** The reason. */
+    @JsonProperty( "repId")
+    private String            mRepId;
 
-	}
+    public Device() {
 
-	public String getmImei() {
-		return mImei;
-	}
+    }
 
-	public void setmImei(String mImei) {
-		this.mImei = mImei;
-	}
+    public Device( String pImei, String pProgramId, String pState, String pReason, String pRepId) {
+        super();
+        this.mImei = pImei;
+        this.mProgramId = pProgramId;
+        this.mState = pState;
+        this.mReason = pReason;
+        this.mRepId = pRepId;
+    }
 
-	public String getmProgramId() {
-		return mProgramId;
-	}
+    public String getImei() {
+        return mImei;
+    }
 
-	public void setmProgramId(String mProgram) {
-		this.mProgramId = mProgram;
-	}
+    public String getProgramId() {
+        return mProgramId;
+    }
 
-	public String getmReason() {
-		return mReason;
-	}
+    public String getReason() {
+        return mReason;
+    }
 
-	public void setmReason(String mReason) {
-		this.mReason = mReason;
-	}
+    public String getRepId() {
+        return mRepId;
+    }
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+    public String getState() {
+        return mState;
+    }
 
-	public String getmRepId() {
-		return mRepId;
-	}
+    public void setImei( String pImei) {
+        this.mImei = pImei;
+    }
 
-	public void setmRepId(String mRepId) {
-		this.mRepId = mRepId;
-	}
+    public void setProgramId( String pProgram) {
+        this.mProgramId = pProgram;
+    }
 
-	public Device(String mImei, String mProgramId, String mState, String mReason, String mRepId) {
-		super();
-		this.mImei = mImei;
-		this.mProgramId = mProgramId;
-		this.mState = mState;
-		this.mReason = mReason;
-		this.mRepId = mRepId;
-	}
+    public void setReason( String pReason) {
+        this.mReason = pReason;
+    }
 
-	@Override
-	public String toString() {
-		return "Device [mImei=" + mImei + ", mProgramId=" + mProgramId + ", mState=" + mState + ", mReason=" + mReason
-				+ ", mRepId=" + mRepId + "]";
-	}
+    public void setRepId( String pRepId) {
+        this.mRepId = pRepId;
+    }
 
-	public String getmState() {
-		return mState;
-	}
+    public void setState( String pState) {
+        this.mState = pState;
+    }
 
-	public void setmState(String mState) {
-		this.mState = mState;
-	}
+    @Override
+    public String toString() {
+        return "Device [imei=" + mImei + ", programId=" + mProgramId + ", state=" + mState + ", reason=" + mReason + ", repId=" + mRepId + "]";
+    }
 
 }

@@ -1,3 +1,4 @@
+
 package com.tmobile.retailinventorycommandservice;
 
 import static com.google.common.base.Predicates.or;
@@ -15,27 +16,24 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@Profile("swagger-enabled-for-dev")
+@Profile( "swagger-enabled-for-dev")
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
 
-	@Bean
-	public Docket postsApi() {
-		return new Docket(DocumentationType.SWAGGER_2).groupName("public-api")
-				.apiInfo(apiInfo()).select().paths(postPaths()).build();
-	}
-	
-	private Predicate<String> postPaths() {
-		return or(regex("/device/tmo.*"), regex("/device.*"), regex("/error.*"), regex("/user.*"));
-	}
-	
-	private ApiInfo apiInfo() {
-		return new ApiInfoBuilder().title("Retail Inventory Serialization API")
-				.description("Device Command Service API reference for developers")
-				.termsOfServiceUrl("http://www.techmahindra.com/pages/default.aspx")
-				.contact("ab00334861@techmahindra.com").license("RIS SOA Team.")
-				.licenseUrl("ab00334861@techmahindra.com").version("1.0").build();
-	}
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder().title("Retail Inventory Serialization API").description("Device Command Service API reference for developers")
+                .termsOfServiceUrl("http://www.techmahindra.com/pages/default.aspx").contact("ab00334861@techmahindra.com").license("RIS SOA Team.")
+                .licenseUrl("ab00334861@techmahindra.com").version("1.0").build();
+    }
+
+    private Predicate<String> postPaths() {
+        return or(regex("/device/tmo.*"), regex("/device.*"), regex("/error.*"), regex("/user.*"));
+    }
+
+    @Bean
+    public Docket postsApi() {
+        return new Docket(DocumentationType.SWAGGER_2).groupName("public-api").apiInfo(apiInfo()).select().paths(postPaths()).build();
+    }
 
 }

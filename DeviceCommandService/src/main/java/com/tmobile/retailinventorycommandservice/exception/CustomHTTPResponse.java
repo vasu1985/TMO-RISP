@@ -46,50 +46,6 @@ public class CustomHTTPResponse {
     }
 
     /**
-     * Gets the value of status.
-     *
-     * @return returns the property status
-     */
-
-    public String getStatus() {
-
-        return mStatus;
-    }
-
-    /**
-     * Sets the value of property status with value status.
-     *
-     * @param status
-     *            the status to set
-     */
-
-    public void setStatus( String status) {
-        this.mStatus = status;
-    }
-
-    /**
-     * Gets the value of statusCode.
-     *
-     * @return returns the property statusCode
-     */
-
-    public int getStatusCode() {
-
-        return mStatusCode;
-    }
-
-    /**
-     * Sets the value of property statusCode with value statusCode.
-     *
-     * @param stsCode
-     *            the statusCode to set
-     */
-
-    public void setStatusCode( int stsCode) {
-        this.mStatusCode = stsCode;
-    }
-
-    /**
      * Gets the value of data.
      *
      * @return returns the property data
@@ -98,17 +54,6 @@ public class CustomHTTPResponse {
     public Object getData() {
 
         return mData;
-    }
-
-    /**
-     * Sets the value of property data with value data.
-     *
-     * @param data
-     *            the data to set
-     */
-
-    public void setData( Object data) {
-        this.mData = data;
     }
 
     /**
@@ -123,6 +68,39 @@ public class CustomHTTPResponse {
     }
 
     /**
+     * Gets the value of status.
+     *
+     * @return returns the property status
+     */
+
+    public String getStatus() {
+
+        return mStatus;
+    }
+
+    /**
+     * Gets the value of statusCode.
+     *
+     * @return returns the property statusCode
+     */
+
+    public int getStatusCode() {
+
+        return mStatusCode;
+    }
+
+    /**
+     * Sets the value of property data with value data.
+     *
+     * @param data
+     *            the data to set
+     */
+
+    public void setData( Object data) {
+        this.mData = data;
+    }
+
+    /**
      * Sets the value of property path with value path.
      *
      * @param path
@@ -131,6 +109,28 @@ public class CustomHTTPResponse {
 
     public void setPath( String path) {
         this.mPath = path;
+    }
+
+    /**
+     * Sets the value of property status with value status.
+     *
+     * @param status
+     *            the status to set
+     */
+
+    public void setStatus( String status) {
+        this.mStatus = status;
+    }
+
+    /**
+     * Sets the value of property statusCode with value statusCode.
+     *
+     * @param stsCode
+     *            the statusCode to set
+     */
+
+    public void setStatusCode( int stsCode) {
+        this.mStatusCode = stsCode;
     }
 
 }

@@ -45,17 +45,6 @@ public class HTTPErrorResponse {
     }
 
     /**
-     * Sets the value of property exception with value exception.
-     *
-     * @param exec
-     *            the exception to set
-     */
-
-    public void setException( String exec) {
-        this.exception = exec;
-    }
-
-    /**
      * Gets the value of message.
      *
      * @return returns the property message
@@ -64,6 +53,17 @@ public class HTTPErrorResponse {
     public String getMessage() {
 
         return message;
+    }
+
+    /**
+     * Sets the value of property exception with value exception.
+     *
+     * @param exec
+     *            the exception to set
+     */
+
+    public void setException( String exec) {
+        this.exception = exec;
     }
 
     /**

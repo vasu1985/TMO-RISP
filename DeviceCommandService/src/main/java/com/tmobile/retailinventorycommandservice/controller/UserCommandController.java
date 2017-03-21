@@ -1,3 +1,4 @@
+
 package com.tmobile.retailinventorycommandservice.controller;
 
 import org.slf4j.Logger;
@@ -24,28 +25,27 @@ import com.tmobile.retailinventorycommandservice.service.UserCommandService;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("/user")
+@RequestMapping( "/user")
 public class UserCommandController {
 
-	/** The log. */
-    private static Logger      log                   = LoggerFactory.getLogger(UserCommandController.class);
+    /** The log. */
+    private static Logger      log = LoggerFactory.getLogger(UserCommandController.class);
 
-	
-	/** The user service. */
-	@Autowired
-	private UserCommandService userCommandService;
+    /** The user service. */
+    @Autowired
+    private UserCommandService userCommandService;
 
-	/**
-	 * Adds the user.
-	 *
-	 * @param user
-	 *            the user
-	 * @return the string
-	 */
-	@RequestMapping(value = "/tmo/resources/services/users", method = RequestMethod.POST)
-	public String addUser(@RequestBody UserInfo user) {
-		log.info("In AddUser");
-		return userCommandService.addUser(user);
-	}
+    /**
+     * Adds the user.
+     *
+     * @param user
+     *            the user
+     * @return the string
+     */
+    @RequestMapping( value = "/tmo/resources/services/users", method = RequestMethod.POST)
+    public String addUser( @RequestBody UserInfo user) {
+        log.info("In AddUser");
+        return userCommandService.addUser(user);
+    }
 
 }

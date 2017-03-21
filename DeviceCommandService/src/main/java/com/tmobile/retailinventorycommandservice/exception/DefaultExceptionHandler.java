@@ -1,3 +1,4 @@
+
 package com.tmobile.retailinventorycommandservice.exception;
 
 import java.util.List;
@@ -15,27 +16,26 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  * Exception handlers
- * 
+ *
  * @author Arun Kishor
  */
-@ControllerAdvice 
-@RequestMapping(produces = "application/json")
+@ControllerAdvice
+@RequestMapping( produces = "application/json")
 public class DefaultExceptionHandler {
 
-	private final Log log = LogFactory.getLog(getClass());
+    private final Log log = LogFactory.getLog(getClass());
 
-	/**
-	 * Handles constraint violation exceptions
-	 * 
-	 * @param ex
-	 *            the exception
-	 * @return the error response
-	 */
-	@RequestMapping(produces = "application/json")
-	@ExceptionHandler(ConstraintViolationException.class)
-	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
-	public @ResponseBody List<FieldError>
-	    handleConstraintViolationException(ConstraintViolationException ex) {
-	 return FieldError.getErrors(ex.getConstraintViolations());
-	}
+    /**
+     * Handles constraint violation exceptions
+     *
+     * @param ex
+     *            the exception
+     * @return the error response
+     */
+    @RequestMapping( produces = "application/json")
+    @ExceptionHandler( ConstraintViolationException.class)
+    @ResponseStatus( value = HttpStatus.BAD_REQUEST)
+    public @ResponseBody List<FieldError> handleConstraintViolationException( ConstraintViolationException ex) {
+        return FieldError.getErrors(ex.getConstraintViolations());
+    }
 }

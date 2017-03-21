@@ -22,27 +22,27 @@ import com.tmobile.retailinventorycommandservice.repository.UserCommandRepositor
 @Service
 public class UserCommandService {
 
-	/** The log. */
-    private static Logger      log                   = LoggerFactory.getLogger(UserCommandService.class);
+    /** The log. */
+    private static Logger         log                     = LoggerFactory.getLogger(UserCommandService.class);
 
-	/** The user repository. */
-	@Autowired
-	private UserCommandRepository userCommandRepository;
+    /** The Constant GET_USER_AUTHENTICATION. */
+    public static final String    GET_USER_AUTHENTICATION = "authenticateUser";
 
-	/** The Constant GET_USER_AUTHENTICATION. */
-	public static final String GET_USER_AUTHENTICATION = "authenticateUser";
+    /** The user repository. */
+    @Autowired
+    private UserCommandRepository userCommandRepository;
 
-	/**
-	 * Adds the user.
-	 *
-	 * @param user
-	 *            the user
-	 * @return the string
-	 */
-	public String addUser(UserInfo user) {
-		userCommandRepository.save(user);
-		log.info("AddUser :"+user.getRepId());
-		return "User " + user.getRepId() + " added successfully";
+    /**
+     * Adds the user.
+     *
+     * @param user
+     *            the user
+     * @return the string
+     */
+    public String addUser( UserInfo user) {
+        userCommandRepository.save(user);
+        log.info("AddUser :" + user.getRepId());
+        return "User " + user.getRepId() + " added successfully";
 
-	}
+    }
 }

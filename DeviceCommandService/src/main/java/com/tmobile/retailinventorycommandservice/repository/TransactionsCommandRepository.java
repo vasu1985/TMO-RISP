@@ -16,7 +16,7 @@ import com.tmobile.retailinventorycommandservice.domain.Transaction;
  * @project RetailInventoryService
  * @updated DateTime: Mar 9, 2017 2:28:54 PM Author: SS00443175
  */
-@Region("transactions")
+@Region( "transactions")
 public interface TransactionsCommandRepository extends CrudRepository<Transaction, String> {
-/*TODO*/
+    /* TODO */
 }

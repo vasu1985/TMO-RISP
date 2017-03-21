@@ -32,103 +32,103 @@ import com.tmobile.retailinventorycommandservice.service.TransactionsCommandServ
  * @project RetailInventoryService
  * @updated DateTime: Mar 9, 2017 2:30:01 PM Author: SS00443175
  */
-@CrossOrigin("*")
+@CrossOrigin( "*")
 @RestController
-@RequestMapping("/device")
+@RequestMapping( "/device")
 public class DeviceCommandController {
 
-	/** The log. */
-	private static Logger log = LoggerFactory.getLogger(DeviceCommandController.class);
+    /** The log. */
+    private static Logger              log    = LoggerFactory.getLogger(DeviceCommandController.class);
 
-	/** The device service. */
-	@Autowired
-	private DeviceCommandService deviceCommandService;
+    /** The device service. */
+    @Autowired
+    private DeviceCommandService       deviceCommandService;
 
-	@Autowired
-	private TransactionsCommandService transactionsCommandService;
+    @Autowired
+    private TransactionsCommandService transactionsCommandService;
 
-	ApplicationContext context;
+    ApplicationContext                 context;
 
-	ObjectMapper mapper = new ObjectMapper();
+    ObjectMapper                       mapper = new ObjectMapper();
 
-	@Autowired
-	public void context(ApplicationContext context) {
-		this.context = context;
-	}
+    /**
+     * Adds the device.
+     *
+     * @param device
+     *            the device
+     * @return the string
+     */
+    @RequestMapping( value = "/tmo/resources/services/devices", method = RequestMethod.POST)
+    public String addDevice( @RequestBody Device device) {
+        log.info("Controller ----------------" + device.getImei());
+        return deviceCommandService.addDevice(device);
+    }
 
-	/**
-	 * Adds the device.
-	 *
-	 * @param device
-	 *            the device
-	 * @return the string
-	 */
-	@RequestMapping(value = "/tmo/resources/services/devices", method = RequestMethod.POST)
-	public String addDevice(@RequestBody Device device) {
-		log.info("Controller ----------------" + device.getmImei());
-		return deviceCommandService.addDevice(device);
-	}
+    @Autowired
+    public void context( ApplicationContext context) {
+        this.context = context;
+    }
 
-	/**
-	 * Update device.
-	 *
-	 * @param imei
-	 *            the imei
-	 * @param device
-	 *            the device
-	 * @return the string
-	 */
-	@RequestMapping(value = "/tmo/resources/services/devices/{imei}", method = RequestMethod.PUT)
-	public String updateDevice(@RequestBody Device device) {
-		log.info("Updating Device...");
-		String updateMesg = null;
-		String status = "success";
-		try {
-			RabbitTemplate rabbitTemplate = context.getBean(RabbitTemplate.class);
-			rabbitTemplate.setQueue(CommandApp.queueName);
-			updateMesg = deviceCommandService.updateDevice(device);
-			rabbitTemplate.convertAndSend(CommandApp.queueName, mapper.writeValueAsString(device));
-		} catch (AmqpException e) {
-			log.error(e.toString());
-			status = "fail";
+    @RequestMapping( value = "/tmo/resources/services/devices/{imei}", method = RequestMethod.GET)
+    public Device getDeviceDetails( @PathVariable String imei) {
+        return deviceCommandService.getDeviceDetails(imei);
+    }
 
-		} catch (JsonProcessingException e) {
-			log.error(e.toString());
-			status = "fail";
-			e.printStackTrace();
+    /**
+     * Update device.
+     *
+     * @param imei
+     *            the imei
+     * @param device
+     *            the device
+     * @return the string
+     */
+    @RequestMapping( value = "/tmo/resources/services/devices/{imei}", method = RequestMethod.PUT)
+    public String updateDevice( @RequestBody Device device) {
+        log.info("Updating Device...");
+        String updateMesg = null;
+        String status = "success";
+        try {
+            RabbitTemplate rabbitTemplate = context.getBean(RabbitTemplate.class);
+            rabbitTemplate.setQueue(CommandApp.queueName);
+            updateMesg = deviceCommandService.updateDevice(device);
+            rabbitTemplate.convertAndSend(CommandApp.queueName, mapper.writeValueAsString(device));
+        } catch (AmqpException e) {
+            log.error(e.toString());
+            status = "fail";
 
-		} catch (Exception e) {
-			log.error(e.toString());
-			status = "fail";
-			throw e;
-		} finally {
-			try {
-				Transaction trans = new Transaction();
-				trans.setmImei(device.getmImei());
-				trans.setmCurrentState(device.getmState());
-				trans.setmReason(device.getmReason());
-				trans.setmRepId(device.getmRepId());
-				trans.setmStatus(status);
-				trans.setQueueName(CommandApp.queueName);
+        } catch (JsonProcessingException e) {
+            log.error(e.toString());
+            status = "fail";
+            e.printStackTrace();
 
-				updateMesg = transactionsCommandService.addTransaction(trans);
-				log.debug("Transaction imei:" + transactionsCommandService.getTransactionDetails(device.getmImei()));
+        } catch (Exception e) {
+            log.error(e.toString());
+            status = "fail";
+            throw e;
+        } finally {
+            try {
+                Transaction trans = new Transaction();
+                trans.setmImei(device.getImei());
+                trans.setmCurrentState(device.getState());
+                trans.setmReason(device.getReason());
+                trans.setmRepId(device.getRepId());
+                trans.setmStatus(status);
+                trans.setQueueName(CommandApp.queueName);
 
-				if (status.equalsIgnoreCase("success")) {
-					RabbitTemplate rabbitTemplate = context.getBean(RabbitTemplate.class);
-					rabbitTemplate.setQueue(CommandApp.transQueueName);
-					log.debug("Queue name is:" + CommandApp.transQueueName);
-					rabbitTemplate.convertAndSend(CommandApp.transQueueName, mapper.writeValueAsString(trans));
-				}
-			} catch (Exception e) {
-				log.error(e.getMessage());
-			}
-		}
-		return updateMesg;
-	}
+                updateMesg = transactionsCommandService.addTransaction(trans);
+                log.debug("Transaction imei:" + transactionsCommandService.getTransactionDetails(device.getImei()));
 
-	@RequestMapping(value = "/tmo/resources/services/devices/{imei}", method = RequestMethod.GET)
-	public Device getDeviceDetails(@PathVariable String imei) {
-		return deviceCommandService.getDeviceDetails(imei);
-	}
+                if (status.equalsIgnoreCase("success")) {
+                    RabbitTemplate rabbitTemplate = context.getBean(RabbitTemplate.class);
+                    rabbitTemplate.setQueue(CommandApp.transQueueName);
+                    log.debug("Queue name is:" + CommandApp.transQueueName);
+                    rabbitTemplate.convertAndSend(CommandApp.transQueueName, mapper.writeValueAsString(trans));
+                }
+            } catch (Exception e) {
+                log.error(e.getMessage());
+            }
+        }
+        return updateMesg;
+    }
 }

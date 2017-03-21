@@ -25,60 +25,60 @@ import com.tmobile.retailinventorycommandservice.repository.DeviceCommandReposit
 @Validated
 @Service
 public class DeviceCommandService {
-	/** The log. */
-    private static Logger      log                   = LoggerFactory.getLogger(DeviceCommandService.class);
 
-	
-	/** The device repository. */
-	@Autowired
-	private DeviceCommandRepository deviceCommandRepository;
+    /** The log. */
+    private static Logger           log = LoggerFactory.getLogger(DeviceCommandService.class);
 
-	/**
-	 * Adds the device.
-	 *
-	 * @param device
-	 *            the device
-	 * @return the string
-	 */
-	public String addDevice(Device device) {
-		deviceCommandRepository.save(device);
-		log.info("addDevice IMEI->" + device.getmImei());
-		return "IMEI->" + device.getmImei() + " added sucessfully";
-	}
+    /** The device repository. */
+    @Autowired
+    private DeviceCommandRepository deviceCommandRepository;
 
-	// TODO addDevices()
+    /**
+     * Adds the device.
+     *
+     * @param device
+     *            the device
+     * @return the string
+     */
+    public String addDevice( Device device) {
+        deviceCommandRepository.save(device);
+        log.info("addDevice IMEI->" + device.getImei());
+        return "IMEI->" + device.getImei() + " added sucessfully";
+    }
 
-	/**
-	 * Update device.
-	 *
-	 * @param imei
-	 *            the imei
-	 * @param updatedDevice
-	 *            the updated device
-	 * @return the string
-	 */
-	public String updateDevice(@Valid Device updatedDevice) {
-		deviceCommandRepository.save(updatedDevice);
-		log.info("updatedDevice IMEI->" + updatedDevice.getmImei());
-		return updatedDevice.getmImei() + " updated sucessfully";
+    // TODO addDevices()
 
-	}
+    /**
+     * Delete device.
+     *
+     * @param imei
+     *            the imei
+     * @return the string
+     */
+    public String deleteDevice( String imei) {
+        deviceCommandRepository.delete(imei);
+        log.info("deleteDevice IMEI->" + imei);
+        return "device with imei-> " + imei + "deleted successfully";
+    }
 
-	/**
-	 * Delete device.
-	 *
-	 * @param imei
-	 *            the imei
-	 * @return the string
-	 */
-	public String deleteDevice(String imei) {
-		deviceCommandRepository.delete(imei);
-		log.info("deleteDevice IMEI->" + imei);
-		return "device with imei-> " + imei + "deleted successfully";
-	}
+    public Device getDeviceDetails( String imei) {
+        return deviceCommandRepository.findOne(imei);
+    }
 
-	public Device getDeviceDetails(String imei) {
-		return deviceCommandRepository.findOne(imei);
-	}
+    /**
+     * Update device.
+     *
+     * @param imei
+     *            the imei
+     * @param updatedDevice
+     *            the updated device
+     * @return the string
+     */
+    public String updateDevice( @Valid Device updatedDevice) {
+        deviceCommandRepository.save(updatedDevice);
+        log.info("updatedDevice IMEI->" + updatedDevice.getImei());
+        return updatedDevice.getImei() + " updated sucessfully";
+
+    }
 
 }

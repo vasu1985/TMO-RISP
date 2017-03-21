@@ -26,20 +26,19 @@ import com.tmobile.retailinventorycommandservice.exception.HTTPErrorResponse;
  */
 @RestController( "/error")
 public class ServiceErrorController implements ErrorController {
-	
-	/** The log. */
-    private static Logger      log                   = LoggerFactory.getLogger(ServiceErrorController.class);
 
-
-    /** The error attributes. */
-    @Autowired
-    private ErrorAttributes    errorAttributes;
+    /** The log. */
+    private static Logger      log       = LoggerFactory.getLogger(ServiceErrorController.class);
 
     /** The Constant PATH. */
     public static final String PATH      = "/error";
 
     /** The Constant ERROR. */
     public static final String STR_ERROR = "error";
+
+    /** The error attributes. */
+    @Autowired
+    private ErrorAttributes    errorAttributes;
 
     /**
      * Error.

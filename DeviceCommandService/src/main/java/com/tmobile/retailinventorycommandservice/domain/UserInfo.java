@@ -15,11 +15,18 @@ import org.springframework.data.gemfire.mapping.Region;
  * @project RetailInventoryService
  * @updated DateTime: Mar 9, 2017 2:28:49 PM Author: SS00443175
  */
-@Region("devices")
-public class UserInfo implements Serializable{
+@Region( "devices")
+public class UserInfo implements Serializable {
+
+    
+    /**
+    * comment for this field
+    */
+    
+    private static final long serialVersionUID = 1L;
 
     /** The rep id. */
-   
+
     private String mRepId;
 
     /** The password. */
@@ -43,6 +50,15 @@ public class UserInfo implements Serializable{
      */
 
     /**
+     * Gets the description.
+     *
+     * @return the description
+     */
+    public String getDescription() {
+        return mDescription;
+    }
+
+    /**
      * Gets the password.
      *
      * @return the password
@@ -52,13 +68,12 @@ public class UserInfo implements Serializable{
     }
 
     /**
-     * Sets the password.
+     * Gets the rep id.
      *
-     * @param password
-     *            the password
+     * @return the rep id
      */
-    public void setPassword( String password) {
-        this.mPassword = password;
+    public String getRepId() {
+        return mRepId;
     }
 
     /**
@@ -68,25 +83,6 @@ public class UserInfo implements Serializable{
      */
     public String getRole() {
         return mRole;
-    }
-
-    /**
-     * Sets the role.
-     *
-     * @param role
-     *            the role
-     */
-    public void setRole( String role) {
-        this.mRole = role;
-    }
-
-    /**
-     * Gets the description.
-     *
-     * @return the description
-     */
-    public String getDescription() {
-        return mDescription;
     }
 
     /**
@@ -100,12 +96,13 @@ public class UserInfo implements Serializable{
     }
 
     /**
-     * Gets the rep id.
+     * Sets the password.
      *
-     * @return the rep id
+     * @param password
+     *            the password
      */
-    public String getRepId() {
-        return mRepId;
+    public void setPassword( String password) {
+        this.mPassword = password;
     }
 
     /**
@@ -116,5 +113,15 @@ public class UserInfo implements Serializable{
      */
     public void setRepId( String repId) {
         this.mRepId = repId;
+    }
+
+    /**
+     * Sets the role.
+     *
+     * @param role
+     *            the role
+     */
+    public void setRole( String role) {
+        this.mRole = role;
     }
 }
