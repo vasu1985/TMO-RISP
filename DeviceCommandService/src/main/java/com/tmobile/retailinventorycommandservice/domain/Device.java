@@ -2,6 +2,9 @@ package com.tmobile.retailinventorycommandservice.domain;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.gemfire.mapping.Region;
 
@@ -13,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * </p>
  * .
  *
- * @author SS00443175
+ * @author Arun Kishor
  * @project RetailInventoryService
  * @updated DateTime: Mar 9, 2017 2:28:41 PM Author: SS00443175
  */
@@ -25,18 +28,22 @@ public class Device implements Serializable {
 	/** The imei. */
 	@Id
 	@JsonProperty("imei")
+	@NotNull
+	@Size(min = 15, max = 15)
 	private String mImei;
 
 	/** The program. */
 	@JsonProperty("programId")
 	private String mProgramId;
 
-	/** The current state. */ 
+	/** The current state. */
 	@JsonProperty("state")
+	@NotNull
 	private String mState;
 
 	/** The reason. */
 	@JsonProperty("reason")
+	@NotNull
 	private String mReason;
 
 	/** The reason. */

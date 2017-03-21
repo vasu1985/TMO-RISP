@@ -1,10 +1,13 @@
 
 package com.tmobile.retailinventorycommandservice.service;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import com.tmobile.retailinventorycommandservice.domain.Device;
 import com.tmobile.retailinventorycommandservice.repository.DeviceCommandRepository;
@@ -19,6 +22,7 @@ import com.tmobile.retailinventorycommandservice.repository.DeviceCommandReposit
  * @project RetailInventoryService
  * @updated DateTime: Mar 9, 2017 2:29:15 PM Author: SS00443175
  */
+@Validated
 @Service
 public class DeviceCommandService {
 	/** The log. */
@@ -53,7 +57,7 @@ public class DeviceCommandService {
 	 *            the updated device
 	 * @return the string
 	 */
-	public String updateDevice(Device updatedDevice) {
+	public String updateDevice(@Valid Device updatedDevice) {
 		deviceCommandRepository.save(updatedDevice);
 		log.info("updatedDevice IMEI->" + updatedDevice.getmImei());
 		return updatedDevice.getmImei() + " updated sucessfully";

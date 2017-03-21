@@ -6,26 +6,26 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Device Command Service</name>
 	<description>Device Command Service</description>
-	
+
 	<parent>
 		<groupId>org.springframework.cloud</groupId>
 		<artifactId>spring-cloud-starter-parent</artifactId>
 		<version>Brixton.RELEASE</version>
 	</parent>
-	
+
 	<dependencies>
 		<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-gemfire</artifactId>
-        </dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-gemfire</artifactId>
+		</dependency>
 		<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-rest</artifactId>
-        </dependency>
-		 <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-amqp</artifactId>
-        </dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-rest</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-amqp</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -58,6 +58,12 @@
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.0</version>
+		</dependency>
 		<!-- swagger documentation API dependency starts -->
 		<dependency>
 			<groupId>io.springfox</groupId>
@@ -89,9 +95,9 @@
 
 	</properties>
 	<repositories>
-         <repository>
-             <id>spring-releases</id>
-             <url>https://repo.spring.io/libs-release</url>
-         </repository>
-     </repositories>
+		<repository>
+			<id>spring-releases</id>
+			<url>https://repo.spring.io/libs-release</url>
+		</repository>
+	</repositories>
 </project>
