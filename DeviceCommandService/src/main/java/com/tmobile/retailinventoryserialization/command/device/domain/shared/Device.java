@@ -1,8 +1,6 @@
 
 package com.tmobile.retailinventoryserialization.command.device.domain.shared;
 
-import java.io.Serializable;
-
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -10,6 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.gemfire.mapping.Region;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.tmobile.retailinventoryserialization.base.domain.shared.BaseRequest;
 
 /**
  * <p>
@@ -22,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @updated DateTime: Mar 9, 2017 2:28:41 PM Author: SS00443175
  */
 @Region( "devices")
-public class Device implements Serializable {
+public class Device extends BaseRequest {
 
     private static final long serialVersionUID = 1L;
 
