@@ -10,12 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import com.tmobile.retailinventoryserialization.base.domain.shared.BaseResponse;
-import com.tmobile.retailinventoryserialization.base.domain.shared.BaseRestResponse;
 import com.tmobile.retailinventoryserialization.base.service.BaseService;
-import com.tmobile.retailinventoryserialization.command.device.domain.shared.AddDeviceResponse;
 import com.tmobile.retailinventoryserialization.command.device.domain.shared.Device;
-import com.tmobile.retailinventoryserialization.command.device.domain.shared.GetDeviceResponse;
-import com.tmobile.retailinventoryserialization.command.device.domain.shared.UpdateDeviceResponse;
 import com.tmobile.retailinventoryserialization.command.device.repository.DeviceCommandRepository;
 
 /**
@@ -46,13 +42,16 @@ public class DeviceCommandService extends BaseService {
 	 *            the device
 	 * @return the string
 	 */
-	public BaseResponse addDevice(Device device) {
+	public BaseResponse<String> addDevice(@Valid Device device) {
 		deviceCommandRepository.save(device);
 		log.info("addDevice IMEI->" + device.getImei());
-		BaseRestResponse<AddDeviceResponse> brr = new BaseRestResponse<AddDeviceResponse>();
-		AddDeviceResponse dr = new AddDeviceResponse();
-		dr.setMessage(device.getImei() + " updated sucessfully");
-		brr.setResult(dr);
+		BaseResponse<String> brr = new BaseResponse<String>();
+		// BaseResponse<AddDeviceResponse> brr = new
+		// BaseResponse<AddDeviceResponse>();
+		// AddDeviceResponse dr = new AddDeviceResponse();
+		// dr.setMessage(device.getImei() + " updated sucessfully");
+		// brr.setResult(dr);
+		brr.setResult(device.getImei() + " updated sucessfully");
 		return brr;
 	}
 
@@ -71,11 +70,14 @@ public class DeviceCommandService extends BaseService {
 		return "device with imei-> " + imei + "deleted successfully";
 	}
 
-	public BaseResponse getDeviceDetails(String imei) {
-		BaseRestResponse<GetDeviceResponse> brr = new BaseRestResponse<GetDeviceResponse>();
-		GetDeviceResponse gdr = new GetDeviceResponse();
-		gdr.setDevice(deviceCommandRepository.findOne(imei));
-		brr.setResult(gdr);
+	public BaseResponse<Device> getDeviceDetails(String imei) {
+		BaseResponse<Device> brr = new BaseResponse<Device>();
+		// BaseResponse<GetDeviceResponse> brr = new
+		// BaseResponse<GetDeviceResponse>();
+		// GetDeviceResponse gdr = new GetDeviceResponse();
+		// gdr.setDevice(deviceCommandRepository.findOne(imei));
+		// brr.setResult(gdr);
+		brr.setResult(deviceCommandRepository.findOne(imei));
 
 		return brr;
 	}
@@ -89,13 +91,14 @@ public class DeviceCommandService extends BaseService {
 	 *            the updated device
 	 * @return the string
 	 */
-	public BaseResponse updateDevice(String imei, @Valid Device updatedDevice) {
+	public BaseResponse<String> updateDevice(String imei, @Valid Device updatedDevice) {
 		deviceCommandRepository.save(updatedDevice);
 		log.info("updatedDevice IMEI->" + updatedDevice.getImei());
-		BaseRestResponse<UpdateDeviceResponse> brr = new BaseRestResponse<UpdateDeviceResponse>();
-		UpdateDeviceResponse dr = new UpdateDeviceResponse();
-		dr.setMessage(updatedDevice.getImei() + " updated sucessfully");
-		brr.setResult(dr);
+		BaseResponse<String> brr = new BaseResponse<String>();
+		// UpdateDeviceResponse dr = new UpdateDeviceResponse();
+		// dr.setMessage(updatedDevice.getImei() + " updated sucessfully");
+		// brr.setResult(dr);
+		brr.setResult(updatedDevice.getImei() + " updated sucessfully");
 		return brr;
 
 	}

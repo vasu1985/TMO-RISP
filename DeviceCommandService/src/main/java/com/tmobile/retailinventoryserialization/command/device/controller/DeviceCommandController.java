@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tmobile.retailinventoryserialization.base.domain.shared.BaseResponse;
-import com.tmobile.retailinventoryserialization.base.domain.shared.BaseRestRequest;
+import com.tmobile.retailinventoryserialization.base.domain.shared.BaseRequest;
 import com.tmobile.retailinventoryserialization.command.device.CommandApp;
 import com.tmobile.retailinventoryserialization.command.device.domain.shared.Device;
 import com.tmobile.retailinventoryserialization.command.device.domain.shared.Transaction;
@@ -61,7 +61,7 @@ public class DeviceCommandController extends DeviceBaseController {
 	 * @return the string
 	 */
 	@RequestMapping(value = "/tmo/resources/services/devices", method = RequestMethod.POST)
-	public BaseResponse addDevice(@RequestBody BaseRestRequest<Device> restRequest) {
+	public BaseResponse<String> addDevice(@RequestBody BaseRequest<Device> restRequest) {
 		Device device = null;
 		if (null != restRequest && null != restRequest.getRequest()) {
 			device = restRequest.getRequest();
@@ -78,7 +78,7 @@ public class DeviceCommandController extends DeviceBaseController {
 	}
 
 	@RequestMapping(value = "/tmo/resources/services/devices/{imei}", method = RequestMethod.GET)
-	public BaseResponse getDeviceDetails(@PathVariable String imei) {
+	public BaseResponse<Device> getDeviceDetails(@PathVariable String imei) {
 		// GetDeviceRequest getDeviceRequest = restRequest.getRequest();
 		// log.info(getDeviceRequest.getAdditionaDetails());
 		return deviceCommandService.getDeviceDetails(imei);
@@ -94,11 +94,11 @@ public class DeviceCommandController extends DeviceBaseController {
 	 * @return the string
 	 */
 	@RequestMapping(value = "/tmo/resources/services/devices/{imei}", method = RequestMethod.PUT)
-	public BaseResponse updateDevice(@PathVariable String imei, @RequestBody BaseRestRequest<Device> restRequest) {
+	public BaseResponse<String> updateDevice(@PathVariable String imei, @RequestBody BaseRequest<Device> restRequest) {
 		log.info("Updating Device...");
 		String status = "success";
 		Device device = null;
-		BaseResponse response = null;
+		BaseResponse<String> response = null;
 		try {
 			RabbitTemplate rabbitTemplate = context.getBean(RabbitTemplate.class);
 			rabbitTemplate.setQueue(CommandApp.queueName);
