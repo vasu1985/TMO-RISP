@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.tmobile.devicequeryservice</groupId>
-	<artifactId>DeviceQueryService</artifactId>
+	<artifactId>device-query-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Device Query Service</name>
 	<description>Device Query Service</description>
