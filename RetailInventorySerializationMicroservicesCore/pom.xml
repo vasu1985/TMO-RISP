@@ -5,7 +5,7 @@
 	<artifactId>retail-inventory-serialization-microservices-core</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<name>Retail Inverntory Serialization Microservices Core</name>
+	<name>Retail Inventory Serialization Microservices Core</name>
 	<description>Core Framework For Retail Inventory Serialization</description>
 
 	<parent>
