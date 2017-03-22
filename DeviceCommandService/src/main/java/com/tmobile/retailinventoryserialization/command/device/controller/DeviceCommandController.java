@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tmobile.retailinventoryserialization.base.domain.shared.BaseResponse;
+import com.tmobile.retailinventoryserialization.base.domain.shared.BaseRestRequest;
 import com.tmobile.retailinventoryserialization.command.device.CommandApp;
 import com.tmobile.retailinventoryserialization.command.device.domain.shared.Device;
 import com.tmobile.retailinventoryserialization.command.device.domain.shared.Transaction;
@@ -32,103 +34,118 @@ import com.tmobile.retailinventoryserialization.command.device.service.Transacti
  * @project RetailInventoryService
  * @updated DateTime: Mar 9, 2017 2:30:01 PM Author: SS00443175
  */
-@CrossOrigin( "*")
+@CrossOrigin("*")
 @RestController
-@RequestMapping( "/device")
-public class DeviceCommandController extends DeviceBaseController{
+@RequestMapping("/device")
+public class DeviceCommandController extends DeviceBaseController {
 
-    /** The log. */
-    private static Logger              log    = LoggerFactory.getLogger(DeviceCommandController.class);
+	/** The log. */
+	private static Logger log = LoggerFactory.getLogger(DeviceCommandController.class);
 
-    /** The device service. */
-    @Autowired
-    private DeviceCommandService       deviceCommandService;
+	/** The device service. */
+	@Autowired
+	private DeviceCommandService deviceCommandService;
 
-    @Autowired
-    private TransactionsCommandService transactionsCommandService;
+	@Autowired
+	private TransactionsCommandService transactionsCommandService;
 
-    ApplicationContext                 context;
+	ApplicationContext context;
 
-    ObjectMapper                       mapper = new ObjectMapper();
+	ObjectMapper mapper = new ObjectMapper();
 
-    /**
-     * Adds the device.
-     *
-     * @param device
-     *            the device
-     * @return the string
-     */
-    @RequestMapping( value = "/tmo/resources/services/devices", method = RequestMethod.POST)
-    public String addDevice( @RequestBody Device device) {
-        log.info("Controller ----------------" + device.getImei());
-        return deviceCommandService.addDevice(device);
-    }
+	/**
+	 * Adds the device.
+	 *
+	 * @param device
+	 *            the device
+	 * @return the string
+	 */
+	@RequestMapping(value = "/tmo/resources/services/devices", method = RequestMethod.POST)
+	public BaseResponse addDevice(@RequestBody BaseRestRequest<Device> restRequest) {
+		Device device = null;
+		if (null != restRequest && null != restRequest.getRequest()) {
+			device = restRequest.getRequest();
 
-    @Autowired
-    public void context( ApplicationContext context) {
-        this.context = context;
-    }
+		} else {
+			log.error("device obj not sent");
+		}
+		return deviceCommandService.addDevice(device);
+	}
 
-    @RequestMapping( value = "/tmo/resources/services/devices/{imei}", method = RequestMethod.GET)
-    public Device getDeviceDetails( @PathVariable String imei) {
-        return deviceCommandService.getDeviceDetails(imei);
-    }
+	@Autowired
+	public void context(ApplicationContext context) {
+		this.context = context;
+	}
 
-    /**
-     * Update device.
-     *
-     * @param imei
-     *            the imei
-     * @param device
-     *            the device
-     * @return the string
-     */
-    @RequestMapping( value = "/tmo/resources/services/devices/{imei}", method = RequestMethod.PUT)
-    public String updateDevice( @RequestBody Device device) {
-        log.info("Updating Device...");
-        String updateMesg = null;
-        String status = "success";
-        try {
-            RabbitTemplate rabbitTemplate = context.getBean(RabbitTemplate.class);
-            rabbitTemplate.setQueue(CommandApp.queueName);
-            updateMesg = deviceCommandService.updateDevice(device);
-            rabbitTemplate.convertAndSend(CommandApp.queueName, mapper.writeValueAsString(device));
-        } catch (AmqpException e) {
-            log.error(e.toString());
-            status = "fail";
+	@RequestMapping(value = "/tmo/resources/services/devices/{imei}", method = RequestMethod.GET)
+	public BaseResponse getDeviceDetails(@PathVariable String imei) {
+		// GetDeviceRequest getDeviceRequest = restRequest.getRequest();
+		// log.info(getDeviceRequest.getAdditionaDetails());
+		return deviceCommandService.getDeviceDetails(imei);
+	}
 
-        } catch (JsonProcessingException e) {
-            log.error(e.toString());
-            status = "fail";
-            e.printStackTrace();
+	/**
+	 * Update device.
+	 *
+	 * @param imei
+	 *            the imei
+	 * @param restRequest
+	 *            the device
+	 * @return the string
+	 */
+	@RequestMapping(value = "/tmo/resources/services/devices/{imei}", method = RequestMethod.PUT)
+	public BaseResponse updateDevice(@PathVariable String imei, @RequestBody BaseRestRequest<Device> restRequest) {
+		log.info("Updating Device...");
+		String status = "success";
+		Device device = null;
+		BaseResponse response = null;
+		try {
+			RabbitTemplate rabbitTemplate = context.getBean(RabbitTemplate.class);
+			rabbitTemplate.setQueue(CommandApp.queueName);
+			if (null != restRequest && null != restRequest.getRequest()) {
+				device = restRequest.getRequest();
 
-        } catch (Exception e) {
-            log.error(e.toString());
-            status = "fail";
-            throw e;
-        } finally {
-            try {
-                Transaction trans = new Transaction();
-                trans.setmImei(device.getImei());
-                trans.setmCurrentState(device.getState());
-                trans.setmReason(device.getReason());
-                trans.setmRepId(device.getRepId());
-                trans.setmStatus(status);
-                trans.setQueueName(CommandApp.queueName);
+			} else {
+				log.error("device obj not sent");
+			}
+			response = deviceCommandService.updateDevice(imei, device);
+			rabbitTemplate.convertAndSend(CommandApp.queueName, mapper.writeValueAsString(restRequest));
+		} catch (AmqpException e) {
+			log.error(e.toString());
+			status = "fail";
 
-                updateMesg = transactionsCommandService.addTransaction(trans);
-                log.debug("Transaction imei:" + transactionsCommandService.getTransactionDetails(device.getImei()));
+		} catch (JsonProcessingException e) {
+			log.error(e.toString());
+			status = "fail";
+			e.printStackTrace();
 
-                if (status.equalsIgnoreCase("success")) {
-                    RabbitTemplate rabbitTemplate = context.getBean(RabbitTemplate.class);
-                    rabbitTemplate.setQueue(CommandApp.transQueueName);
-                    log.debug("Queue name is:" + CommandApp.transQueueName);
-                    rabbitTemplate.convertAndSend(CommandApp.transQueueName, mapper.writeValueAsString(trans));
-                }
-            } catch (Exception e) {
-                log.error(e.getMessage());
-            }
-        }
-        return updateMesg;
-    }
+		} catch (Exception e) {
+			log.error(e.toString());
+			status = "fail";
+			throw e;
+		} finally {
+			try {
+				Transaction trans = new Transaction();
+				trans.setmImei(device.getImei());
+				trans.setmCurrentState(device.getState());
+				trans.setmReason(device.getReason());
+				trans.setmRepId(device.getRepId());
+				trans.setmStatus(status);
+				trans.setQueueName(CommandApp.queueName);
+
+				transactionsCommandService.addTransaction(trans);
+				log.debug("Transaction imei:" + transactionsCommandService.getTransactionDetails(device.getImei()));
+
+				if (status.equalsIgnoreCase("success")) {
+					RabbitTemplate rabbitTemplate = context.getBean(RabbitTemplate.class);
+					rabbitTemplate.setQueue(CommandApp.transQueueName);
+					log.debug("Queue name is:" + CommandApp.transQueueName);
+					rabbitTemplate.convertAndSend(CommandApp.transQueueName, mapper.writeValueAsString(trans));
+				}
+			} catch (Exception e) {
+				log.error(e.getMessage());
+			}
+		}
+		return response;
+	}
 }
