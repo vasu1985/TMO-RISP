@@ -49,9 +49,11 @@ public class DeviceCommandService extends BaseService {
 	public BaseResponse addDevice(Device device) {
 		deviceCommandRepository.save(device);
 		log.info("addDevice IMEI->" + device.getImei());
+		BaseRestResponse<AddDeviceResponse> brr = new BaseRestResponse<AddDeviceResponse>();
 		AddDeviceResponse dr = new AddDeviceResponse();
 		dr.setMessage(device.getImei() + " updated sucessfully");
-		return dr;
+		brr.setResult(dr);
+		return brr;
 	}
 
 	// TODO addDevices()
@@ -90,9 +92,11 @@ public class DeviceCommandService extends BaseService {
 	public BaseResponse updateDevice(String imei, @Valid Device updatedDevice) {
 		deviceCommandRepository.save(updatedDevice);
 		log.info("updatedDevice IMEI->" + updatedDevice.getImei());
+		BaseRestResponse<UpdateDeviceResponse> brr = new BaseRestResponse<UpdateDeviceResponse>();
 		UpdateDeviceResponse dr = new UpdateDeviceResponse();
 		dr.setMessage(updatedDevice.getImei() + " updated sucessfully");
-		return dr;
+		brr.setResult(dr);
+		return brr;
 
 	}
 
