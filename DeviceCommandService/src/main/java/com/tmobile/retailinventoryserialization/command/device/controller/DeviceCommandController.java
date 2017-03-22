@@ -35,7 +35,7 @@ import com.tmobile.retailinventoryserialization.command.device.service.Transacti
 @CrossOrigin( "*")
 @RestController
 @RequestMapping( "/device")
-public class DeviceCommandController {
+public class DeviceCommandController extends DeviceBaseController{
 
     /** The log. */
     private static Logger              log    = LoggerFactory.getLogger(DeviceCommandController.class);
