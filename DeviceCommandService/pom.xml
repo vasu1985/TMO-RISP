@@ -15,7 +15,7 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.tmobile.retailinverntoryserialization.core</groupId>
+			<groupId>com.tmobile.retailinventoryserialization.core</groupId>
 			<artifactId>retail-inventory-serialization-microservices-core</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
