@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tmobile.retailinventoryserialization.base.domain.shared.BaseResponse;
 import com.tmobile.retailinventoryserialization.base.domain.shared.BaseRequest;
+import com.tmobile.retailinventoryserialization.base.domain.shared.BaseResponse;
 import com.tmobile.retailinventoryserialization.command.device.CommandApp;
 import com.tmobile.retailinventoryserialization.command.device.domain.shared.Device;
 import com.tmobile.retailinventoryserialization.command.device.domain.shared.Transaction;
@@ -100,8 +100,6 @@ public class DeviceCommandController extends DeviceBaseController {
 		Device device = null;
 		BaseResponse<String> response = null;
 		try {
-			RabbitTemplate rabbitTemplate = context.getBean(RabbitTemplate.class);
-			rabbitTemplate.setQueue(CommandApp.queueName);
 			if (null != restRequest && null != restRequest.getRequest()) {
 				device = restRequest.getRequest();
 
@@ -109,7 +107,7 @@ public class DeviceCommandController extends DeviceBaseController {
 				log.error("device obj not sent");
 			}
 			response = deviceCommandService.updateDevice(imei, device);
-			rabbitTemplate.convertAndSend(CommandApp.queueName, mapper.writeValueAsString(restRequest));
+			convertAndSend(context, CommandApp.queueName, mapper.writeValueAsString(restRequest));
 		} catch (AmqpException e) {
 			log.error(e.toString());
 			status = "fail";
