@@ -1,8 +1,6 @@
 package com.tmobile.retailinventoryserialization.base.domain.shared;
 
-import java.io.Serializable;
-
-public class BaseRequest<O> implements Serializable {
+public class BaseRequest<O> implements BaseRequestInterface {
 	/**
 	 * 
 	 */

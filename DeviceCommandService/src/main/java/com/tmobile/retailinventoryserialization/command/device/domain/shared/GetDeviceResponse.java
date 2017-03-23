@@ -1,8 +1,8 @@
 package com.tmobile.retailinventoryserialization.command.device.domain.shared;
 
-import com.tmobile.retailinventoryserialization.base.domain.shared.BaseResponse;
+import com.tmobile.retailinventoryserialization.base.domain.shared.BaseRequestInterface;
 
-public class GetDeviceResponse extends BaseResponse {
+public class GetDeviceResponse implements BaseRequestInterface {
 	private static final long serialVersionUID = 1L;
 	private Device device;
 

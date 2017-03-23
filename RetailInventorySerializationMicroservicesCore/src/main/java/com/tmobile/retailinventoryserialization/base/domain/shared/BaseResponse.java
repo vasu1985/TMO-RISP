@@ -1,9 +1,8 @@
 package com.tmobile.retailinventoryserialization.base.domain.shared;
 
-import java.io.Serializable;
 import java.util.List;
 
-public class BaseResponse<O> implements Serializable {
+public class BaseResponse<O> implements BaseRequestInterface {
 	private static final long serialVersionUID = 1L;
 	private List<FieldError> fieldError;
 	private O result;

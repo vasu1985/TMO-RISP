@@ -1,7 +1,6 @@
 
 package com.tmobile.retailinventoryserialization.base.domain.shared;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -15,7 +14,7 @@ import org.apache.commons.lang3.StringUtils;
  *
  * @author Arun Kishor
  */
-public class FieldError implements Serializable {
+public class FieldError implements BaseRequestInterface {
 	private static final long serialVersionUID = 1L;
 
 	/**

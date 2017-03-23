@@ -1,9 +1,9 @@
 package com.tmobile.retailinventoryserialization.command.device.domain.shared;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.tmobile.retailinventoryserialization.base.domain.shared.BaseRequest;
+import com.tmobile.retailinventoryserialization.base.domain.shared.BaseRequestInterface;
 
-public class GetDeviceRequest extends BaseRequest {
+public class GetDeviceRequest implements BaseRequestInterface {
 
 	/**
 	 * 

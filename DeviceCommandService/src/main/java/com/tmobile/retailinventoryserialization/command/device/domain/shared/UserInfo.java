@@ -1,9 +1,9 @@
 
 package com.tmobile.retailinventoryserialization.command.device.domain.shared;
 
-import java.io.Serializable;
-
 import org.springframework.data.gemfire.mapping.Region;
+
+import com.tmobile.retailinventoryserialization.base.domain.shared.BaseRequestInterface;
 
 /**
  * <p>
@@ -15,113 +15,113 @@ import org.springframework.data.gemfire.mapping.Region;
  * @project RetailInventoryService
  * @updated DateTime: Mar 9, 2017 2:28:49 PM Author: SS00443175
  */
-@Region( "devices")
-public class UserInfo implements Serializable {
+@Region("devices")
+public class UserInfo implements BaseRequestInterface {
 
-    
-    /**
-    * comment for this field
-    */
-    
-    private static final long serialVersionUID = 1L;
+	/**
+	 * comment for this field
+	 */
 
-    /** The rep id. */
+	private static final long serialVersionUID = 1L;
 
-    private String mRepId;
+	/** The rep id. */
 
-    /** The password. */
-    private String mPassword;
+	private String mRepId;
 
-    /** The role. */
-    private String mRole;
+	/** The password. */
+	private String mPassword;
 
-    /** The description. */
-    private String mDescription;
+	/** The role. */
+	private String mRole;
 
-    /**
-     * The Constructor.
-     */
-    public UserInfo() {
+	/** The description. */
+	private String mDescription;
 
-    }
-    /*
-     * public User(String repId, String role, String description, String autherization, String authentication) { super(); this.repId = repId; this.role = role;
-     * this.description = description; }
-     */
+	/**
+	 * The Constructor.
+	 */
+	public UserInfo() {
 
-    /**
-     * Gets the description.
-     *
-     * @return the description
-     */
-    public String getDescription() {
-        return mDescription;
-    }
+	}
+	/*
+	 * public User(String repId, String role, String description, String
+	 * autherization, String authentication) { super(); this.repId = repId;
+	 * this.role = role; this.description = description; }
+	 */
 
-    /**
-     * Gets the password.
-     *
-     * @return the password
-     */
-    public String getPassword() {
-        return mPassword;
-    }
+	/**
+	 * Gets the description.
+	 *
+	 * @return the description
+	 */
+	public String getDescription() {
+		return mDescription;
+	}
 
-    /**
-     * Gets the rep id.
-     *
-     * @return the rep id
-     */
-    public String getRepId() {
-        return mRepId;
-    }
+	/**
+	 * Gets the password.
+	 *
+	 * @return the password
+	 */
+	public String getPassword() {
+		return mPassword;
+	}
 
-    /**
-     * Gets the role.
-     *
-     * @return the role
-     */
-    public String getRole() {
-        return mRole;
-    }
+	/**
+	 * Gets the rep id.
+	 *
+	 * @return the rep id
+	 */
+	public String getRepId() {
+		return mRepId;
+	}
 
-    /**
-     * Sets the description.
-     *
-     * @param description
-     *            the description
-     */
-    public void setDescription( String description) {
-        this.mDescription = description;
-    }
+	/**
+	 * Gets the role.
+	 *
+	 * @return the role
+	 */
+	public String getRole() {
+		return mRole;
+	}
 
-    /**
-     * Sets the password.
-     *
-     * @param password
-     *            the password
-     */
-    public void setPassword( String password) {
-        this.mPassword = password;
-    }
+	/**
+	 * Sets the description.
+	 *
+	 * @param description
+	 *            the description
+	 */
+	public void setDescription(String description) {
+		this.mDescription = description;
+	}
 
-    /**
-     * Sets the rep id.
-     *
-     * @param repId
-     *            the rep id
-     */
-    public void setRepId( String repId) {
-        this.mRepId = repId;
-    }
+	/**
+	 * Sets the password.
+	 *
+	 * @param password
+	 *            the password
+	 */
+	public void setPassword(String password) {
+		this.mPassword = password;
+	}
 
-    /**
-     * Sets the role.
-     *
-     * @param role
-     *            the role
-     */
-    public void setRole( String role) {
-        this.mRole = role;
-    }
+	/**
+	 * Sets the rep id.
+	 *
+	 * @param repId
+	 *            the rep id
+	 */
+	public void setRepId(String repId) {
+		this.mRepId = repId;
+	}
+
+	/**
+	 * Sets the role.
+	 *
+	 * @param role
+	 *            the role
+	 */
+	public void setRole(String role) {
+		this.mRole = role;
+	}
 }
