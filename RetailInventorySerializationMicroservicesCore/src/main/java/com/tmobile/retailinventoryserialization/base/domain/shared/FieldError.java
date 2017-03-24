@@ -14,7 +14,7 @@ import org.apache.commons.lang3.StringUtils;
  *
  * @author Arun Kishor
  */
-public class FieldError implements BaseRequestInterface {
+public class FieldError implements BaseRequest {
 	private static final long serialVersionUID = 1L;
 
 	/**

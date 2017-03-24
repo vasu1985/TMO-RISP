@@ -5,7 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.gemfire.mapping.Region;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.tmobile.retailinventoryserialization.base.domain.shared.BaseRequestInterface;
+import com.tmobile.retailinventoryserialization.base.domain.shared.BaseRequest;
 
 /**
  * <p>
@@ -18,7 +18,7 @@ import com.tmobile.retailinventoryserialization.base.domain.shared.BaseRequestIn
  * @updated DateTime: Mar 9, 2017 2:28:41 PM Author: SS00443175
  */
 @Region("transactions")
-public class Transaction implements BaseRequestInterface {
+public class Transaction implements BaseRequest {
 
 	private static final long serialVersionUID = 1L;
 

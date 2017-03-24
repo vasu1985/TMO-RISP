@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Bean;
  * @updated DateTime: Mar 9, 2017 2:09:39 PM Author: SS00443175
  */
 @SpringBootApplication
-public class CommandApp {
+public class DeviceCommandApp {
 
     public final static String queueName      = "imei-state-updated";
     public final static String transQueueName = "transaction-state-updated";
@@ -31,7 +31,7 @@ public class CommandApp {
      *            the args
      */
     public static void main( String[] args) {
-        SpringApplication.run(CommandApp.class, args);
+        SpringApplication.run(DeviceCommandApp.class, args);
     }
 
     @Bean

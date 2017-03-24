@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.tmobile.retailinventoryserialization.base.domain.shared.BaseResponse;
+import com.tmobile.retailinventoryserialization.base.domain.shared.BaseServiceResponse;
 import com.tmobile.retailinventoryserialization.base.domain.shared.FieldError;
 
 /**
@@ -37,9 +37,9 @@ public class DefaultExceptionHandler {
 	@RequestMapping(produces = "application/json")
 	@ExceptionHandler(ConstraintViolationException.class)
 	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
-	public @ResponseBody BaseResponse handleConstraintViolationException(ConstraintViolationException ex) {
-		BaseResponse baseResponse = new BaseResponse();
-		baseResponse.setFieldError(FieldError.getErrors(ex.getConstraintViolations()));
-		return baseResponse;
+	public @ResponseBody BaseServiceResponse handleConstraintViolationException(ConstraintViolationException ex) {
+		BaseServiceResponse baseServiceResponse = new BaseServiceResponse();
+		baseServiceResponse.setFieldError(FieldError.getErrors(ex.getConstraintViolations()));
+		return baseServiceResponse;
 	}
 }

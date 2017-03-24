@@ -3,7 +3,7 @@ package com.tmobile.retailinventoryserialization.command.device.domain.shared;
 
 import org.springframework.data.gemfire.mapping.Region;
 
-import com.tmobile.retailinventoryserialization.base.domain.shared.BaseRequestInterface;
+import com.tmobile.retailinventoryserialization.base.domain.shared.BaseRequest;
 
 /**
  * <p>
@@ -16,7 +16,7 @@ import com.tmobile.retailinventoryserialization.base.domain.shared.BaseRequestIn
  * @updated DateTime: Mar 9, 2017 2:28:49 PM Author: SS00443175
  */
 @Region("devices")
-public class UserInfo implements BaseRequestInterface {
+public class UserInfo implements BaseRequest {
 
 	/**
 	 * comment for this field

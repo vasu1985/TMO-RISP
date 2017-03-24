@@ -1,27 +1,7 @@
 package com.tmobile.retailinventoryserialization.base.domain.shared;
 
-public class BaseRequest<O> implements BaseRequestInterface {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private O request;
-	private String sourceSystem;
+import java.io.Serializable;
 
-	public O getRequest() {
-		return request;
-	}
-
-	public void setRequest(O request) {
-		this.request = request;
-	}
-
-	public String getSourceSystem() {
-		return sourceSystem;
-	}
-
-	public void setSourceSystem(String sourceSystem) {
-		this.sourceSystem = sourceSystem;
-	}
+public interface BaseRequest extends Serializable {
 
 }

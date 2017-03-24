@@ -1,8 +1,8 @@
 package com.tmobile.retailinventoryserialization.command.device.domain.shared;
 
-import com.tmobile.retailinventoryserialization.base.domain.shared.BaseRequestInterface;
+import com.tmobile.retailinventoryserialization.base.domain.shared.BaseRequest;
 
-public class AddDeviceResponse implements BaseRequestInterface {
+public class AddDeviceResponse implements BaseRequest {
 	/**
 	 * 
 	 */

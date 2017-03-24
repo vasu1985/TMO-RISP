@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tmobile.retailinventoryserialization.base.domain.shared.BaseRequest;
-import com.tmobile.retailinventoryserialization.base.domain.shared.BaseResponse;
-import com.tmobile.retailinventoryserialization.command.device.CommandApp;
+import com.tmobile.retailinventoryserialization.base.domain.shared.BaseServiceRequest;
+import com.tmobile.retailinventoryserialization.base.domain.shared.BaseServiceResponse;
+import com.tmobile.retailinventoryserialization.command.device.DeviceCommandApp;
 import com.tmobile.retailinventoryserialization.command.device.domain.shared.Device;
 import com.tmobile.retailinventoryserialization.command.device.domain.shared.Transaction;
 import com.tmobile.retailinventoryserialization.command.device.service.DeviceCommandService;
@@ -61,7 +61,7 @@ public class DeviceCommandController extends DeviceBaseController {
 	 * @return the string
 	 */
 	@RequestMapping(value = "/tmo/resources/services/devices", method = RequestMethod.POST)
-	public BaseResponse<String> addDevice(@RequestBody BaseRequest<Device> restRequest) {
+	public BaseServiceResponse<String> addDevice(@RequestBody BaseServiceRequest<Device> restRequest) {
 		Device device = null;
 		if (null != restRequest && null != restRequest.getRequest()) {
 			device = restRequest.getRequest();
@@ -78,7 +78,7 @@ public class DeviceCommandController extends DeviceBaseController {
 	}
 
 	@RequestMapping(value = "/tmo/resources/services/devices/{imei}", method = RequestMethod.GET)
-	public BaseResponse<Device> getDeviceDetails(@PathVariable String imei) {
+	public BaseServiceResponse<Device> getDeviceDetails(@PathVariable String imei) {
 		// GetDeviceRequest getDeviceRequest = restRequest.getRequest();
 		// log.info(getDeviceRequest.getAdditionaDetails());
 		return deviceCommandService.getDeviceDetails(imei);
@@ -94,11 +94,11 @@ public class DeviceCommandController extends DeviceBaseController {
 	 * @return the string
 	 */
 	@RequestMapping(value = "/tmo/resources/services/devices/{imei}", method = RequestMethod.PUT)
-	public BaseResponse<String> updateDevice(@PathVariable String imei, @RequestBody BaseRequest<Device> restRequest) {
+	public BaseServiceResponse<String> updateDevice(@PathVariable String imei, @RequestBody BaseServiceRequest<Device> restRequest) {
 		log.info("Updating Device...");
 		String status = "success";
 		Device device = null;
-		BaseResponse<String> response = null;
+		BaseServiceResponse<String> response = null;
 		try {
 			if (null != restRequest && null != restRequest.getRequest()) {
 				device = restRequest.getRequest();
@@ -107,7 +107,7 @@ public class DeviceCommandController extends DeviceBaseController {
 				log.error("device obj not sent");
 			}
 			response = deviceCommandService.updateDevice(imei, device);
-			convertAndSend(context, CommandApp.queueName, mapper.writeValueAsString(restRequest));
+			convertAndSend(context, DeviceCommandApp.queueName, mapper.writeValueAsString(restRequest));
 		} catch (AmqpException e) {
 			log.error(e.toString());
 			status = "fail";
@@ -129,16 +129,16 @@ public class DeviceCommandController extends DeviceBaseController {
 				trans.setmReason(device.getReason());
 				trans.setmRepId(device.getRepId());
 				trans.setmStatus(status);
-				trans.setQueueName(CommandApp.queueName);
+				trans.setQueueName(DeviceCommandApp.queueName);
 
 				transactionsCommandService.addTransaction(trans);
 				log.debug("Transaction imei:" + transactionsCommandService.getTransactionDetails(device.getImei()));
 
 				if (status.equalsIgnoreCase("success")) {
 					RabbitTemplate rabbitTemplate = context.getBean(RabbitTemplate.class);
-					rabbitTemplate.setQueue(CommandApp.transQueueName);
-					log.debug("Queue name is:" + CommandApp.transQueueName);
-					rabbitTemplate.convertAndSend(CommandApp.transQueueName, mapper.writeValueAsString(trans));
+					rabbitTemplate.setQueue(DeviceCommandApp.transQueueName);
+					log.debug("Queue name is:" + DeviceCommandApp.transQueueName);
+					rabbitTemplate.convertAndSend(DeviceCommandApp.transQueueName, mapper.writeValueAsString(trans));
 				}
 			} catch (Exception e) {
 				log.error(e.getMessage());
