@@ -4,7 +4,7 @@ package com.tmobile.retailinventoryserialization.command.device.repository;
 import org.springframework.data.gemfire.mapping.Region;
 import org.springframework.data.repository.CrudRepository;
 
-import com.tmobile.retailinventoryserialization.base.dao.BaseRepository;
+import com.tmobile.retailinventoryserialization.base.dao.BaseCrudRepository;
 import com.tmobile.retailinventoryserialization.command.device.domain.shared.Device;
 
 /**
@@ -18,6 +18,6 @@ import com.tmobile.retailinventoryserialization.command.device.domain.shared.Dev
  * @updated DateTime: Mar 9, 2017 2:28:54 PM Author: SS00443175
  */
 @Region( "devices")
-public interface DeviceCommandRepository extends BaseRepository<Device, String> {
+public interface DeviceCommandRepository extends BaseCrudRepository<Device, String> {
     /* TODO */
 }
