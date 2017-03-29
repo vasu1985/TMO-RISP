@@ -2,10 +2,10 @@ package com.tmobile.retailinventoryserialization.base.domain.shared;
 
 import java.util.List;
 
-public class BaseServiceResponse<O> implements BaseRequest {
+public class BaseServiceResponse<O> implements BaseResponse {
 	private static final long serialVersionUID = 1L;
-	private List<FieldError> fieldError;
 	private O result;
+	private List<FieldError> fieldErrors;
 
 	public O getResult() {
 		return result;
@@ -15,12 +15,11 @@ public class BaseServiceResponse<O> implements BaseRequest {
 		this.result = result;
 	}
 
-	public List<FieldError> getFieldError() {
-		return fieldError;
+	public List<FieldError> getFieldErrors() {
+		return fieldErrors;
 	}
 
-	public void setFieldError(List<FieldError> fieldError) {
-		this.fieldError = fieldError;
+	public void setFieldErrors(List<FieldError> fieldErrors) {
+		this.fieldErrors = fieldErrors;
 	}
-
 }

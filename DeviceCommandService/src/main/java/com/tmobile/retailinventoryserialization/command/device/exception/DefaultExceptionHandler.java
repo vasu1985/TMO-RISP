@@ -2,7 +2,6 @@
 package com.tmobile.retailinventoryserialization.command.device.exception;
 
 import javax.validation.ConstraintViolationException;
-import javax.validation.constraints.Null;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -35,11 +34,18 @@ public class DefaultExceptionHandler {
 	 * @return the error response
 	 */
 	@RequestMapping(produces = "application/json")
-	@ExceptionHandler(ConstraintViolationException.class)
+	@ExceptionHandler(Exception.class)
 	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
-	public @ResponseBody BaseServiceResponse handleConstraintViolationException(ConstraintViolationException ex) {
-		BaseServiceResponse baseServiceResponse = new BaseServiceResponse();
-		baseServiceResponse.setFieldError(FieldError.getErrors(ex.getConstraintViolations()));
-		return baseServiceResponse;
+	public @ResponseBody BaseServiceResponse handleConstraintViolationException(Exception ex) {
+		if (ex instanceof ConstraintViolationException) {
+			BaseServiceResponse baseServiceResponse = new BaseServiceResponse();
+			baseServiceResponse.setFieldErrors(
+					FieldError.getErrors(((ConstraintViolationException) ex).getConstraintViolations()));
+			return baseServiceResponse;
+		} else {
+			BaseServiceResponse baseServiceResponse = new BaseServiceResponse();
+			baseServiceResponse.setResult("some error occoured");
+			return baseServiceResponse;
+		}
 	}
 }

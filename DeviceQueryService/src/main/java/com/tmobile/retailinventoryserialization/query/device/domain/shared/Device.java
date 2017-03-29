@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.gemfire.mapping.Region;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.tmobile.retailinventoryserialization.base.domain.shared.BaseRequest;
 
 /**
  * <p>
@@ -18,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @updated DateTime: Mar 9, 2017 2:28:41 PM Author: SS00443175
  */
 @Region("queryDevice")
-public class Device implements Serializable {
+public class Device implements BaseRequest {
 
 	private static final long serialVersionUID = 1L;
 
@@ -68,43 +69,43 @@ public class Device implements Serializable {
 
 	}
 
-	public String getmImei() {
+	public String getImei() {
 		return mImei;
 	}
 
-	public void setmImei(String mImei) {
+	public void setImei(String mImei) {
 		this.mImei = mImei;
 	}
 
-	public String getmSku() {
+	public String getSku() {
 		return mSku;
 	}
 
-	public void setmSku(String mSku) {
+	public void setSku(String mSku) {
 		this.mSku = mSku;
 	}
 
-	public String getmRepId() {
+	public String getRepId() {
 		return mRepId;
 	}
 
-	public void setmRepId(String mRepId) {
+	public void setRepId(String mRepId) {
 		this.mRepId = mRepId;
 	}
 
-	public String getmDescription() {
+	public String getDescription() {
 		return mDescription;
 	}
 
-	public void setmDescription(String mDescription) {
+	public void setDescription(String mDescription) {
 		this.mDescription = mDescription;
 	}
 
-	public String getmReason() {
+	public String getReason() {
 		return mReason;
 	}
 
-	public void setmReason(String mReason) {
+	public void setReason(String mReason) {
 		this.mReason = mReason;
 	}
 
@@ -112,59 +113,59 @@ public class Device implements Serializable {
 		return serialVersionUID;
 	}
 
-	public String getmStockTransferOrderId() {
+	public String getStockTransferOrderId() {
 		return mStockTransferOrderId;
 	}
 
-	public void setmStockTransferOrderId(String mStockTransferOrderId) {
+	public void setStockTransferOrderId(String mStockTransferOrderId) {
 		this.mStockTransferOrderId = mStockTransferOrderId;
 	}
 
-	public String getmAccountId() {
+	public String getAccountId() {
 		return mAccountId;
 	}
 
-	public void setmAccountId(String mAccountId) {
+	public void setAccountId(String mAccountId) {
 		this.mAccountId = mAccountId;
 	}
 
-	public String getmProgramId() {
+	public String getProgramId() {
 		return mProgramId;
 	}
 
-	public void setmProgramId(String mProgramId) {
+	public void setProgramId(String mProgramId) {
 		this.mProgramId = mProgramId;
 	}
 
-	public String getmOwningStoreId() {
+	public String getOwningStoreId() {
 		return mOwningStoreId;
 	}
 
-	public void setmOwningStoreId(String mOwningStoreId) {
+	public void setOwningStoreId(String mOwningStoreId) {
 		this.mOwningStoreId = mOwningStoreId;
 	}
 
-	public String getmState() {
+	public String getState() {
 		return mState;
 	}
 
-	public void setmState(String mState) {
+	public void setState(String mState) {
 		this.mState = mState;
 	}
 
-	public String getmMake() {
+	public String getMake() {
 		return mMake;
 	}
 
-	public void setmMake(String mMake) {
+	public void setMake(String mMake) {
 		this.mMake = mMake;
 	}
 
-	public String getmModel() {
+	public String getModel() {
 		return mModel;
 	}
 
-	public void setmModel(String mModel) {
+	public void setModel(String mModel) {
 		this.mModel = mModel;
 	}
 

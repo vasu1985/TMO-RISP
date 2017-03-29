@@ -4,6 +4,8 @@ package com.tmobile.retailinventoryserialization.query.device.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +49,7 @@ public class DeviceQueryService {
 
 	public String updateDevice(Device updatedDevice) {
 		deviceQueryRepository.save(updatedDevice);
-		return updatedDevice.getmImei() + " updated sucessfully";
+		return updatedDevice.getImei() + " updated sucessfully";
 
 	}
 
@@ -63,10 +65,17 @@ public class DeviceQueryService {
 
 	}
 
-	public String addDevice(Device device) {
-		deviceQueryRepository.save(device);
-		log.info("IMEI-> added sucessfully");	
-		return "IMEI->" + device.getmImei() + " added sucessfully";
+	public String addDevice(@Valid Device device) {
+		try {
+			deviceQueryRepository.save(device);
+			log.info("addDevice IMEI->" + device.getImei());
+			return device.getImei() + " added sucessfully";
+		} catch (Exception e) {
+			// TODO Throw exception from here
+			e.printStackTrace();
+		}
+		return null;
+
 	}
 
 }

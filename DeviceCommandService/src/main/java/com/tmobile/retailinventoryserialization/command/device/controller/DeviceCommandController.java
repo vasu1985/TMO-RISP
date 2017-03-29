@@ -3,7 +3,6 @@ package com.tmobile.retailinventoryserialization.command.device.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -65,11 +64,11 @@ public class DeviceCommandController extends DeviceBaseController {
 		Device device = null;
 		if (null != restRequest && null != restRequest.getRequest()) {
 			device = restRequest.getRequest();
-
-		} else {
-			log.error("device obj not sent");
 		}
-		return deviceCommandService.addDevice(device);
+		// TODO if client request is null, need to handle it
+		BaseServiceResponse<String> response = new BaseServiceResponse<>();
+		response.setResult(deviceCommandService.addDevice(device));
+		return response;
 	}
 
 	@Autowired
@@ -79,9 +78,9 @@ public class DeviceCommandController extends DeviceBaseController {
 
 	@RequestMapping(value = "/tmo/resources/services/devices/{imei}", method = RequestMethod.GET)
 	public BaseServiceResponse<Device> getDeviceDetails(@PathVariable String imei) {
-		// GetDeviceRequest getDeviceRequest = restRequest.getRequest();
-		// log.info(getDeviceRequest.getAdditionaDetails());
-		return deviceCommandService.getDeviceDetails(imei);
+		BaseServiceResponse<Device> response = new BaseServiceResponse<>();
+		response.setResult(deviceCommandService.getDeviceDetails(imei));
+		return response;
 	}
 
 	/**
@@ -92,13 +91,15 @@ public class DeviceCommandController extends DeviceBaseController {
 	 * @param restRequest
 	 *            the device
 	 * @return the string
+	 * @throws JsonProcessingException
 	 */
 	@RequestMapping(value = "/tmo/resources/services/devices/{imei}", method = RequestMethod.PUT)
-	public BaseServiceResponse<String> updateDevice(@PathVariable String imei, @RequestBody BaseServiceRequest<Device> restRequest) {
+	public BaseServiceResponse<String> updateDevice(@PathVariable String imei,
+			@RequestBody BaseServiceRequest<Device> restRequest) throws JsonProcessingException {
 		log.info("Updating Device...");
 		String status = "success";
 		Device device = null;
-		BaseServiceResponse<String> response = null;
+		BaseServiceResponse<String> response = new BaseServiceResponse<String>();
 		try {
 			if (null != restRequest && null != restRequest.getRequest()) {
 				device = restRequest.getRequest();
@@ -106,22 +107,25 @@ public class DeviceCommandController extends DeviceBaseController {
 			} else {
 				log.error("device obj not sent");
 			}
-			response = deviceCommandService.updateDevice(imei, device);
+			response = new BaseServiceResponse<>();
+			response.setResult(deviceCommandService.updateDevice(imei, device));
 			convertAndSend(context, DeviceCommandApp.queueName, mapper.writeValueAsString(restRequest));
-		} catch (AmqpException e) {
-			log.error(e.toString());
-			status = "fail";
-
-		} catch (JsonProcessingException e) {
-			log.error(e.toString());
-			status = "fail";
-			e.printStackTrace();
-
-		} catch (Exception e) {
-			log.error(e.toString());
-			status = "fail";
-			throw e;
-		} finally {
+		}
+		// catch (AmqpException e) {
+		// log.error(e.toString());
+		// status = "fail";
+		//
+		// } catch (JsonProcessingException e) {
+		// log.error(e.toString());
+		// status = "fail";
+		// e.printStackTrace();
+		//
+		// } catch (Exception e) {
+		// log.error(e.toString());
+		// status = "fail";
+		// throw e;
+		// }
+		finally {
 			try {
 				Transaction trans = new Transaction();
 				trans.setmImei(device.getImei());

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tmobile.retailinventoryserialization.base.domain.shared.BaseServiceRequest;
+import com.tmobile.retailinventoryserialization.base.domain.shared.BaseServiceResponse;
 import com.tmobile.retailinventoryserialization.query.device.domain.shared.Device;
 import com.tmobile.retailinventoryserialization.query.device.service.DeviceQueryService;
 
@@ -44,9 +46,11 @@ public class DeviceQueryController {
 	 * @return the devices
 	 */
 	@RequestMapping(value = "${retailInventoryQueryService.allImeiDetails.mapping}", method = RequestMethod.GET)
-	public List<Device> getDevices() {
+	public BaseServiceResponse<List<Device>> getDevices() {
 		log.info("Showing devices");
-		return deviceQueryService.getDevices();
+		BaseServiceResponse<List<Device>> response = new BaseServiceResponse<>();
+		response.setResult(deviceQueryService.getDevices());
+		return response;
 	}
 
 	/**
@@ -57,14 +61,22 @@ public class DeviceQueryController {
 	 * @return the device details
 	 */
 	@RequestMapping(value = "${retailInventoryQueryService.imeiDetails.mapping}", method = RequestMethod.GET)
-	public Device getDeviceDetails(@PathVariable String imei) {
-		return deviceQueryService.getDeviceDetails(imei);
+	public BaseServiceResponse<Device> getDeviceDetails(@PathVariable String imei) {
+		BaseServiceResponse<Device> response = new BaseServiceResponse<>();
+		response.setResult(deviceQueryService.getDeviceDetails(imei));
+		return response;
 	}
 
 	@RequestMapping(value = "/tmo/resources/services/devices", method = RequestMethod.POST)
-	public String addDevice(@RequestBody Device device) {
-
-		return deviceQueryService.addDevice(device);
+	public BaseServiceResponse<String> addDevice(@RequestBody BaseServiceRequest<Device> restRequest) {
+		Device device = null;
+		if (null != restRequest && null != restRequest.getRequest()) {
+			device = restRequest.getRequest();
+		}
+		// TODO if client request is null, need to handle it
+		BaseServiceResponse<String> response = new BaseServiceResponse<>();
+		response.setResult(deviceQueryService.addDevice(device));
+		return response;
 	}
 
 	@RequestMapping(value = "retailInventoryQueryService.imeiDetails.mapping", method = RequestMethod.PUT)

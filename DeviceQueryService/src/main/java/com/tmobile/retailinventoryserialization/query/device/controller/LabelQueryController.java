@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tmobile.retailinventoryserialization.query.device.domain.shared.Device;
+import com.tmobile.retailinventoryserialization.base.domain.shared.BaseServiceResponse;
+import com.tmobile.retailinventoryserialization.query.device.domain.shared.Label;
 import com.tmobile.retailinventoryserialization.query.device.service.DeviceQueryService;
 
 /**
@@ -43,7 +44,8 @@ public class LabelQueryController {
      * @return the device details
      */
     @RequestMapping( value = "${retailInventoryQueryService.labelDetails.mapping}", method = RequestMethod.GET)
-    public Device getLabelDetails( @PathVariable String imei) {
-        return deviceQueryService.getDeviceDetails(imei);
+    public BaseServiceResponse<Label> getLabelDetails( @PathVariable String imei) {
+//        return deviceQueryService.getDeviceDetails(imei);
+    	return null;
     }
 }

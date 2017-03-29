@@ -18,7 +18,7 @@ import com.tmobile.retailinventoryserialization.query.device.service.DeviceQuery
 @Component
 public class Consumer {
 	/** The log. */
-    private static Logger      log                   = LoggerFactory.getLogger(Consumer.class);
+	private static Logger log = LoggerFactory.getLogger(Consumer.class);
 
 	private CountDownLatch latch = new CountDownLatch(1);
 	ObjectMapper mapper = new ObjectMapper();
@@ -29,13 +29,16 @@ public class Consumer {
 		log.info("Consumed <" + message + ">");
 		try {
 			Device updatedDevice = mapper.readValue(message, Device.class);
-			log.info(
-					"imei-> " + updatedDevice.getmImei() + "\nnew state-> " + updatedDevice.getmState());
-			Device deviceToPersist = deviceQueryService.getDeviceDetails(updatedDevice.getmImei());
-			deviceToPersist.setmReason(updatedDevice.getmReason());
-			deviceToPersist.setmState(updatedDevice.getmState());
-			deviceToPersist.setmRepId(updatedDevice.getmRepId());
-			deviceQueryService.updateDevice(deviceToPersist);
+			if (null != updatedDevice) {
+				log.info("imei-> " + updatedDevice.getImei() + "\nnew state-> " + updatedDevice.getState());
+			}
+			Device deviceToPersist = deviceQueryService.getDeviceDetails(updatedDevice.getImei());
+			if (null != deviceToPersist) {
+				deviceToPersist.setReason(updatedDevice.getReason());
+				deviceToPersist.setState(updatedDevice.getState());
+				deviceToPersist.setRepId(updatedDevice.getRepId());
+				deviceQueryService.updateDevice(deviceToPersist);
+			}
 		} catch (JsonParseException e) {
 			e.printStackTrace();
 			log.error(e.getMessage());
