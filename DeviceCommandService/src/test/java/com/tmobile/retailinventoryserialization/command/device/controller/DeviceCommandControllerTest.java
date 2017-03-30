@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
 import com.tmobile.retailinventoryserialization.base.domain.shared.BaseServiceRequest;
 import com.tmobile.retailinventoryserialization.base.domain.shared.BaseServiceResponse;
 import com.tmobile.retailinventoryserialization.command.device.domain.shared.Device;
-import com.tmobile.retailinventoryserialization.command.device.service.DeviceCommandService;
+import com.tmobile.retailinventoryserialization.command.device.service.DeviceCommandServiceImpl;
 
 /**
  * <p>
@@ -53,7 +53,7 @@ public class DeviceCommandControllerTest {
 
     /** The device command service mock. */
     @Mock
-    DeviceCommandService            deviceCommandServiceMock;
+    DeviceCommandServiceImpl            deviceCommandServiceMock;
 
     /** The base service request mock. */
     @Mock
