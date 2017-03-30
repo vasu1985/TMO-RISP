@@ -1,5 +1,4 @@
 package com.tmobile.retailinventoryserialization.base.service;
-
-public interface BaseService {
-
-}
+ public class BaseServiceImpl implements BaseService{
+	 
+ }
