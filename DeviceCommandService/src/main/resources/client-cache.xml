@@ -13,7 +13,7 @@
 		<pdx-serializer>
 			<class-name>com.gemstone.gemfire.pdx.ReflectionBasedAutoSerializer</class-name>
 			<parameter name="classes">
-				<string>com\.tmobile\.retailinventorycommandservice\.domain\..+</string>
+				<string>com\.tmobile\..+</string>
 			</parameter>
 		</pdx-serializer>
 	</pdx>
@@ -22,6 +22,9 @@
 		<region-attributes pool-name="client-pool" />
 	</region> 
 	<region name="transactions" refid="PROXY">
+		<region-attributes pool-name="client-pool" />
+	</region>
+	<region name="errorRegion" refid="PROXY">
 		<region-attributes pool-name="client-pool" />
 	</region>
 </client-cache>

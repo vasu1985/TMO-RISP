@@ -33,8 +33,8 @@ public class Device implements BaseRequest {
 	/** The imei. */
 	@Id
 	@JsonProperty("imei")
-	@NotNull
-	@Size(min = 15, max = 15)
+	@NotNull (message = "error.mImei.notnull")
+	@Size(min = 15, max = 15 , message = "error.mImei.size")
 	private String mImei;
 
 	/** The programId */
@@ -43,12 +43,12 @@ public class Device implements BaseRequest {
 
 	/** The state. */
 	@JsonProperty("state")
-	@NotNull
+	@NotNull (message = "error.mState.notnull")
 	private String mState;
 
 	/** The reason. */
 	@JsonProperty("reason")
-	@NotNull
+	@NotNull(message = "error.mReason.notnull")
 	private String mReason;
 
 	/** The reason. */
