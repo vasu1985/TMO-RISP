@@ -20,7 +20,7 @@ import com.tmobile.retailinventoryserialization.base.domain.shared.BaseServiceRe
 import com.tmobile.retailinventoryserialization.command.device.DeviceCommandApp;
 import com.tmobile.retailinventoryserialization.command.device.domain.shared.Device;
 import com.tmobile.retailinventoryserialization.command.device.domain.shared.Transaction;
-import com.tmobile.retailinventoryserialization.command.device.service.DeviceCommandServiceImpl;
+import com.tmobile.retailinventoryserialization.command.device.service.DeviceCommandService;
 import com.tmobile.retailinventoryserialization.command.device.service.TransactionsCommandService;
 
 /**
@@ -43,7 +43,7 @@ public class DeviceCommandController extends DeviceBaseController {
 
 	/** The device service. */
 	@Autowired
-	private DeviceCommandServiceImpl deviceCommandServiceImpl;
+	private DeviceCommandService deviceCommandService;
 
 	@Autowired
 	private TransactionsCommandService transactionsCommandService;
@@ -67,7 +67,7 @@ public class DeviceCommandController extends DeviceBaseController {
 		}
 		// TODO if client request is null, need to handle it
 		BaseServiceResponse<String> response = new BaseServiceResponse<>();
-		response.setResult(deviceCommandServiceImpl.addDevice(device));
+		response.setResult(deviceCommandService.addDevice(device));
 		return response;
 	}
 
@@ -79,7 +79,7 @@ public class DeviceCommandController extends DeviceBaseController {
 	@RequestMapping(value = "/tmo/resources/services/devices/{imei}", method = RequestMethod.GET)
 	public BaseServiceResponse<Device> getDeviceDetails(@PathVariable String imei) {
 		BaseServiceResponse<Device> response = new BaseServiceResponse<>();
-		response.setResult(deviceCommandServiceImpl.getDeviceDetails(imei));
+		response.setResult(deviceCommandService.getDeviceDetails(imei));
 		return response;
 	}
 
@@ -108,7 +108,7 @@ public class DeviceCommandController extends DeviceBaseController {
 				log.error("device obj not sent");
 			}
 			response = new BaseServiceResponse<>();
-			response.setResult(deviceCommandServiceImpl.updateDevice(imei, device));
+			response.setResult(deviceCommandService.updateDevice(imei, device));
 			convertAndSend(context, DeviceCommandApp.queueName, mapper.writeValueAsString(restRequest));
 		}
 		// catch (AmqpException e) {
