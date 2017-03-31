@@ -109,7 +109,7 @@ public class DeviceCommandController extends DeviceBaseController {
 			}
 			response = new BaseServiceResponse<>();
 			response.setResult(deviceCommandService.updateDevice(imei, device));
-			convertAndSend(context, DeviceCommandApp.queueName, mapper.writeValueAsString(restRequest));
+			convertAndSend(context, DeviceCommandApp.queueName, mapper.writeValueAsString(device));
 		}
 		// catch (AmqpException e) {
 		// log.error(e.toString());
