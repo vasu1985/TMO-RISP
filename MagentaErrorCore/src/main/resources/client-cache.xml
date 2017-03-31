@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<client-cache xmlns="http://geode.apache.org/schema/cache"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://geode.apache.org/schema/cache
+                      http://geode.apache.org/schema/cache/cache-1.0.xsd"
+	version="1.0">
+	<pool name="error-pool" subscription-enabled="true">
+		<locator host="localhost" port="10334" />
+	</pool>
+
+
+	<pdx>
+		<pdx-serializer>
+			<class-name>com.gemstone.gemfire.pdx.ReflectionBasedAutoSerializer</class-name>
+			<parameter name="classes">
+				<string>com\.tmobile\.error\.base\.domain\.shared\..+</string>
+			</parameter>
+		</pdx-serializer>
+	</pdx>
+
+	<region name="errorRegion" refid="PROXY">
+		<region-attributes pool-name="error-pool" />
+	</region>
+</client-cache>
