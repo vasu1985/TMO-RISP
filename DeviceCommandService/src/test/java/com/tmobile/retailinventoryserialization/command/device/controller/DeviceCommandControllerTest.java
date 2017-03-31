@@ -21,8 +21,8 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.tmobile.retailinventoryserialization.base.domain.shared.BaseServiceRequest;
-import com.tmobile.retailinventoryserialization.base.domain.shared.BaseServiceResponse;
+import com.tmobile.magenta.base.domain.shared.BaseServiceRequest;
+import com.tmobile.magenta.base.domain.shared.BaseServiceResponse;
 import com.tmobile.retailinventoryserialization.command.device.domain.shared.Device;
 import com.tmobile.retailinventoryserialization.command.device.service.DeviceCommandService;
 import com.tmobile.test.core.base.BaseTest;

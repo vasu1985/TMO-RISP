@@ -1,7 +1,7 @@
 package com.tmobile.retailinventoryserialization.query.device.domain.shared;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.tmobile.retailinventoryserialization.base.domain.shared.BaseRequest;
+import com.tmobile.magenta.base.domain.shared.BaseRequest;
 
 public class Label implements BaseRequest {
 

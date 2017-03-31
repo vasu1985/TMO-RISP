@@ -12,8 +12,8 @@
 //import org.springframework.web.bind.annotation.ResponseBody;
 //import org.springframework.web.bind.annotation.ResponseStatus;
 //
-//import com.tmobile.retailinventoryserialization.base.domain.shared.BaseServiceResponse;
-//import com.tmobile.retailinventoryserialization.base.domain.shared.FieldError;
+//import com.tmobile.magenta.base.domain.shared.BaseServiceResponse;
+//import com.tmobile.magenta.base.domain.shared.FieldError;
 //
 ///**
 // * Exception handlers

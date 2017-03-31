@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tmobile.retailinventoryserialization.base.domain.shared.BaseServiceResponse;
+import com.tmobile.magenta.base.domain.shared.BaseServiceResponse;
 import com.tmobile.retailinventoryserialization.query.device.domain.shared.Label;
 import com.tmobile.retailinventoryserialization.query.device.service.DeviceQueryService;
 

@@ -3,7 +3,7 @@ package com.tmobile.retailinventoryserialization.command.device.domain.shared;
 
 import org.springframework.data.gemfire.mapping.Region;
 
-import com.tmobile.retailinventoryserialization.base.domain.shared.BaseRequest;
+import com.tmobile.magenta.base.domain.shared.BaseRequest;
 
 /**
  * <p>

@@ -5,7 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.gemfire.mapping.Region;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.tmobile.retailinventoryserialization.base.domain.shared.BaseRequest;
+import com.tmobile.magenta.base.domain.shared.BaseRequest;
 
 /**
  * <p>
