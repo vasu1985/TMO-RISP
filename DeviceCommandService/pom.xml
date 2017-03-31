@@ -91,7 +91,13 @@
 			<scope>compile</scope>	
 		</dependency>
 		<!-- Error Framework dependency ends -->
-		
+		<dependency>
+			<groupId>com.tmobile.test.core</groupId>
+			<artifactId>magenta-test-core</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<!-- <type>test-jar</type> -->
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 

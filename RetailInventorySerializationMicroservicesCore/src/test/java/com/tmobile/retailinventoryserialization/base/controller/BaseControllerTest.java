@@ -12,18 +12,16 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.context.ApplicationContext;
+
+import com.tmobile.test.core.base.BaseTest;
 
 /**
  * <p>
@@ -35,9 +33,9 @@ import org.springframework.context.ApplicationContext;
  * @project retail-inventory-serialization-microservices-core
  * @updated DateTime: Mar 29, 2017 1:44:57 PM Author: SS00443175
  */
-@RunWith( PowerMockRunner.class)
+
 @PrepareForTest( { BaseController.class, LoggerFactory.class })
-public class BaseControllerTest {
+public class BaseControllerTest extends BaseTest {
 
     /** The base controller. */
     private BaseController baseController = new BaseController();
@@ -48,14 +46,6 @@ public class BaseControllerTest {
     /** The rabbit template mock. */
     @Mock
     RabbitTemplate         rabbitTemplateMock;
-
-    /**
-     * Initialized the mock objects.
-     */
-    @Before
-    public void init() {
-        MockitoAnnotations.initMocks(this);
-    }
 
     /**
      * Setup.

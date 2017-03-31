@@ -12,23 +12,20 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 import static org.powermock.api.mockito.PowerMockito.when;
 
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.tmobile.retailinventoryserialization.base.domain.shared.BaseServiceRequest;
 import com.tmobile.retailinventoryserialization.base.domain.shared.BaseServiceResponse;
 import com.tmobile.retailinventoryserialization.command.device.domain.shared.Device;
-import com.tmobile.retailinventoryserialization.command.device.service.DeviceCommandServiceImpl;
+import com.tmobile.retailinventoryserialization.command.device.service.DeviceCommandService;
+import com.tmobile.test.core.base.BaseTest;
 
 /**
  * <p>
@@ -40,9 +37,9 @@ import com.tmobile.retailinventoryserialization.command.device.service.DeviceCom
  * @project device-command-service
  * @updated DateTime: Mar 29, 2017 3:59:44 PM Author: SS00443175
  */
-@RunWith( PowerMockRunner.class)
+
 @PrepareForTest( { DeviceCommandController.class, LoggerFactory.class })
-public class DeviceCommandControllerTest {
+public class DeviceCommandControllerTest extends BaseTest {
 
     /** The base controller. */
     @InjectMocks
@@ -53,19 +50,11 @@ public class DeviceCommandControllerTest {
 
     /** The device command service mock. */
     @Mock
-    DeviceCommandServiceImpl            deviceCommandServiceMock;
+    DeviceCommandService            deviceCommandServiceMock;
 
     /** The base service request mock. */
     @Mock
     BaseServiceRequest<Device>      baseServiceRequestMock;
-
-    /**
-     * Initialized the mock objects.
-     */
-    @Before
-    public void init() {
-        MockitoAnnotations.initMocks(this);
-    }
 
     /**
      * Setup.

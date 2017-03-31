@@ -47,6 +47,15 @@
 			<version>1.6.4</version>
 			<type>pom</type>
 		</dependency>
+		<!-- Unit test dependency starts -->
+		<dependency>
+			<groupId>com.tmobile.test.core</groupId>
+			<artifactId>magenta-test-core</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<!-- <type>test-jar</type> -->
+			<scope>test</scope>
+		</dependency>
+		<!-- Unit test dependency ends -->
 	</dependencies>
 
 	<build>
