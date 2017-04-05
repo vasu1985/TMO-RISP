@@ -66,6 +66,9 @@ public class ErrorMessageService {
         return message;
     }
 
+    /**
+     * Update error message.
+     */
     public void updateErrorMessage() {
 
         ErrorMessage errorbad = new ErrorMessage(400, "BAD request...");
