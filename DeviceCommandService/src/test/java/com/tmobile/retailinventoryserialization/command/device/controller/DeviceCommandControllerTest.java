@@ -15,8 +15,6 @@ import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.slf4j.LoggerFactory;
 
 import com.tmobile.magenta.base.domain.shared.BaseServiceRequest;
 import com.tmobile.magenta.base.domain.shared.BaseServiceResponse;
@@ -34,8 +32,6 @@ import com.tmobile.test.core.base.BaseTest;
  * @project device-command-service
  * @updated DateTime: Mar 29, 2017 3:59:44 PM Author: SS00443175
  */
-
-@PrepareForTest( { LoggerFactory.class })
 public class DeviceCommandControllerTest extends BaseTest {
 
     /** The base controller. */
@@ -80,7 +76,6 @@ public class DeviceCommandControllerTest extends BaseTest {
     @SuppressWarnings( { "rawtypes" })
     @Test
     public void testGetDeviceDetails() {
-
         String expected = "TEST1234";
         Device deviceMock = mock(Device.class, RETURNS_DEEP_STUBS);
 

@@ -13,8 +13,6 @@ import static org.mockito.Mockito.when;
 
 import org.junit.Test;
 import org.mockito.Mock;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.context.ApplicationContext;
 
@@ -31,8 +29,6 @@ import com.tmobile.test.core.base.BaseTest;
  * @project retail-inventory-serialization-microservices-core
  * @updated DateTime: Mar 29, 2017 1:44:57 PM Author: SS00443175
  */
-
-@PrepareForTest( { BaseController.class, LoggerFactory.class })
 public class BaseControllerTest extends BaseTest {
 
     /** The base controller. */
