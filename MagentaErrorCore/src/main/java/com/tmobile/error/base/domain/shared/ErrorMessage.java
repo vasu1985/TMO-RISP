@@ -1,13 +1,10 @@
-/*
- * ErrorMessage
- */
+
 package com.tmobile.error.base.domain.shared;
 
 import java.io.Serializable;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
-import org.springframework.data.gemfire.mapping.Region;
 
 /**
  * <p>
@@ -16,86 +13,88 @@ import org.springframework.data.gemfire.mapping.Region;
  * .
  *
  * @author vm00436370
- * @project ErrorCore
+ * @project magenta-error-core
  * @updated DateTime: Mar 22, 2017 8:20:13 PM Author: vm00436370
  */
 
 public class ErrorMessage implements Serializable {
 
-	/**
-	 * The Constructor.
-	 */
-	public ErrorMessage() {
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = 4189535634730818693L;
 
-	}
+    /**
+     * The Constructor.
+     */
+    public ErrorMessage() {
 
-	/** The error code. */
-	@Id
-	public int errorCode;
+    }
 
-	/** The error message. */
-	public String errorMessage;
+    /** The error code. */
+    @Id
+    public int    errorCode;
 
-	/**
-	 * The Constructor.
-	 *
-	 * @param error_code
-	 *            the error_code
-	 * @param error_message
-	 *            the error_message
-	 */
-	@PersistenceConstructor
-	public ErrorMessage(int error_code, String error_message) {
-		this.errorMessage = error_message;
-		this.errorCode = error_code;
-	}
+    /** The error message. */
+    public String errorMessage;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return errorCode + " : " + errorMessage;
-	}
+    /**
+     * The Constructor.
+     *
+     * @param error_code
+     *            the error_code
+     * @param error_message
+     *            the error_message
+     */
+    @PersistenceConstructor
+    public ErrorMessage( int error_code, String error_message) {
+        this.errorMessage = error_message;
+        this.errorCode = error_code;
+    }
 
-	/**
-	 * Gets the error_code.
-	 *
-	 * @return the error_code
-	 */
-	public int getError_code() {
-		return errorCode;
-	}
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return errorCode + " : " + errorMessage;
+    }
 
-	/**
-	 * Sets the error_code.
-	 *
-	 * @param error_code
-	 *            the error_code
-	 */
-	public void setError_code(int error_code) {
-		this.errorCode = error_code;
-	}
+    /**
+     * Gets the error_code.
+     *
+     * @return the error_code
+     */
+    public int getError_code() {
+        return errorCode;
+    }
 
-	/**
-	 * Gets the error_message.
-	 *
-	 * @return the error_message
-	 */
-	public String getError_message() {
-		return errorMessage;
-	}
+    /**
+     * Sets the error_code.
+     *
+     * @param error_code
+     *            the error_code
+     */
+    public void setError_code( int error_code) {
+        this.errorCode = error_code;
+    }
 
-	/**
-	 * Sets the error_message.
-	 *
-	 * @param error_message
-	 *            the error_message
-	 */
-	public void setError_message(String error_message) {
-		this.errorMessage = error_message;
-	}
+    /**
+     * Gets the error_message.
+     *
+     * @return the error_message
+     */
+    public String getError_message() {
+        return errorMessage;
+    }
+
+    /**
+     * Sets the error_message.
+     *
+     * @param error_message
+     *            the error_message
+     */
+    public void setError_message( String error_message) {
+        this.errorMessage = error_message;
+    }
 
 }

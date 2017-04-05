@@ -1,6 +1,4 @@
-/*
- * BaseErrorController
- */
+
 package com.tmobile.error.base.controller;
 
 import java.util.ArrayList;
@@ -32,104 +30,103 @@ import com.tmobile.error.base.service.ErrorMessageService;
 
 /**
  * <p>
- * This class defines methods for handling error thrown by parent services using
- * error core project.
+ * This class defines methods for handling error thrown by parent services using error core project.
  * </p>
  * .
  *
  * @author vm00436370
- * @project ErrorCore
+ * @project magenta-error-core
  * @updated DateTime: Mar 22, 2017 8:20:13 PM Author: vm00436370
  */
 @RestController
 public class BaseErrorController implements ErrorHandlerInterface, ErrorController {
-	/** The log. */
-	private static Logger log = LoggerFactory.getLogger(BaseErrorController.class);
 
-	/** The error attributes. */
-	@Autowired
-	private ErrorAttributes errorAttributes;
+    /** The log. */
+    private static Logger       log       = LoggerFactory.getLogger(BaseErrorController.class);
 
-	/** The Constant PATH. */
-	public static final String PATH = "/error";
+    /** The error attributes. */
+    @Autowired
+    private ErrorAttributes     errorAttributes;
 
-	/** The Constant ERROR. */
-	public static final String STR_ERROR = "error";
+    /** The Constant PATH. */
+    public static final String  PATH      = "/error";
 
-	/** The errorService. */
-	@Autowired
-	private MessageSource msgSource;
-	@Autowired
-	private ErrorMessageService errorService;
+    /** The Constant ERROR. */
+    public static final String  STR_ERROR = "error";
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.tmobile.error.base.ErrorHandlerInterface#processError(javax.servlet.
-	 * http.HttpServletRequest, javax.servlet.http.HttpServletResponse,
-	 * java.lang.Exception)
-	 */
+    /** The errorService. */
+    @Autowired
+    private MessageSource       msgSource;
 
-	@Override
-	
-	@ExceptionHandler(Exception.class)
-	public CustomErrorResponse processError(HttpServletRequest request, HttpServletResponse response, Exception ex) {
+    /** The error service. */
+    @Autowired
+    private ErrorMessageService errorService;
 
-		// Get the Http error code.
-		// final int error_code = getHttpStatusCode(request);
+    /*
+     * (non-Javadoc)
+     * @see com.tmobile.error.base.ErrorHandlerInterface#processError(javax.servlet. http.HttpServletRequest, javax.servlet.http.HttpServletResponse,
+     * java.lang.Exception)
+     */
 
-		// Generates Error message for corresponding Http Error Code.
+    @Override
+    @ExceptionHandler( Exception.class)
+    public CustomErrorResponse processError( HttpServletRequest request, HttpServletResponse response, Exception ex) {
 
-		RequestAttributes requestAttributes = new ServletRequestAttributes(request, response);
-		Map<String, Object> error = errorAttributes.getErrorAttributes(requestAttributes, true);
+        // Get the Http error code.
+        // final int error_code = getHttpStatusCode(request);
 
-		String exceptionMessage = (String) error.get("error");
-		int statusCode = (Integer) error.get("status");
-		String exception = (String) error.get("exception");
+        // Generates Error message for corresponding Http Error Code.
 
-		if (ex instanceof HttpClientErrorException) {
-			statusCode = ((HttpClientErrorException) ex).getStatusCode().value();
-			exception = ((HttpClientErrorException) ex).getMessage();
-		}
-	    errorService.updateErrorMessage();
-		final String error_message = errorService.getErrorMessage(statusCode);
-	
-		CustomErrorResponse errorResp = new CustomErrorResponse(exception, error_message);
-		
-		return errorResp;
+        RequestAttributes requestAttributes = new ServletRequestAttributes(request, response);
+        Map<String, Object> error = errorAttributes.getErrorAttributes(requestAttributes, true);
 
-	}
+        int statusCode = (Integer) error.get("status");
+        String exception = (String) error.get("exception");
 
-	@ExceptionHandler(ConstraintViolationException.class)
-	public List<CustomErrorResponse> handleConstraintViolationException(ConstraintViolationException ex) {
+        if (ex instanceof HttpClientErrorException) {
+            statusCode = ((HttpClientErrorException) ex).getStatusCode().value();
+            exception = ((HttpClientErrorException) ex).getMessage();
+        }
+        errorService.updateErrorMessage();
+        final String error_message = errorService.getErrorMessage(statusCode);
 
-		Locale currentLocale = LocaleContextHolder.getLocale();
-		List<CustomErrorResponse> errorList= new ArrayList<CustomErrorResponse>();
-		List<FieldError> errors = FieldError.getErrors(ex.getConstraintViolations());
-		for(int i=0;i<errors.size();i++){
-			FieldError error=errors.get(i);
-			error.setMessage(msgSource.getMessage(error.getMessage(), null, currentLocale));
-			CustomErrorResponse errorResp = new CustomErrorResponse(ex.getMessage(), error.getMessage());
-			errorList.add(errorResp);
-		}
-  
-	
-		return errorList;
-	}
+        CustomErrorResponse errorResp = new CustomErrorResponse(exception, error_message);
 
-	
+        return errorResp;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.springframework.boot.autoconfigure.web.ErrorController#getErrorPath()
-	 */
-	@Override
-	public String getErrorPath() {
-		// TODO Auto-generated method stub
-		return PATH;
-	}
+    }
+
+    /**
+     * Handle constraint violation exception.
+     *
+     * @param ex
+     *            the ex
+     * @return the list< custom error response>
+     */
+    @ExceptionHandler( ConstraintViolationException.class)
+    public List<CustomErrorResponse> handleConstraintViolationException( ConstraintViolationException ex) {
+
+        Locale currentLocale = LocaleContextHolder.getLocale();
+        List<CustomErrorResponse> errorList = new ArrayList<CustomErrorResponse>();
+        List<FieldError> errors = FieldError.getErrors(ex.getConstraintViolations());
+        for ( int i = 0; i < errors.size(); i++) {
+            FieldError error = errors.get(i);
+            error.setMessage(msgSource.getMessage(error.getMessage(), null, currentLocale));
+            CustomErrorResponse errorResp = new CustomErrorResponse(ex.getMessage(), error.getMessage());
+            errorList.add(errorResp);
+        }
+
+        return errorList;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.springframework.boot.autoconfigure.web.ErrorController#getErrorPath()
+     */
+    @Override
+    public String getErrorPath() {
+        // TODO Auto-generated method stub
+        return PATH;
+    }
 
 }
