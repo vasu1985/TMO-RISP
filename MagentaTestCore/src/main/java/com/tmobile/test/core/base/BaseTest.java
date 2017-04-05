@@ -1,6 +1,11 @@
 
 package com.tmobile.test.core.base;
 
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
+import static org.powermock.api.mockito.PowerMockito.mockStatic;
+import static org.powermock.api.mockito.PowerMockito.when;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +16,8 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.powermock.modules.junit4.PowerMockRunner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <p>
@@ -24,12 +31,25 @@ import org.powermock.modules.junit4.PowerMockRunner;
 @RunWith( PowerMockRunner.class)
 public class BaseTest {
 
+    /** The logger. */
+    protected Logger logger;
+
     /**
      * Inits the Mock Engine.
      */
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
+    }
+
+    /**
+     * Setup.
+     */
+    @Before
+    public void setup() {
+        mockStatic(LoggerFactory.class);
+        logger = mock(Logger.class);
+        when(LoggerFactory.getLogger(any(Class.class))).thenReturn(logger);
     }
 
     /**

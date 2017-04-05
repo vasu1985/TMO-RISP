@@ -9,16 +9,13 @@ import static org.mockito.Mockito.doCallRealMethod;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
-import static org.powermock.api.mockito.PowerMockito.mockStatic;
 import static org.powermock.api.mockito.PowerMockito.when;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.tmobile.magenta.base.domain.shared.BaseServiceRequest;
@@ -38,15 +35,12 @@ import com.tmobile.test.core.base.BaseTest;
  * @updated DateTime: Mar 29, 2017 3:59:44 PM Author: SS00443175
  */
 
-@PrepareForTest( { DeviceCommandController.class, LoggerFactory.class })
+@PrepareForTest( { LoggerFactory.class })
 public class DeviceCommandControllerTest extends BaseTest {
 
     /** The base controller. */
     @InjectMocks
     private DeviceCommandController deviceCommandController;
-
-    /** The logger. */
-    private static Logger           logger;
 
     /** The device command service mock. */
     @Mock
@@ -55,16 +49,6 @@ public class DeviceCommandControllerTest extends BaseTest {
     /** The base service request mock. */
     @Mock
     BaseServiceRequest<Device>      baseServiceRequestMock;
-
-    /**
-     * Setup.
-     */
-    @BeforeClass
-    public static void setup() {
-        mockStatic(LoggerFactory.class);
-        logger = mock(Logger.class);
-        when(LoggerFactory.getLogger(any(Class.class))).thenReturn(logger);
-    }
 
     /**
      * Test add device.
